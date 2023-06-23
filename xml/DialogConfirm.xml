@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<coordinates>
+		<left>1090</left>
+		<top>720</top>
+	</coordinates>
+	<include>dialogeffect</include>
+	<depth>DepthDialog+</depth>
+	<controls>
+		<include content="DialogBackgroundCommons">
+			<param name="DialogBackgroundWidth" value="750" />
+			<param name="DialogBackgroundHeight" value="260" />
+			<param name="DialogHeaderWidth" value="750" />
+			<param name="DialogHeaderLabel" value="" />
+			<param name="DialogHeaderId" value="1" />
+			<param name="CloseButtonLeft" value="560" />
+			<param name="CloseButtonNav" value="9000" />
+		</include>
+		<control type="textbox" id="9">
+			<description>text</description>
+			<left>20</left>
+			<top>52</top>
+			<width>690</width>
+			<height>130</height>
+			<align>left</align>
+			<label/>
+			<font>font16</font>
+			<autoscroll time="3000" delay="4000" repeat="5000">true</autoscroll>
+		</control>
+		<control type="progress" id="20">
+			<description>Progressbar</description>
+			<left>30</left>
+			<top>168</top>
+			<width>590</width>
+			<height>16</height>
+			<info>System.Progressbar</info>
+		</control>
+		<control type="grouplist" id="9000">
+			<left>125</left>
+			<top>195</top>
+			<width>600</width>
+			<height>40</height>
+			<align>right</align>
+			<itemgap>0</itemgap>
+			<orientation>horizontal</orientation>
+			<control type="button" id="11">
+				<description>OK button</description>
+				<width>200</width>
+				<height>40</height>
+				<label>107</label>
+				<font>font13_title</font>
+				<align>center</align>
+			</control>
+			<control type="button" id="10">
+				<description>Cancel button</description>
+				<width>200</width>
+				<height>40</height>
+				<label>106</label>
+				<font>font13_title</font>
+				<align>center</align>
+			</control>
+			<control type="button" id="12">
+				<description>Custom button</description>
+				<width>200</width>
+				<height>40</height>
+				<label>106</label>
+				<font>font13_title</font>
+				<align>center</align>
+			</control>
+		</control>
+	</controls>
+</window>
