@@ -53,6 +53,7 @@
 		<value condition="String.StartsWith(Container.FolderPath,special://skin/playlists/movie)">$LOCALIZE[31954]</value>
 		<value condition="String.StartsWith(Container.FolderPath,videodb://tvshows)">$LOCALIZE[31955]</value>
 		<value condition="String.StartsWith(Container.FolderPath,special://skin/playlists/tvshow)">$LOCALIZE[31955]</value> -->
+		<value condition="!String.IsEmpty(Container.PluginName)">$INFO[Container.FolderName]</value>
 		<value condition="Container.Content(movies)">$LOCALIZE[31954]</value>
 		<value condition="Container.Content(tvshows)">$LOCALIZE[31955]</value>
 		<value condition="Container.Content(episodes)">$LOCALIZE[31955]</value>
@@ -100,6 +101,7 @@
 		<value condition="Control.IsVisible(60112) + !String.IsEmpty(Container(60112).ListItem.property(xspPath))">$INFO[Container(60112).ListItem.property(xspPath)]</value>
 		<value condition="Control.IsVisible(60112)">videodb://tvshows/titles/$INFO[Container(60112).ListItem.TvShowDBID]/$INFO[Container(60112).ListItem.Season]/?tvshowid=$INFO[Container(60112).ListItem.TvShowDBID]</value>
 		<!-- ADDON -->
+		<value condition="Control.IsVisible(60113)">$INFO[Container(60113).ListItem.FolderPath]</value>
 		<value condition="Control.IsVisible(60115)">$INFO[Container(60115).ListItem.FolderPath]</value>
 		<value condition="Control.IsVisible(60116)">$INFO[Container(60116).ListItem.property(xspPath)]</value>
 		<value>$INFO[Container(60102).ListItem.property(xspPath)]</value>
@@ -134,6 +136,7 @@
 		<value condition="Control.HasFocus(60108)">white</value>
 		<value condition="Control.HasFocus(60109)">white</value>
 		<value condition="Control.HasFocus(60112)">white</value>
+		<value condition="Control.HasFocus(60113)">white</value>
 		<value condition="Control.HasFocus(60115)">white</value>
 		<value condition="Control.HasFocus(60116)">white</value>
 		<value>lightblue</value>
@@ -149,6 +152,7 @@
 		<value condition="Control.HasFocus(60108)">lightblue</value>
 		<value condition="Control.HasFocus(60109)">lightblue</value>
 		<value condition="Control.HasFocus(60112)">lightblue</value>
+		<value condition="Control.HasFocus(60113)">lightblue</value>
 		<value condition="Control.HasFocus(60115)">lightblue</value>
 		<value condition="Control.HasFocus(60116)">lightblue</value>
 		<value>lightblueTransparent</value>
@@ -1123,6 +1127,7 @@
 		<value>$INFO[ListItem.Icon]</value>
 	</variable>
 	<variable name="PosterThumb">
+		<!-- <value condition="!String.IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value> -->
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value>$INFO[ListItem.Icon]</value>
 	</variable>
@@ -1240,6 +1245,16 @@
         <value condition="Container.Content(seasons) + !String.IsEmpty(ListItem(2).DBID)">plugin://script.embuary.helper?info=getcast&amp;type=tvshow&amp;title='$ESCINFO[ListItem(2).TVShowTitle]'</value>
         <value>-</value>
     </variable>
+	<variable name="TYDLine1">
+		<value condition="Container.Content(seasons) | Container.Content(episodes)">$INFO[Container.ShowTitle]</value>
+		<value>$INFO[ListItem.label]</value>
+	</variable>
+	<variable name="TYDLine2">
+		<value condition="Container.Content(seasons)">$INFO[ListItem.label]</value>
+		<value condition="Container.Content(episodes)">S$INFO[ListItem.Season]:E$INFO[ListItem.Episode] - $INFO[ListItem.Title]</value>
+		<value condition="Container.Content(movies) | Container.Content(tvshows)">$INFO[ListItem.Year]</value>
+		<value>$INFO[ListItem.Label]</value>
+	</variable>
 	<!-- INCLUDES -->
 	<include name="OSD_Seek_Position">
 		<param name="id">401</param>
@@ -1727,6 +1742,7 @@
 			<onup>61</onup>
 			<ondown condition="Control.IsVisible(60102)">60102</ondown>
 			<ondown condition="Control.IsVisible(60112)">60112</ondown>
+			<ondown condition="Control.IsVisible(60113)">60113</ondown>
 			<ondown condition="Control.IsVisible(19) + Container.Content(movies)">Container.Update(videodb://movies/titles/,true)</ondown>
 			<ondown condition="Control.IsVisible(19) + Container.Content(tvshows) | Container.Content(episodes)">Container.Update(videodb://tvshows/titles/,true)</ondown>
 			<ondown condition="Control.IsVisible(19)">19</ondown>
@@ -1752,58 +1768,58 @@
 					<label>browse by</label>
 					<icon>buttons/browseBy.png</icon>
 					<property name="hover">buttons/browseBy_focus.png</property>
-					<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible>
+					<visible>true</visible>
 				</item>
 				<item id="3">
 					<label>$INFO[Control.GetLabel(10)]</label>
 					<icon>buttons/allVideos.png</icon>
 					<property name="hover">buttons/allVideos_focus.png</property>
 					<onclick>SendClick(videolibrary,10)</onclick>
-					<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible>
+					<visible>String.IsEmpty(Container.PluginName) +[Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
 				</item>
 				<item id="4">
 					<label>search</label>
 					<icon>buttons/search.png</icon>
 					<property name="hover">buttons/search_focus.png</property>
-					<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible>
+					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
 				</item>
 				<item id="5">
 					<label>update</label>
 					<icon>buttons/update.png</icon>
 					<property name="hover">buttons/update_focus.png</property>
 					<onclick>UpdateLibrary(video)</onclick>
-					<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible>
+					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
 				</item>
 				<item id="6">
 					<label>genre</label>
 					<icon>buttons/genre.png</icon>
 					<property name="hover">buttons/genre_focus.png</property>
-					<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible>
+					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
 				</item>
 				<item id="7">
 					<label>sort</label>
 					<icon>buttons/sort.png</icon>
 					<property name="hover">buttons/sort_focus.png</property>
 					<onclick>SendClick(videolibrary,3)</onclick>
-					<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible>
+					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
 				</item>
 				<item id="8">
 					<label>year</label>
 					<icon>buttons/year.png</icon>
 					<property name="hover">buttons/year_focus.png</property>
-					<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible>
+					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
 				</item>
 				<item id="9">
 					<label>settings</label>
 					<icon>buttons/settings.png</icon>
 					<property name="hover">buttons/settings_focus.png</property>
-					<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible>
+					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
 				</item>
 				<item id="10">
-					<label>two</label>
+					<label>=$INFO[Container.PluginName]=$INFO[Container.PluginCategory]==$INFO[Container.Content]=</label>
 					<icon>buttons/ratingsMain.png</icon>
 					<property name="hover">buttons/ratingsMain_focus.png</property>
-					<visible>false + Control.IsVisible(60102)</visible>
+					<visible>false</visible>
 					<!-- <visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible> -->
 				</item>
 				 <item id="11">
@@ -1872,7 +1888,7 @@
 		</control>
 		<control type="fixedlist" id="60102">
 			<onup>SetFocus(60101,1)</onup>
-			<visible allowhiddenfocus="true">Control.HasFocus(60102) | [Container(60101).HasFocus(2) + !Control.IsVisible(60112)] | Control.HasFocus(60111) | !Container(60101).HasFocus(4) + !Control.IsVisible(60104) + !Control.IsVisible(60105) + !Control.IsVisible(60106) + !Control.IsVisible(60107) + !Control.IsVisible(60112)</visible>
+			<visible allowhiddenfocus="true">Control.HasFocus(60102) | String.IsEmpty(Container.PluginName) + [Container(60101).HasFocus(2) + !Control.IsVisible(60112)] | Control.HasFocus(60111) | !Container(60101).HasFocus(4) + !Control.IsVisible(60104) + !Control.IsVisible(60105) + !Control.IsVisible(60106) + !Control.IsVisible(60107) + !Control.IsVisible(60112)</visible>
 			<include>subHeaderLayout</include>
 			<content>
 				<item id="1">
@@ -1907,27 +1923,27 @@
 					<label>all tv shows</label>
 					<property name="xspPath">videodb://tvshows/titles/</property>
 					<property name="upId">$NUMBER[1]</property>
-					<visible>Container.Content(tvshows) | Container.Content(seasons)</visible>
+					<visible>Container.Content(tvshows)</visible>
 				</item>
 				<item id="7">
 					<label>next up</label>
 					<property name="xspPath">plugin://script.embuary.helper/?info=getnextup</property>
 					<property name="upId">$NUMBER[1]</property>
-					<visible> false + [Container.Content(tvshows) | Container.Content(seasons)]</visible>
+					<visible> false + [Container.Content(tvshows)]</visible>
 				</item>
 				<item id="8">
 					<label>in progress</label>
 					<property name="upId">$NUMBER[1]</property>
 					<property name="xspPath">$VAR[inProgressVideoXSP]</property>
 					<property name="sortId">$NUMBER[29]</property>
-					<visible>Container.Content(tvshows) | Container.Content(seasons)</visible>
+					<visible>Container.Content(tvshows)</visible>
 				</item>
 				<item id="9">
 					<label>recently added</label>
 					<property name="upId">$NUMBER[1]</property>
 					<property name="xspPath">$VAR[recentlyAddedVideoXSP]</property>
 					<property name="sortId">$NUMBER[29]</property>
-					<visible>Container.Content(tvshows) | Container.Content(seasons)</visible>
+					<visible>Container.Content(tvshows)</visible>
 				</item>
 				<!-- <item id="4">
 					<label>$INFO[Container(60102).ListItem.Property(xspPath)]</label>
@@ -1938,7 +1954,7 @@
 		</control>
 		<control type="fixedlist" id="60112">
 			<onup>SetFocus(60101,1)</onup>
-			<visible>Control.HasFocus(60112) | [Container.Content(episodes) + !Control.HasFocus(60102)] + !Control.IsVisible(19) + !Control.IsVisible(60104) + !Control.IsVisible(60105) + !Control.IsVisible(60106) + !Control.IsVisible(60107)</visible>
+			<visible>Control.HasFocus(60112) | String.IsEmpty(Container.PluginName) + [Container.Content(episodes) + !Control.HasFocus(60102)] + !Control.IsVisible(19) + !Control.IsVisible(60104) + !Control.IsVisible(60105) + !Control.IsVisible(60106) + !Control.IsVisible(60107)</visible>
 			<include>subHeaderLayout</include>
 			<!-- <content>
 				<item id="1">
@@ -1948,6 +1964,12 @@
 			</content> -->
 			<content>videodb://tvshows/titles/$INFO[ListItem.TvShowDBID]</content>
 		</control>
+		<!-- <control type="fixedlist" id="60113">
+			<onup>SetFocus(60101,1)</onup>
+			<visible>Control.HasFocus(60113) | true</visible>
+			<include>subHeaderClickLayout</include>
+			<content>plugin://$INFO[Container.PluginName]</content>
+		</control> -->
 			
 		<control type="edit" id="19">
 			<top>180</top>
@@ -2326,6 +2348,7 @@
 			<onright>60101</onright>
 			<onup>61</onup>
 			<ondown condition="Control.IsVisible(60102)">60102</ondown>
+			<ondown condition="Control.IsVisible(60113)">60113</ondown>
 			<ondown condition="Control.IsVisible(60115)">60115</ondown>
 			<ondown condition="Control.IsVisible(60116)">60116</ondown>
 			<!-- <ondown condition="Control.IsVisible(60106)">60106</ondown>
@@ -2831,6 +2854,41 @@
 		</focusedlayout>
 	</include>
 
+	<include name="subHeaderClickLayout">
+		<ondown>601</ondown>
+		<top>170</top>
+		<left>150</left>
+		<viewtype label="535">list</viewtype>
+		<orientation>horizontal</orientation>
+		<movement>1</movement>
+		<itemlayout height="50" width="200">
+			<control type="label">
+				<left>0</left>
+				<top>0</top>
+				<font>font16_lcase</font>
+				<textcolor>$VAR[subNoFocusColor]</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+			</control>
+		</itemlayout>
+		<focusedlayout height="50" width="350">
+			<control type="label">
+				<left>0</left>
+				<top>0</top>
+				<font>font30_Bold_lcase</font>
+				<textcolor>$VAR[subFocusColor]</textcolor>
+				<align>center</align>
+				<label>&lt; $INFO[ListItem.Label] &gt;</label>
+			</control>
+			<!-- <control type="button">
+				<label>here</label>
+				<onclick>Container.Update($VAR[forcedContentPath],replace)</onclick>
+				<visible>0</visible>
+			</control> -->
+		</focusedlayout>
+	</include>
+
 
 
 	<include name="MainWindowMouseButtons">
@@ -3096,6 +3154,182 @@
 		</control>
 	</include>
 	<include name="TitleYearDuration">
+		<control type="group">
+			<!-- <control type="image">
+				<left>-300</left>
+				<width>250</width>
+				<height>100</height>
+				<texture>$INFO[ListItem.Art(tvshow.clearlogo)]</texture>
+				<aspectratio>keep</aspectratio>
+				<visible>Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)</visible>
+			</control> -->
+			<control type="label">
+				<width>1500</width>
+				<height>35</height>
+				<font>font36_Bold</font>
+				<textcolor>white</textcolor>
+				<scroll>true</scroll>
+				<label>$VAR[TYDLine1]</label>
+			</control>
+			<control type="group">
+				<left>0</left>
+				<top>50</top>
+				<visible>!Container.Content(episodes)</visible>
+				<control type="label">
+					<font>font36</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+					<label>$VAR[TYDLine2]</label>
+				</control>
+				<control type="image">
+					<left>120</left>
+					<width>180</width>
+					<height>35</height>
+					<top>10</top>
+					<texture>$VAR[videoRating]</texture>
+					<visible>Container.Content(movies) | Container.Content(tvshows)</visible>
+				</control>
+				<control type="image">
+					<left>-110</left>
+					<width>100</width>
+					<height>48</height>
+					<top>8</top>
+					<texture>flagging/ratings/$VAR[Rating].png</texture>
+					<visible>!Player.HasVideo</visible>
+				</control>
+			</control>
+			<control type="group">
+				<left>0</left>
+				<top>50</top>
+				<visible>Container.Content(episodes)</visible>
+				<control type="label">
+					<font>font36</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+					<label>$VAR[TYDLine2]</label>
+				</control>
+			</control>
+			<control type="group">
+				<top>100</top>
+				<width>1500</width>
+				<height>150</height>
+				<visible>!Control.IsVisible(65001)</visible>
+				<control type="label">
+					<font>font36</font>
+					<textcolor>lightblue</textcolor>
+					<scroll>true</scroll>
+					<label>$VAR[DurationInMinutes]</label>
+					<visible>Container.Content(movies)</visible>
+				</control>
+				<control type="label">
+					<font>font16</font>
+					<textcolor>lightblue</textcolor>
+					<scroll>true</scroll>
+					<label>$INFO[ListItem.Property(TotalSeasons)] Seasons[CR]$INFO[ListItem.Property(UnWatchedEpisodes)] Unwatched Episodes</label>
+					<visible>Container.Content(tvshows)</visible>
+				</control>
+				<control type="label">
+					<top>-50</top>
+					<left>350</left>
+					<height>160</height>
+					<width>1000</width>
+					<wrapmultiline>true</wrapmultiline>
+					<font>font30</font>
+					<textcolor>lightblue</textcolor>
+					<scroll>true</scroll>
+					<label>$INFO[ListItem.Plot]</label>
+					<visible>Container.Content(tvshows)</visible>
+				</control>
+				<control type="label">
+					<font>font16</font>
+					<textcolor>lightblue</textcolor>
+					<scroll>true</scroll>
+					<label>$INFO[ListItem.Property(TotalEpisodes)] episodes[CR]$INFO[ListItem.Property(UnWatchedEpisodes)] Unwatched</label>
+					<visible>Container.Content(seasons)</visible>
+				</control>
+				<control type="label">
+					<font>font16</font>
+					<height>100</height>
+					<width>1500</width>
+					<wrapmultiline>true</wrapmultiline>
+					<textcolor>lightblue</textcolor>
+					<scroll>true</scroll>
+					<label>$INFO[ListItem.Plot]</label>
+					<visible>Container.Content(episodes)</visible>
+				</control>
+			</control>
+			
+			<control type="group">
+				<top>100</top>
+				<width>1500</width>
+				<height>35</height>
+				<visible>Control.IsVisible(65001)</visible>
+				<control type="label">
+					<top>10</top>
+					<font>font24</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+					<label>ends: $INFO[ListItem.EndTime] ($VAR[DurationInMinutes])</label>
+				</control>
+				<control type="label">
+					<top>50</top>
+					<font>font24</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+					<label>added: $INFO[ListItem.DateAdded], $INFO[ListItem.Genre]</label>
+				</control>
+				<control type="label">
+					<top>90</top>
+					<font>font14</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+					<haspath>true</haspath>
+					<label>path: $INFO[ListItem.FileNameAndPath]</label>
+				</control>
+			</control>
+			<control type="grouplist">
+				<left>10</left>
+				<top>570</top>
+				<width>1280</width>
+				<align>center</align>
+				<orientation>horizontal</orientation>
+				<itemgap>2</itemgap>
+				<control type="label">
+					<width>150</width>
+					<align>right</align>
+					<font>font13</font>
+					<textcolor>blue</textcolor>
+					<shadowcolor>black</shadowcolor>
+					<label>$LOCALIZE[180]: </label>
+					<visible>!ListItem.IsParentFolder</visible>
+				</control>
+				<control type="label">
+					<width>150</width>
+					<align>left</align>
+					<font>font13</font>
+					<textcolor>white</textcolor>
+					<shadowcolor>black</shadowcolor>
+					<label>$INFO[Container(5041).ListItem.Duration]</label>
+				</control>
+			</control>
+			<control type="grouplist">
+				<description>Media Codec Flagging Images</description>
+				<left>0</left>
+				<top>610</top>
+				<width>1280</width>
+				<align>center</align>
+				<itemgap>2</itemgap>
+				<orientation>horizontal</orientation>
+				<include>VideoCodecFlaggingConditions</include>
+				<include>AudioCodecFlaggingConditions</include>
+				<include>AudioChannelsFlaggingConditions</include>
+				<include>AspectCodecFlaggingConditions</include>
+				<include>VideoStereoscopicsFlaggingConditions</include>
+				<include>VideoTypeHackFlaggingConditions</include>
+			</control>
+		</control>
+	</include>
+	<include name="TitleDescription">
 		<control type="group">
 			<control type="label">
 				<width>1000</width>
