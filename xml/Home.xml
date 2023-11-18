@@ -853,6 +853,12 @@
 						<property name="unfocusedIcon">homeIcons/systemInformationNoFocus.png</property>
 					</item>
 					<item id="4">
+						<label>skin settings</label>
+						<onclick>ActivateWindow(10035)</onclick>
+						<icon>kodi-button.png</icon>
+						<property name="unfocusedIcon">kodi-button.png</property>
+					</item>
+					<item id="4">
 						<label>interface</label>
 						<onclick>ActivateWindow(10032)</onclick>
 						<icon>homeIcons/interface.png</icon>
@@ -942,7 +948,7 @@
 						<onclick>ActivateWindow(RadioChannels)</onclick>
 						<icon/>
 						<thumb/>
-						<visible>PVR.HasRadioChannels</visible>
+						<visible>false + PVR.HasRadioChannels</visible>
 						<property name="focusId">$NUMBER[90013]</property>
 					</item>
 					<item id="12">
