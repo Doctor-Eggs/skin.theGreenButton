@@ -84,7 +84,7 @@
 				<label>$VAR[SeekLabel]</label>
 			</control> -->
 			<control type="group">
-				<visible>false + [VideoPlayer.Content(LiveTV) + VideoPlayer.HasEpg]</visible>
+				<visible>[VideoPlayer.Content(LiveTV) + VideoPlayer.HasEpg]</visible>
 				<!-- <control type="label">
 					<description>Elapsed Time Label</description>
 					<left>0</left>
@@ -179,11 +179,11 @@
 					<texturesliderbar>seekslider.png</texturesliderbar>
 					<textureslidernib>osd_slider_nib.png</textureslidernib>
 					<textureslidernibfocus>osd_slider_nib.png</textureslidernibfocus>
-					<visible>true + Player.Seeking</visible>
+					<visible>false + Player.Seeking</visible>
 				</control>
 			</control>
 			<control type="group">
-				<visible>true | ![VideoPlayer.Content(LiveTV) + VideoPlayer.HasEpg]</visible>
+				<visible>![VideoPlayer.Content(LiveTV) + VideoPlayer.HasEpg]</visible>
 				<!-- <control type="label">
 					<description>Elapsed Time Label</description>
 					<left>20</left>

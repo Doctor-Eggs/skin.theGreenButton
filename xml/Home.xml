@@ -46,6 +46,7 @@
 			<visible>Library.HasContent(Music)</visible>
 		</control>
 		<include>CommonBackground</include>
+		<include>MainWindowMouseButtons</include>
 		<!-- Music Info -->
 		<control type="group">
 			<depth>DepthMenu</depth>
@@ -948,7 +949,7 @@
 						<onclick>ActivateWindow(RadioChannels)</onclick>
 						<icon/>
 						<thumb/>
-						<visible>false + PVR.HasRadioChannels</visible>
+						<visible>PVR.HasRadioChannels</visible>
 						<property name="focusId">$NUMBER[90013]</property>
 					</item>
 					<item id="12">
@@ -958,15 +959,7 @@
 						<thumb/>
 						<visible>true | PVR.HasTVChannels</visible>
 						<property name="focusId">$NUMBER[90012]</property>
-					</item><!-- 
-					<item id="15">
-						<label>Next Up</label>
-						<onclick>ActivateWindow(TVChannels)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>true | PVR.HasTVChannels</visible>
-						<property name="focusId">$NUMBER[90015]</property>
-					</item> -->
+					</item>
 					<item id="2">
 						<label>31953</label>
 						<onclick condition="String.IsEqual(Window.Property(VideosDirectLink),True)">ActivateWindow(Videos)</onclick>
@@ -1259,7 +1252,7 @@
 				<visible>true</visible>
 			</control>
 			<control type="label">
-				<description>Date label</description>
+				<description>Kodi label</description>
 				<right>130</right>
 				<top>45</top>
 				<width>300</width>
@@ -1269,9 +1262,33 @@
 				<font>font30_light</font>
 				<textcolor>white</textcolor>
 				<label>[B]Kodi[/B] Media Center</label>
-				<include>Window_OpenClose_Animation</include>
-				<include>VisibleFadeEffect</include>
-				<visible>true</visible>
+				<animation type="WindowOpen" condition="Window.Previous(startup)">
+					<effect type="fade" start="100" end="100" time="0"/>
+					<effect type="fade" start="100" end="0" time="500" delay="4500"/>
+				</animation>
+				<animation type="WindowOpen" condition="!Window.Previous(startup)">
+					<effect type="fade" start="0" end="0" time="0"/>
+				</animation>
+				<animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
+			</control>
+			<control type="label">
+				<description>Time label</description>
+				<right>130</right>
+				<top>45</top>
+				<width>300</width>
+				<height>15</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<font>font30_light</font>
+				<textcolor>white</textcolor>
+				<label>[B]$INFO[System.Time][/B]</label>
+				<animation type="WindowOpen" condition="Window.Previous(startup)">
+					<effect type="fade" start="0" end="100" time="500" delay="5000"/>
+				</animation>
+				<animation type="WindowOpen" condition="!Window.Previous(startup)">
+					<effect type="fade" start="0" end="100" time="500"/>
+				</animation>
+				<animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
 			</control>
 			<control type="image">
 				<description>LOGO</description>

@@ -56,7 +56,7 @@
 			<depth>DepthFooter</depth>
 			<include>CommonPageCount</include>
 			<include>CommonNowPlaying</include>
-			<visible>0</visible>
+			<visible>true</visible>
 		</control>
 		<include>MainWindowMouseButtons</include>
 		<include>BehindDialogFadeOut</include>

@@ -1,0 +1,16 @@
+[B]0.0.4[/B]
+
+- Update home icons
+- Add counter in library views
+- Add a browse by country in the movies library
+
+[B]0.0.3[/B]
+
+- Updated some of the library views.
+- Removed a view that isn't ready and gets in the way.
+- Removed Radio as an option for the time being.
+- Started work on the menu edit but nowhere close to being done
+
+[B]0.0.2[/B]
+
+- Alpha Commit to the SVN

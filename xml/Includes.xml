@@ -97,6 +97,8 @@
 		<value condition="Control.IsVisible(60105) + Container.Content(tvshows)">videodb://tvshows/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22year%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60105).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22tvshows%22%7D</value>
 		<value condition="Control.IsVisible(60105)">videodb://movies/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22year%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60105).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</value>
 		<value condition="Control.IsVisible(11)">pvr://channels/tv/$INFO[Container(11).ListItem.label]</value>
+		<!-- COUNTRIES -->
+		<value condition="Control.IsVisible(60107)">videodb://movies/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22country%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60107).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</value>
 		<!-- EPISODES -->
 		<value condition="Control.IsVisible(60112) + !String.IsEmpty(Container(60112).ListItem.property(xspPath))">$INFO[Container(60112).ListItem.property(xspPath)]</value>
 		<value condition="Control.IsVisible(60112)">videodb://tvshows/titles/$INFO[Container(60112).ListItem.TvShowDBID]/$INFO[Container(60112).ListItem.Season]/?tvshowid=$INFO[Container(60112).ListItem.TvShowDBID]</value>
@@ -1816,13 +1818,19 @@
 					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
 				</item>
 				<item id="10">
+					<label>country</label>
+					<icon>buttons/country.png</icon>
+					<property name="hover">buttons/country_focus.png</property>
+					<visible>String.IsEmpty(Container.PluginName) + Container.Content(movies)</visible>
+				</item>
+				<item id="11">
 					<label>=$INFO[Container.PluginName]=$INFO[Container.PluginCategory]==$INFO[Container.Content]=</label>
 					<icon>buttons/ratingsMain.png</icon>
 					<property name="hover">buttons/ratingsMain_focus.png</property>
 					<visible>false</visible>
 					<!-- <visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible> -->
 				</item>
-				 <item id="11">
+				 <item id="12">
 					<label>twelve</label>
 					<icon>buttons/ratingsMain.png</icon>
 					<thumb>thumb2.png</thumb>
@@ -2004,11 +2012,17 @@
 		</control>
 		<control type="list" id="60106">
 			<onup>SetFocus(60101,9)</onup>
-			<visible>Control.HasFocus(60106) | Container(60101).HasFocus(10)</visible>
+			<visible>Control.HasFocus(60106) | Container(60101).HasFocus(10000)</visible>
 			<include>subHeaderLayout</include>
 			<content>videodb://movies/directors/</content>
 		</control>
 		<control type="list" id="60107">
+			<onup>SetFocus(60101,9)</onup>
+			<visible>Control.HasFocus(60107) | Container(60101).HasFocus(10)</visible>
+			<include>subHeaderLayout</include>
+			<content>videodb://movies/countries/</content>
+		</control>
+		<!-- <control type="list" id="60107">
 			<onup>SetFocus(60101,3)</onup>
 			<visible>Control.HasFocus(60107) | Container(60101).HasFocus(12)</visible>
 			<include>subHeaderLayout</include>
@@ -2026,7 +2040,7 @@
 					<label>!!!!!</label>
 				</item>
 			</content>
-		</control>
+		</control> -->
 	</include>
 	<include name="PVRChannelHeader">
 		<control type="button" id="10">
