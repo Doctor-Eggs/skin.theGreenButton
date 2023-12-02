@@ -1,8 +1,8 @@
 [B]0.0.4[/B]
 
-- Update home icons
-- Add counter in library views
-- Add a browse by country in the movies library
+- Updated home menu icons
+- Moved Radio to Music home menu item
+- Added Visibility change to home menu
 
 [B]0.0.3[/B]
 

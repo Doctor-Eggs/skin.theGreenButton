@@ -1248,13 +1248,14 @@
         <value>-</value>
     </variable>
 	<variable name="TYDLine1">
-		<value condition="Container.Content(seasons) | Container.Content(episodes)">$INFO[Container.ShowTitle]</value>
+		<value condition="Container.Content(seasons) | Container.Content(episodes)">$INFO[ListItem.TVShowTitle]</value>
 		<value>$INFO[ListItem.label]</value>
 	</variable>
 	<variable name="TYDLine2">
 		<value condition="Container.Content(seasons)">$INFO[ListItem.label]</value>
 		<value condition="Container.Content(episodes)">S$INFO[ListItem.Season]:E$INFO[ListItem.Episode] - $INFO[ListItem.Title]</value>
 		<value condition="Container.Content(movies) | Container.Content(tvshows)">$INFO[ListItem.Year]</value>
+		<value condition="Container.Content(videos)">$VAR[DurationInMinutes]</value>
 		<value>$INFO[ListItem.Label]</value>
 	</variable>
 	<!-- INCLUDES -->
@@ -3264,11 +3265,11 @@
 				<control type="label">
 					<font>font16</font>
 					<height>100</height>
-					<width>1500</width>
+					<width>1200</width>
 					<wrapmultiline>true</wrapmultiline>
 					<textcolor>lightblue</textcolor>
 					<scroll>true</scroll>
-					<label>$INFO[ListItem.Plot]</label>
+					<label>$VAR[DurationInMinutes][CR]$INFO[ListItem.Plot]</label>
 					<visible>Container.Content(episodes)</visible>
 				</control>
 			</control>

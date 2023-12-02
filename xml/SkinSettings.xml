@@ -203,7 +203,7 @@
 						<align>left</align>
 						<aligny>center</aligny>
 					</control>
-					<control type="button" id="102">
+					<!-- <control type="button" id="102">
 						<width>750</width>
 						<height>50</height>
 						<font>font36</font>
@@ -215,19 +215,123 @@
 						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
 						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
 						<onclick>Skin.SetString(HomeMenuLabel1)</onclick>
-					</control>
-					<control type="radiobutton" id="103">
+					</control> -->
+					<control type="radiobutton" id="111">
 						<width>750</width>
 						<height>40</height>
 						<font>font16</font>
-						<label>Sub Menu Type</label>
+						<label>Weather</label>
 						<textcolor>99FFFFFF</textcolor>
 						<focusedcolor>white</focusedcolor>
 						<invalidcolor>invalid</invalidcolor>
 						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
 						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
-						<onclick>Skin.ToggleSetting(ComingSoon)</onclick>
-						<selected>Skin.HasSetting(ComingSoon)</selected>
+						<onclick>Skin.ToggleSetting(weatherVisible)</onclick>
+						<selected>Skin.HasSetting(weatherVisible)</selected>
+					</control>
+					<control type="radiobutton" id="112">
+						<width>750</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>Pictures</label>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>Skin.ToggleSetting(picturesVisible)</onclick>
+						<selected>Skin.HasSetting(picturesVisible)</selected>
+					</control>
+					<control type="radiobutton" id="113">
+						<width>750</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>Games</label>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>Skin.ToggleSetting(gamesVisible)</onclick>
+						<selected>Skin.HasSetting(gamesVisible)</selected>
+					</control>
+					<control type="radiobutton" id="114">
+						<width>750</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>TV</label>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>Skin.ToggleSetting(tvVisible)</onclick>
+						<selected>Skin.HasSetting(tvVisible)</selected>
+					</control>
+					<control type="radiobutton" id="115">
+						<width>750</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>Videos</label>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>Skin.ToggleSetting(videosVisible)</onclick>
+						<selected>Skin.HasSetting(videosVisible)</selected>
+					</control>
+					<control type="radiobutton" id="116">
+						<width>750</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>Movies</label>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>Skin.ToggleSetting(moviesVisible)</onclick>
+						<selected>Skin.HasSetting(moviesVisible)</selected>
+					</control>
+					<control type="radiobutton" id="117">
+						<width>750</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>TV Shows</label>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>Skin.ToggleSetting(tvShowsVisible)</onclick>
+						<selected>Skin.HasSetting(tvShowsVisible)</selected>
+					</control>
+					<control type="radiobutton" id="118">
+						<width>750</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>Music</label>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>Skin.ToggleSetting(musicVisible)</onclick>
+						<selected>Skin.HasSetting(musicVisible)</selected>
+					</control>
+					<control type="radiobutton" id="119">
+						<width>750</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>Add-Ons</label>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>Skin.ToggleSetting(addonsVisible)</onclick>
+						<selected>Skin.HasSetting(addonsVisible)</selected>
 					</control>
 				</control>
 				<control type="scrollbar" id="60">

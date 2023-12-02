@@ -564,6 +564,8 @@
 					</item>
 					<item id="2">
 						<label>view weather</label>
+						<icon>homeIcons/weather.png</icon>
+						<property name="unfocusedIcon">homeIcons/weatherNoFocus.png</property>
 					</item>
 					<item id="3">
 						<label>weather add-ons</label>
@@ -645,16 +647,10 @@
 						<property name="unfocusedIcon">homeIcons/liveTVNoFocus.png</property>
 					</item>
 					<item id="5">
-						<label>restart pvr</label>
-						<icon>homeIcons/restart.png</icon>
-						<property name="unfocusedIcon">homeIcons/restartNoFocus.png</property>
-						<onclick>ActivateWindow(TVChannels)</onclick>
-					</item>
-					<item id="6">
 						<label>live tv setup</label>
-						<icon>homeIcons/settings.png</icon>
+						<icon>homeIcons/liveTVSettings.png</icon>
 						<property name="unfocusedIcon">homeIcons/settingsNoFocus.png</property>
-						<onclick>ActivateWindow(TVChannels)</onclick>
+						<onclick>ActivateWindow(10021)</onclick>
 					</item>
 				</content>
 			</control>
@@ -702,7 +698,7 @@
 				<content>
 					<item id="1">
 						<label>search</label>
-						<icon>homeIcons/search.png</icon>
+						<icon>homeIcons/searchMovies.png</icon>
 						<property name="unfocusedIcon">homeIcons/searchNoFocus.png</property>
 					</item>
 					<item id="2">
@@ -732,7 +728,7 @@
 				<content>
 					<item id="1">
 						<label>search</label>
-						<icon>homeIcons/search.png</icon>
+						<icon>homeIcons/searchTVLibrary.png</icon>
 						<property name="unfocusedIcon">homeIcons/searchNoFocus.png</property>
 					</item>
 					<item id="2">
@@ -784,6 +780,12 @@
 						<icon>homeIcons/musicAddons.png</icon>
 						<property name="unfocusedIcon">homeIcons/musicAddonsNoFocus.png</property>
 					</item>
+					<item id="5">
+						<label>radio</label>
+						<onclick>ActivateWindow(RadioChannels)</onclick>
+						<icon>homeIcons/radio.png</icon>
+						<property name="unfocusedIcon">homeIcons/radioNoFocus.png</property>
+					</item>
 				</content>
 			</control>
 			<control type="fixedlist" id="90001">
@@ -806,8 +808,8 @@
 					<item id="3">
 						<label>program add-ons</label>
 						<onclick>ActivateWindow(addonbrowser,addons://user/xbmc.addon.executable/)</onclick>
-						<icon>homeIcons/addons.png</icon>
-						<property name="unfocusedIcon">homeIcons/addonsNoFocus.png</property>
+						<icon>homeIcons/programAddons.png</icon>
+						<property name="unfocusedIcon">homeIcons/programAddonsNoFocus.png</property>
 					</item>
 					<item id="4">
 						<label>music add-ons</label>
@@ -824,11 +826,17 @@
 					<item id="6">
 						<label>all add-ons</label>
 						<onclick>ActivateWindow(addonbrowser,addons://user/all/)</onclick>
-						<icon>homeIcons/allAddons.png</icon>
-						<property name="unfocusedIcon">homeIcons/allAddonsNoFocus.png</property>
+						<icon>homeIcons/addons.png</icon>
+						<property name="unfocusedIcon">homeIcons/addonsNoFocus.png</property>
 					</item>
 				</content>
 			</control>
+			<!-- <control type="fixedlist" id="90015">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<visible>Container(9000).HasFocus(15)</visible>
+				<content target="videos">plugin://plugin.video.youtube/kodion/search/list/</content>
+			</control> -->
 			<control type="fixedlist" id="90009">
 				<top>630</top>
 				<include>HomeSubMenuBase</include>
@@ -847,19 +855,19 @@
 						<icon>homeIcons/allSettings.png</icon>
 						<property name="unfocusedIcon">homeIcons/allSettingsNoFocus.png</property>
 					</item>
-					<item id="3">
+					<!-- <item id="3">
 						<label>system information</label>
 						<onclick>ActivateWindow(10016)</onclick>
 						<icon>homeIcons/systemInformation.png</icon>
 						<property name="unfocusedIcon">homeIcons/systemInformationNoFocus.png</property>
-					</item>
+					</item> -->
 					<item id="4">
 						<label>skin settings</label>
 						<onclick>ActivateWindow(10035)</onclick>
-						<icon>kodi-button.png</icon>
-						<property name="unfocusedIcon">kodi-button.png</property>
+						<icon>homeIcons/skinSettings.png</icon>
+						<property name="unfocusedIcon">homeIcons/skinSettingsNoFocus.png</property>
 					</item>
-					<item id="4">
+					<!-- <item id="4">
 						<label>interface</label>
 						<onclick>ActivateWindow(10032)</onclick>
 						<icon>homeIcons/interface.png</icon>
@@ -870,7 +878,7 @@
 						<onclick>ActivateWindow(10030)</onclick>
 						<icon>homeIcons/allSettings.png</icon>
 						<property name="unfocusedIcon">homeIcons/allSettingsNoFocus.png</property>
-					</item>
+					</item> -->
 				</content>
 			</control>
 
@@ -925,7 +933,7 @@
 						<onclick condition="String.IsEmpty(Weather.Plugin)">ActivateWindow(servicesettings,weather)</onclick>
 						<icon/>
 						<thumb/>
-						<visible>[!Skin.HasSetting(HomeMenuNoWeatherButton) + !System.IsMaster] | [!Skin.HasSetting(MasterHomeMenuNoWeatherButton) + System.IsMaster]</visible>
+						<visible>Skin.HasSetting(weatherVisible)</visible>
 						<property name="focusId">$NUMBER[90007]</property>
 					</item>
 					<item id="4">
@@ -933,7 +941,7 @@
 						<onclick>ActivateWindow(Pictures)</onclick>
 						<icon/>
 						<thumb/>
-						<visible>[!Skin.HasSetting(HomeMenuNoPicturesButton) + !System.IsMaster] | [!Skin.HasSetting(MasterHomeMenuNoPicturesButton) + System.IsMaster]</visible>
+						<visible>Skin.HasSetting(picturesVisible)</visible>
 						<property name="focusId">$NUMBER[90004]</property>
 					</item>
 					<item id="14">
@@ -941,23 +949,23 @@
 						<onclick>ActivateWindow(Games)</onclick>
 						<icon/>
 						<thumb/>
-						<visible>[!Skin.HasSetting(HomeMenuNoGamesButton) + !System.IsMaster] | [!Skin.HasSetting(MasterHomeMenuNoGamesButton) + System.IsMaster]</visible>
+						<visible>Skin.HasSetting(gamesVisible)</visible>
 						<property name="focusId">$NUMBER[90014]</property>
 					</item>
-					<item id="13">
+					<!-- <item id="13">
 						<label>31960</label>
 						<onclick>ActivateWindow(RadioChannels)</onclick>
 						<icon/>
 						<thumb/>
 						<visible>PVR.HasRadioChannels</visible>
 						<property name="focusId">$NUMBER[90013]</property>
-					</item>
+					</item> -->
 					<item id="12">
 						<label>31952</label>
 						<onclick>ActivateWindow(TVChannels)</onclick>
 						<icon/>
 						<thumb/>
-						<visible>true | PVR.HasTVChannels</visible>
+						<visible>Skin.HasSetting(tvVisible)</visible>
 						<property name="focusId">$NUMBER[90012]</property>
 					</item>
 					<item id="2">
@@ -966,16 +974,24 @@
 						<onclick condition="!String.IsEqual(Window.Property(VideosDirectLink),True)">ActivateWindow(Videos,root)</onclick>
 						<icon/>
 						<thumb/>
-						<visible>[!Skin.HasSetting(HomeMenuNoVideosButton) + !System.IsMaster] | [!Skin.HasSetting(MasterHomeMenuNoVideosButton) + System.IsMaster]</visible>
+						<visible>Skin.HasSetting(videosVisible)</visible>
 						<property name="focusId">$NUMBER[90002]</property>
 					</item>
+					<!-- <item id="15">
+						<label>YouTube Search</label>
+						<onclick>plugin://plugin.video.youtube/kodion/search/list/</onclick>
+						<icon/>
+						<thumb/>
+						<visible>true | PVR.HasTVChannels</visible>
+						<property name="focusId">$NUMBER[90015]</property>
+					</item> -->
 					<item id="10">
 						<label>31954</label>
 						<onclick condition="System.IsMaster | !Skin.HasSetting(HomeMenuMovieUsePlaylist)">ActivateWindow(Videos,MovieTitles,return)</onclick>
 						<onclick condition="!System.IsMaster + Skin.HasSetting(HomeMenuMovieUsePlaylist)">ActivateWindow(Videos,$INFO[Skin.String(HomeMenuMoviePlaylist)],return)</onclick>
 						<icon/>
 						<thumb/>
-						<visible>[[!Skin.HasSetting(HomeMenuNoMovieButton) + !System.IsMaster] | [!Skin.HasSetting(MasterHomeMenuNoMovieButton) + System.IsMaster]] + Library.HasContent(Movies)</visible>
+						<visible>Skin.HasSetting(moviesVisible)</visible>
 						<property name="focusId">$NUMBER[90010]</property>
 					</item>
 					<item id="11">
@@ -984,7 +1000,7 @@
 						<onclick condition="!System.IsMaster + Skin.HasSetting(HomeMenuTVShowUsePlaylist)">ActivateWindow(Videos,$INFO[Skin.String(HomeMenuTVShowPlaylist)],return)</onclick>
 						<icon/>
 						<thumb/>
-						<visible>[[!Skin.HasSetting(HomeMenuNoTVShowButton) + !System.IsMaster] | [!Skin.HasSetting(MasterHomeMenuNoTVShowButton) + System.IsMaster]] + Library.HasContent(TVShows)</visible>
+						<visible>Skin.HasSetting(tvshowsVisible)</visible>
 						<property name="focusId">$NUMBER[90011]</property>
 					</item>
 					<item id="3">
@@ -994,7 +1010,7 @@
 						<onclick condition="!System.IsMaster + Skin.HasSetting(HomeMenuMusicUsePlaylist)">ActivateWindow(Music,$INFO[Skin.String(HomeMenuMusicPlaylist)],return)</onclick>
 						<icon/>
 						<thumb/>
-						<visible>[!Skin.HasSetting(HomeMenuNoMusicButton) + !System.IsMaster] | [!Skin.HasSetting(MasterHomeMenuNoMusicButton) + System.IsMaster]</visible>
+						<visible>Skin.HasSetting(musicVisible)</visible>
 						<property name="focusId">$NUMBER[90003]</property>
 					</item>
 					<item id="1">
@@ -1003,7 +1019,7 @@
 						<onclick condition="System.Platform.Android">ActivateWindow(Programs)</onclick>
 						<icon/>
 						<thumb/>
-						<visible>[!Skin.HasSetting(HomeMenuNoProgramsButton) + !System.IsMaster] | [!Skin.HasSetting(MasterHomeMenuNoProgramsButton) + System.IsMaster]</visible>
+						<visible>Skin.HasSetting(addonsVisible)</visible>
 						<property name="focusId">$NUMBER[90001]</property>
 					</item>
 					<item id="6">
