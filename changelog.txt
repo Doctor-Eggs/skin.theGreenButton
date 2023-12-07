@@ -1,3 +1,8 @@
+[B]0.0.5[/B]
+
+- Add Favorites to the home menu
+- Update the display for when favorites is clicked
+
 [B]0.0.4[/B]
 
 - Updated home menu icons

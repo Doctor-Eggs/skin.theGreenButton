@@ -837,6 +837,20 @@
 				<visible>Container(9000).HasFocus(15)</visible>
 				<content target="videos">plugin://plugin.video.youtube/kodion/search/list/</content>
 			</control> -->
+			<control type="fixedlist" id="90016">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<visible>Container(9000).HasFocus(16)</visible>
+				<content>
+					<item id="1">
+						<label>all $LOCALIZE[1036]</label>
+						<onclick>ActivateWindow(Favourites)</onclick>
+						<icon>homeIcons/addons.png</icon>
+						<property name="unfocusedIcon">homeIcons/playlistNoFocus.png</property>
+					</item>
+				</content>
+				<content>favourites://</content>
+			</control>
 			<control type="fixedlist" id="90009">
 				<top>630</top>
 				<include>HomeSubMenuBase</include>
@@ -1021,6 +1035,13 @@
 						<thumb/>
 						<visible>Skin.HasSetting(addonsVisible)</visible>
 						<property name="focusId">$NUMBER[90001]</property>
+					</item>
+					<item id="16">
+						<label>$LOCALIZE[1036]</label>
+						<icon/>
+						<thumb/>
+						<visible>Skin.HasSetting(favoritesVisible)</visible>
+						<property name="focusId">$NUMBER[90016]</property>
 					</item>
 					<item id="6">
 						<label>31958</label>

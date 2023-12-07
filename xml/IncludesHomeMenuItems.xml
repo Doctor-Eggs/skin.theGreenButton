@@ -19,7 +19,7 @@
 			<width>300</width>
 			<control type="label">
 				<top>150</top>
-				<font>font16</font>
+				<font>font16_lcase</font>
 				<textcolor>whiteTransparent</textcolor>
 				<align>center</align>
 				<aligny>bottom</aligny>
@@ -51,7 +51,7 @@
 				<left>-15</left>
 				<top>200</top>
 				<width>300</width>
-				<font>font30</font>
+				<font>font30_lcase</font>
 				<textcolor>white</textcolor>
 				<align>right</align>
 				<aligny>bottom</aligny>

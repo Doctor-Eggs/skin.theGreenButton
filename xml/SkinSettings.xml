@@ -333,6 +333,19 @@
 						<onclick>Skin.ToggleSetting(addonsVisible)</onclick>
 						<selected>Skin.HasSetting(addonsVisible)</selected>
 					</control>
+					<control type="radiobutton" id="120">
+						<width>750</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>Favorites</label>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>Skin.ToggleSetting(favoritesVisible)</onclick>
+						<selected>Skin.HasSetting(favoritesVisible)</selected>
+					</control>
 				</control>
 				<control type="scrollbar" id="60">
 					<left>1060</left>
