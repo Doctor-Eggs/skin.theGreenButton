@@ -1497,7 +1497,7 @@
 			<top>0</top>
 			<width>1920</width>
 			<height>1080</height>
-			<texture fallback="special://skin/backgrounds/SKINDEFAULT.jpg">$INFO[Skin.String(MasterCustomBackgroundPath)]</texture>
+			<texture fallback="special://skin/backgrounds/SKINDEFAULT.png">$INFO[Skin.String(MasterCustomBackgroundPath)]</texture>
 		</control>
 		<control type="image">
 			<description>top shadow</description>
@@ -3988,34 +3988,67 @@
 			<label>$INFO[System.Time]</label>
 			<animation effect="slide" start="0,0" end="-40,0" time="75" condition="Player.Muted">conditional</animation>
 		</control>
-                <control type="group">
-                        <visible>Integer.IsGreater(System.ProfileCount,1)</visible>
-                        <control type="image">
-                                <visible>Skin.HasSetting(show_profileavatar)</visible>
-                                <top>5</top>
-                                <left>1105</left>
-                                <width>30</width>
-                                <height>30</height>
-                                <animation effect="slide" start="0,0" end="-40,0" time="75" condition="Player.Muted">conditional</animation>
-                                <texture>$INFO[System.ProfileThumb]</texture>
-                                <aspectratio>scale</aspectratio>
-                        </control>
-                        <control type="label">
-                                <visible>Skin.HasSetting(show_profilename)</visible>
-                                <font>font28_title</font>
-                                <align>right</align>
-                                <top>5</top>
-                                <left>540</left>
-                                <textcolor>white</textcolor>
-                                <shadowcolor>black</shadowcolor>
-                                <aligny>center</aligny>
-                                <height>30</height>
-                                <width max="600">auto</width>
-                                <animation effect="slide" start="0,0" end="-40,0" time="75" condition="Player.Muted">conditional</animation>
-                                <label>$INFO[System.ProfileName]</label>
-                        </control>
-                </control>
+        <control type="group">
+            <visible>Integer.IsGreater(System.ProfileCount,1)</visible>
+            <control type="image">
+                <visible>Skin.HasSetting(show_profileavatar)</visible>
+                <top>5</top>
+                <left>1105</left>
+                <width>30</width>
+                <height>30</height>
+                <animation effect="slide" start="0,0" end="-40,0" time="75" condition="Player.Muted">conditional</animation>
+                <texture>$INFO[System.ProfileThumb]</texture>
+                <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label">
+                <visible>Skin.HasSetting(show_profilename)</visible>
+                <font>font28_title</font>
+                <align>right</align>
+                <top>5</top>
+                <left>540</left>
+                <textcolor>white</textcolor>
+                <shadowcolor>black</shadowcolor>
+                <aligny>center</aligny>
+                <height>30</height>
+                <width max="600">auto</width>
+                <animation effect="slide" start="0,0" end="-40,0" time="75" condition="Player.Muted">conditional</animation>
+                <label>$INFO[System.ProfileName]</label>
+            </control>
+        </control>
 
+	</include>
+	<include name="HomeWeatherDay">
+		<control type="group">
+			<!-- <visible>Weather.IsFetched + !String.IsEmpty(Window.Property(Daily.$PARAM[item_id].Outlook)) + !String.IsEmpty(Window.Property(Daily.IsFetched))</visible> -->
+			<control type="label">
+				<font>font30</font>
+				<width>120</width>
+				<align>center</align>
+				<label>$INFO[Window(Weather).Property(Daily.1.ShortDay)]</label>
+			</control>
+			<control type="image">
+				<top>20</top>
+				<left>10</left>
+				<width>100</width>
+				<height>100</height>
+				<texture>resource://resource.images.weathericons.default/$INFO[Window(Weather).Property(Daily.1.OutlookIcon)]</texture>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="label">
+				<top>100</top>
+				<font>font14</font>
+				<width>120</width>
+				<align>center</align>
+				<label>$INFO[Window(Weather).Property(Daily.1.HighTemperature)] [COLOR=whiteTransparent3]|[/COLOR] [COLOR=whiteTransparent9]$INFO[Window(Weather).Property(Daily.1.LowTemperature)][/COLOR]</label>
+			</control>
+		</control>
+		<!-- <item>
+			<label>[B]$INFO[Window.Property(Daily.$PARAM[item_id].ShortDay)][/B][CR][COLOR=grey2]$INFO[Window.Property(Daily.$PARAM[item_id].ShortDate)][/COLOR]</label>
+			<label2>$INFO[Window.Property(Daily.$PARAM[item_id].HighTemperature),[COLOR=grey2]$LOCALIZE[419] :[/COLOR][B] ,[/B]]  $INFO[Window.Property(Daily.$PARAM[item_id].LowTemperature),[COLOR=grey2]$LOCALIZE[418] :[/COLOR][B] ,[/B]][CR]$INFO[Window.Property(Daily.$PARAM[item_id].Precipitation),[COLOR=grey2]$LOCALIZE[33022] :[/COLOR][B] ,[/B]][CR]$INFO[Window.Property(Daily.$PARAM[item_id].Cloudiness),[COLOR=grey2]$LOCALIZE[387] :[/COLOR][B] ,[/B]]</label2>
+			<thumb>resource://resource.images.weathericons.default/$INFO[Window.Property(Daily.$PARAM[item_id].OutlookIcon)]</thumb>
+			<icon>$INFO[Window.Property(Daily.$PARAM[item_id].Outlook),[COLOR=grey2]$LOCALIZE[33030]: [/COLOR]][CR][COLOR=grey2]$LOCALIZE[383]: [/COLOR]$INFO[Window.Property(Daily.$PARAM[item_id].WindSpeed)] $INFO[Window.Property(Daily.$PARAM[item_id].WindDirection)]</icon>
+			<visible>Weather.IsFetched + !String.IsEmpty(Window.Property(Daily.$PARAM[item_id].Outlook)) + !String.IsEmpty(Window.Property(Daily.IsFetched))</visible>
+		</item> -->
 	</include>
 	<include name="HomeAddonsCommonLayout">
 		<include>Window_OpenClose_Animation</include>

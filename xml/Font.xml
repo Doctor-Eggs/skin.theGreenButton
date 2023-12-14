@@ -4,44 +4,44 @@
 		<!-- Normal Fonts -->
 		<font>
 			<name>font10</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>14</size>
 		</font>
 		<font>
 			<name>font12</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>17</size>
 		</font>
 		<font>
 			<name>font13</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>20</size>
 		</font>
 		<font>
 			<name>font14</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>22</size>
 		</font>
 		<font>
 			<name>font16</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>25</size>
 		</font>
 		<font>
 			<name>font16_lcase</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>25</size>
 			<style>lowercase</style>
 		</font>
 		<font>
 			<name>font16_Bold_lcase</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>25</size>
 			<style>lowercase bold</style>
 		</font>
 		<font>
 			<name>font30</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>30</size>
 		</font>
 		<font>
@@ -51,31 +51,31 @@
 		</font>
 		<font>
 			<name>font30_Bold</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<style>bold</style>
 			<size>30</size>
 		</font>
 		<font>
 			<name>font30_Bold_lcase</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<style>lowercase bold</style>
 			<size>30</size>
 		</font>
 		<font>
 			<name>font30_lcase</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>30</size>
 			<style>lowercase</style>
 		</font>
 		<font>
 			<name>font36_ucase</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>36</size>
 			<style>uppercase</style>
 		</font>
 		<font>
 			<name>font36</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>36</size>
 		</font>
 		<font>
@@ -84,19 +84,29 @@
 			<size>36</size>
 		</font>
 		<font>
+			<name>font40</name>
+			<filename>Segoe-UI.ttf</filename>
+			<size>40</size>
+		</font>
+		<font>
+			<name>font40_light</name>
+			<filename>Segoe-UI-Light.ttf</filename>
+			<size>40</size>
+		</font>
+		<font>
 			<name>font24</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>24</size>
 		</font>
 		<font>
 			<name>font36_Bold</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<style>bold</style>
 			<size>36</size>
 		</font>
 		<font>
 			<name>fontContextMenu</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>18</size>
 		</font>
 		<!-- Title Fonts -->
@@ -142,7 +152,7 @@
 		</font>
 		<font>
 			<name>fontDialog_Title</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>30</size>
 			<style>uppercase</style>
 		</font>
@@ -172,44 +182,44 @@
 		<font>
 			<name>WeatherTemp</name>
 			<filename>Segoe-UI-Bold.ttf</filename>
-			<size>80</size>
+			<size>120</size>
 		</font>
 	</fontset>
 	<fontset id="Massive" idloc="15110">
 		<!-- Normal Fonts -->
 		<font>
 			<name>font10</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>14</size>
 		</font>
 		<font>
 			<name>font12</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>23</size>
 		</font>
 		<font>
 			<name>font13</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>25</size>
 		</font>
 		<font>
 			<name>font14</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>25</size>
 		</font>
 		<font>
 			<name>font16</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>25</size>
 		</font>
 		<font>
 			<name>font30</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>30</size>
 		</font>
 		<font>
 			<name>fontContextMenu</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>25</size>
 		</font>
 		<!-- Title Fonts -->
@@ -263,37 +273,37 @@
 		<!-- Normal Fonts -->
 		<font>
 			<name>font10</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>14</size>
 		</font>
 		<font>
 			<name>font12</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>17</size>
 		</font>
 		<font>
 			<name>font13</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>20</size>
 		</font>
 		<font>
 			<name>font14</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>22</size>
 		</font>
 		<font>
 			<name>font16</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>25</size>
 		</font>
 		<font>
 			<name>font30</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>30</size>
 		</font>
 		<font>
 			<name>fontContextMenu</name>
-			<filename>Segoe-UI-Regular.ttf</filename>
+			<filename>Segoe-UI.ttf</filename>
 			<size>18</size>
 		</font>
 		<!-- Title Fonts -->

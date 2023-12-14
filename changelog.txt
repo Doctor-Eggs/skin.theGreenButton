@@ -1,3 +1,9 @@
+[B]0.0.6[/B]
+
+- Update Favorites to the home menu
+- Add Weather to home menu
+- Update the View Weather on the home menu to go to Weather
+
 [B]0.0.5[/B]
 
 - Add Favorites to the home menu
