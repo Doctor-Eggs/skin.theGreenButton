@@ -1,3 +1,7 @@
+[B]0.0.7[/B]
+
+- Fix Fonts
+
 [B]0.0.6[/B]
 
 - Update Favorites to the home menu
