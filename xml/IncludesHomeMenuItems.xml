@@ -4,7 +4,7 @@
 		<left>30</left>
 		<top>530</top>
 		<width>1500</width>
-		<height>270</height>
+		<height>280</height>
 		<onleft>90002</onleft>
 		<onright>90002</onright>
 		<pagecontrol/>
@@ -14,7 +14,7 @@
 		<orientation>Horizontal</orientation>
 		<onup>Control.Move(9000,-1)</onup>
 		<ondown>Control.Move(9000,1)</ondown>
-		<itemlayout height="200" width="300">
+		<itemlayout height="220" width="300">
 			<height>200</height>
 			<width>300</width>
 			<control type="label">
@@ -46,7 +46,7 @@
 				<visible>String.IsEmpty(ListItem.Property(unfocusedIcon))</visible>
 			</control>
 		</itemlayout>
-		<focusedlayout height="200" width="300">
+		<focusedlayout height="220" width="300">
 			<control type="label">
 				<left>-15</left>
 				<top>200</top>
@@ -56,6 +56,31 @@
 				<align>right</align>
 				<aligny>bottom</aligny>
 				<label>$INFO[ListItem.Label]</label>
+				<visible>String.IsEmpty(ListItem.Label2)</visible>
+			</control>
+			<control type="label">
+				<left>0</left>
+				<top>200</top>
+				<width>300</width>
+				<font>font36</font>
+				<textcolor>white</textcolor>
+				<align>left</align>
+				<aligny>bottom</aligny>
+				<scroll>false</scroll>
+				<label>$INFO[ListItem.Label]</label>
+				<visible>!String.IsEmpty(ListItem.Label2)</visible>
+			</control>
+			<control type="label">
+				<left>0</left>
+				<top>250</top>
+				<width>300</width>
+				<font>font16</font>
+				<textcolor>lightblue</textcolor>
+				<align>left</align>
+				<aligny>bottom</aligny>
+				<scroll>false</scroll>
+				<label>$INFO[ListItem.Label2]</label>
+				<visible>!String.IsEmpty(ListItem.Label2)</visible>
 			</control>
 			<control type="image">
 				<centerleft>50%</centerleft>

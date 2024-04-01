@@ -163,8 +163,8 @@
 		<control type="image">
 			<width>1920</width>
 			<height>1080</height>
-			<texture fallback="special://skin/backgrounds/SKINDEFAULT.png">$INFO[Skin.String(MasterCustomBackgroundPath)]</texture>
-			<visible>Control.IsVisible(563)</visible>
+			<texture fallback="special://skin/backgrounds/SKINDEFAULT.png" colordiffuse="noFocus">$INFO[Skin.String(MasterCustomBackgroundPath)]</texture>
+			<visible>false + Control.IsVisible(563)</visible>
 		</control>
 		<control type="group">
 			<visible>Control.IsVisible(563)</visible>

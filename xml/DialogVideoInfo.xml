@@ -213,7 +213,7 @@
 								<icon>buttons/trailer.png</icon>
 								<property name="hover">buttons/trailer_focus.png</property>
 								<onclick>SendClick(11)</onclick>
-								<visible>!String.IsEmpty(ListItem.Trailer) + Skin.HasSetting(WindowedTrailer)</visible>
+								<visible>!String.IsEmpty(ListItem.Trailer)</visible>
 							</item>
 						</content>
 					</control>
