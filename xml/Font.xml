@@ -89,9 +89,31 @@
 			<size>40</size>
 		</font>
 		<font>
+			<name>font40_bold</name>
+			<filename>selawk.ttf</filename>
+			<style>bold</style>
+			<size>40</size>
+		</font>
+		<font>
 			<name>font40_light</name>
 			<filename>selawkl.ttf</filename>
 			<size>40</size>
+		</font>
+		<font>
+			<name>font48</name>
+			<filename>selawk.ttf</filename>
+			<size>48</size>
+		</font>
+		<font>
+			<name>font48_bold</name>
+			<filename>selawk.ttf</filename>
+			<style>bold</style>
+			<size>48</size>
+		</font>
+		<font>
+			<name>font48_light</name>
+			<filename>selawkl.ttf</filename>
+			<size>48</size>
 		</font>
 		<font>
 			<name>font24</name>

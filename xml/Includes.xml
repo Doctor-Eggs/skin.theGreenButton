@@ -4018,37 +4018,32 @@
 
 	</include>
 	<include name="HomeWeatherDay">
-		<control type="group">
-			<!-- <visible>Weather.IsFetched + !String.IsEmpty(Window.Property(Daily.$PARAM[item_id].Outlook)) + !String.IsEmpty(Window.Property(Daily.IsFetched))</visible> -->
-			<control type="label">
-				<font>font30</font>
-				<width>120</width>
-				<align>center</align>
-				<label>$INFO[Window(Weather).Property(Daily.1.ShortDay)]</label>
+		<param name="item_id" default="some default value used if you don't pass a param" />
+		<definition>
+			<control type="group">
+				<control type="label">
+					<font>font30</font>
+					<width>120</width>
+					<align>center</align>
+					<label>$INFO[Window(Weather).Property(Daily.$PARAM[item_id].ShortDay)]</label>
+				</control>
+				<control type="image">
+					<top>20</top>
+					<left>10</left>
+					<width>100</width>
+					<height>100</height>
+					<texture>resource://resource.images.weathericons.default/$INFO[Window(Weather).Property(Daily.$PARAM[item_id].OutlookIcon)]</texture>
+					<aspectratio>keep</aspectratio>
+				</control>
+				<control type="label">
+					<top>100</top>
+					<font>font14</font>
+					<width>120</width>
+					<align>center</align>
+					<label>$INFO[Window(Weather).Property(Daily.$PARAM[item_id].HighTemperature)] [COLOR=whiteTransparent3]|[/COLOR] [COLOR=whiteTransparent9]$INFO[Window(Weather).Property(Daily.$PARAM[item_id].LowTemperature)][/COLOR]</label>
+				</control>
 			</control>
-			<control type="image">
-				<top>20</top>
-				<left>10</left>
-				<width>100</width>
-				<height>100</height>
-				<texture>resource://resource.images.weathericons.default/$INFO[Window(Weather).Property(Daily.1.OutlookIcon)]</texture>
-				<aspectratio>keep</aspectratio>
-			</control>
-			<control type="label">
-				<top>100</top>
-				<font>font14</font>
-				<width>120</width>
-				<align>center</align>
-				<label>$INFO[Window(Weather).Property(Daily.1.HighTemperature)] [COLOR=whiteTransparent3]|[/COLOR] [COLOR=whiteTransparent9]$INFO[Window(Weather).Property(Daily.1.LowTemperature)][/COLOR]</label>
-			</control>
-		</control>
-		<!-- <item>
-			<label>[B]$INFO[Window.Property(Daily.$PARAM[item_id].ShortDay)][/B][CR][COLOR=grey2]$INFO[Window.Property(Daily.$PARAM[item_id].ShortDate)][/COLOR]</label>
-			<label2>$INFO[Window.Property(Daily.$PARAM[item_id].HighTemperature),[COLOR=grey2]$LOCALIZE[419] :[/COLOR][B] ,[/B]]  $INFO[Window.Property(Daily.$PARAM[item_id].LowTemperature),[COLOR=grey2]$LOCALIZE[418] :[/COLOR][B] ,[/B]][CR]$INFO[Window.Property(Daily.$PARAM[item_id].Precipitation),[COLOR=grey2]$LOCALIZE[33022] :[/COLOR][B] ,[/B]][CR]$INFO[Window.Property(Daily.$PARAM[item_id].Cloudiness),[COLOR=grey2]$LOCALIZE[387] :[/COLOR][B] ,[/B]]</label2>
-			<thumb>resource://resource.images.weathericons.default/$INFO[Window.Property(Daily.$PARAM[item_id].OutlookIcon)]</thumb>
-			<icon>$INFO[Window.Property(Daily.$PARAM[item_id].Outlook),[COLOR=grey2]$LOCALIZE[33030]: [/COLOR]][CR][COLOR=grey2]$LOCALIZE[383]: [/COLOR]$INFO[Window.Property(Daily.$PARAM[item_id].WindSpeed)] $INFO[Window.Property(Daily.$PARAM[item_id].WindDirection)]</icon>
-			<visible>Weather.IsFetched + !String.IsEmpty(Window.Property(Daily.$PARAM[item_id].Outlook)) + !String.IsEmpty(Window.Property(Daily.IsFetched))</visible>
-		</item> -->
+		</definition>
 	</include>
 	<include name="HomeAddonsCommonLayout">
 		<include>Window_OpenClose_Animation</include>

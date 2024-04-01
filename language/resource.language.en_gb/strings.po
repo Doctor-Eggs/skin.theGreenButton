@@ -453,6 +453,10 @@ msgctxt "#31310"
 msgid "Track number"
 msgstr ""
 
+msgctxt "#31311"
+msgid "Track Time"
+msgstr "Track Time"
+
 #empty strings from id 31311 to 31318
 
 msgctxt "#31319"

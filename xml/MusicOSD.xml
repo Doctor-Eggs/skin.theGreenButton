@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
 	<defaultcontrol always="true">100</defaultcontrol>
-	<onload condition="!MusicPlayer.Content(LiveTV)">SetFocus(602)</onload>
+	<onload condition="!MusicPlayer.Content(LiveTV)">SetFocus(70001)</onload>
 	<include>dialogeffect</include>
 	<depth>DepthOSD</depth>
 	<coordinates>
@@ -20,10 +20,10 @@
 			<onclick>Dialog.Close(MusicOSD,true)</onclick>
 			<onclick>FullScreen</onclick>
 			<texturefocus>DialogCloseButton-focus.png</texturefocus>
-			<texturenofocus>DialogCloseButton.png</texturenofocus>
+			<texturenofocus>DialogCloseButton-focus.png</texturenofocus>
 			<animation effect="fade" time="150">VisibleChange</animation>
 			<animation effect="slide" start="0,0" end="-30,0" time="0" condition="Player.Muted">conditional</animation>
-			<visible>system.getbool(input.enablemouse) + ![Window.IsVisible(AddonSettings) | Window.IsVisible(SelectDialog) | Window.IsVisible(VisualisationPresetList) | Window.IsVisible(PVROSDChannels) | Window.IsVisible(PVRChannelGuide) | Window.IsVisible(PVRRadioRDSInfo) | Window.IsVisible(Addon)]</visible>
+			<visible>false + system.getbool(input.enablemouse) + ![Window.IsVisible(AddonSettings) | Window.IsVisible(SelectDialog) | Window.IsVisible(VisualisationPresetList) | Window.IsVisible(PVROSDChannels) | Window.IsVisible(PVRChannelGuide) | Window.IsVisible(PVRRadioRDSInfo) | Window.IsVisible(Addon)]</visible>
 		</control>
 		<control type="slider" id="87">
 			<depth>DepthOSD+</depth>
@@ -39,11 +39,166 @@
 			<textureslidernib>osd_slider_nibNF.png</textureslidernib>
 			<textureslidernibfocus>osd_slider_nib.png</textureslidernibfocus>
 			<animation effect="fade" time="150">VisibleChange</animation>
-			<visible>![Window.IsVisible(AddonSettings) | Window.IsVisible(SelectDialog) | Window.IsVisible(VisualisationPresetList) | Window.IsVisible(PVROSDChannels) | Window.IsVisible(PVRChannelGuide) | Window.IsVisible(PVRRadioRDSInfo) | Window.IsVisible(Addon)]</visible>
+			<visible>false + ![Window.IsVisible(AddonSettings) | Window.IsVisible(SelectDialog) | Window.IsVisible(VisualisationPresetList) | Window.IsVisible(PVROSDChannels) | Window.IsVisible(PVRChannelGuide) | Window.IsVisible(PVRRadioRDSInfo) | Window.IsVisible(Addon)]</visible>
+		</control>
+		<control type="image">
+			<description>left menu</description>
+			<left>-325</left>
+			<top>-400</top>
+			<width>850</width>
+			<height>2160</height>
+			<texture colordiffuse="CC051b4d">common/behindClock.png</texture>
+			<aspectratio>stretch</aspectratio>
+		</control>
+		<include>MainWindowMouseButtons</include>
+		<control type="list" id="70001">
+			<left>50</left>
+			<top>220</top>
+			<width>300</width>
+			<height>700</height>
+			<onright>100</onright><!-- 
+			<onleft>9000</onleft>
+			<onup>9000</onup>
+			<ondown>9000</ondown> -->
+			<pagecontrol/>
+			<scrolltime>300</scrolltime>
+			<itemlayout height="80" width="300">
+				<control type="label">
+					<left>10</left>
+					<top>0</top>
+					<width>300</width>
+					<height>65</height>
+					<font>font30</font>
+					<textcolor>lightblue</textcolor>
+					<align>left</align>
+					<aligny>center</aligny>
+					<label>$INFO[ListItem.Label]</label>
+				</control>
+				<control type="image">
+					<left>240</left>
+					<top>22</top>
+					<width>29</width>
+					<height>22</height>
+					<texture colordiffuse="whiteTransparentC">checkmark.png</texture>
+					<visible>[!String.IsEmpty(ListItem.Property(isShuffle)) + Playlist.IsRandom] | [!String.IsEmpty(ListItem.Property(isRepeat)) + [Playlist.IsRepeat | Playlist.IsRepeatOne]]</visible>
+				</control>
+				<control type="label">
+					<description>Shown to indicate Repeat Once</description>
+					<left>0</left>
+					<top>0</top>
+					<width>290</width>
+					<height>65</height>
+					<font>font14</font>
+					<textcolor>white</textcolor>
+					<align>right</align>
+					<aligny>center</aligny>
+					<label>$NUMBER[1]</label>
+					<visible>!String.IsEmpty(ListItem.Property(isRepeat)) + Playlist.IsRepeatOne</visible>
+				</control>
+			</itemlayout>
+			<focusedlayout height="80" width="300">
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<width>300</width>
+					<height>65</height>
+					<texture border="10" colordiffuse="99FFFFFF">common/folder-focus.png</texture>
+				</control>
+				<control type="label">
+					<left>10</left>
+					<top>0</top>
+					<width>300</width>
+					<height>65</height>
+					<font>font30</font>
+					<textcolor>white</textcolor>
+					<align>left</align>
+					<aligny>center</aligny>
+					<label>$INFO[ListItem.Label]</label>
+				</control>
+				<control type="image">
+					<left>240</left>
+					<top>22</top>
+					<width>29</width>
+					<height>22</height>
+					<texture colordiffuse="whiteTransparentC">checkmark.png</texture>
+					<visible>[!String.IsEmpty(ListItem.Property(isShuffle)) + Playlist.IsRandom] | [!String.IsEmpty(ListItem.Property(isRepeat)) + [Playlist.IsRepeat | Playlist.IsRepeatOne]]</visible>
+				</control>
+				<control type="label">
+					<description>Shown to indicate Repeat Once</description>
+					<left>0</left>
+					<top>0</top>
+					<width>290</width>
+					<height>65</height>
+					<font>font14</font>
+					<textcolor>white</textcolor>
+					<align>right</align>
+					<aligny>center</aligny>
+					<label>$NUMBER[1]</label>
+					<visible>!String.IsEmpty(ListItem.Property(isRepeat)) + Playlist.IsRepeatOne</visible>
+				</control>
+			</focusedlayout>
+			<content>
+				<item id="6">
+					<label>View Song List</label>
+					<onclick>Close</onclick>
+					<onclick>ActivateWindow(MusicPlaylist)</onclick>
+					<icon/>
+				</item>
+				<item id="1">
+					<label>Visualisation</label>
+					<onclick>SendClick(500)</onclick>
+					<icon/>
+				</item>
+				<item id="2">
+					<label>Visualize Settings</label>
+					<onclick>Addon.Default.OpenSettings(xbmc.player.musicviz)</onclick>
+					<icon/>
+				</item>
+				<item id="4">
+					<label>31128</label>
+					<onclick>Close</onclick>
+					<onclick>RunScript($INFO[Skin.String(LyricScript_Path)])</onclick>
+					<altclick>Skin.SetAddon(LyricScript_Path,xbmc.python.lyrics)</altclick>
+					<altclick>Close</altclick>
+					<altclick>RunScript($INFO[Skin.String(LyricScript_Path)])</altclick>
+					<icon/>
+				</item>
+				<item id="8">
+					<label>Shuffle</label>
+					<onclick>PlayerControl(Random)</onclick>
+					<icon/>
+					<property name="isShuffle">true</property>
+				</item>
+				<item id="3">
+					<label>Repeat</label>
+					<onclick>PlayerControl(Repeat)</onclick>
+					<property name="isRepeat">true</property>
+				</item><!-- 
+				<item id="4">
+					<label>24001</label>
+					<label2>31433</label2>
+					<onclick>ActivateWindow(AddonBrowser)</onclick>
+					<icon/>
+				</item> -->
+				<!-- <item id="5">
+					<label>14036</label>
+					<label2>31434</label2>
+					<onclick>ActivateWindow(ServiceSettings)</onclick>
+					<icon/>
+				</item>
+				<item id="7">
+					<label>13000</label>
+					<label2>31435</label2>
+					<onclick>ActivateWindow(SystemSettings)</onclick>
+					<icon/>
+				</item> -->
+			</content>
 		</control>
 		<control type="grouplist" id="100">
 			<left>325</left>
 			<top>60r</top>
+			<onup>70001</onup>
+			<onleft>70001</onleft>
 			<orientation>horizontal</orientation>
 			<itemgap>0</itemgap>
 			<animation effect="fade" time="150">VisibleChange</animation>
@@ -96,7 +251,7 @@
 				<altlabel>208</altlabel>
 				<font/>
 				<texturefocus>OSDPauseFO.png</texturefocus>
-				<texturenofocus>OSDPauseNF.png</texturenofocus>
+				<texturenofocus colordiffuse="CCFFFFFF">OSDPauseNF.png</texturenofocus>
 				<usealttexture>Player.Paused | Player.Forwarding | Player.Rewinding</usealttexture>
 				<alttexturefocus>OSDPlayFO.png</alttexturefocus>
 				<alttexturenofocus>OSDPlayNF.png</alttexturenofocus>

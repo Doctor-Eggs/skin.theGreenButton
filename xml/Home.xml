@@ -52,7 +52,7 @@
 			<depth>DepthMenu</depth>
 			<left>0</left>
 			<top>60</top>
-			<visible>Player.HasAudio + !Skin.HasSetting(homepageMusicinfo) + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))</visible>
+			<visible>false + Player.HasAudio + !Skin.HasSetting(homepageMusicinfo) + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))</visible>
 			<include>VisibleFadeEffect</include>
 			<include>Window_OpenClose_Animation</include>
 			<control type="image">
@@ -560,7 +560,8 @@
 				<visible>Container(9000).HasFocus(7)</visible>
 				<content>
 					<item id="1">
-						<label>weather sources</label>
+						<label>weather location</label>
+						<onclick>Weather.LocationNext</onclick>
 					</item>
 					<item id="2">
 						<label>view weather</label>
@@ -571,6 +572,7 @@
 					</item>
 					<item id="3">
 						<label>weather add-ons</label>
+						<onclick>ActivateWindow(addonbrowser,addons://user/weather/)</onclick>
 					</item>
 				</content>
 			</control>
@@ -787,6 +789,21 @@
 						<onclick>ActivateWindow(RadioChannels)</onclick>
 						<icon>homeIcons/radio.png</icon>
 						<property name="unfocusedIcon">homeIcons/radioNoFocus.png</property>
+					</item>
+				</content>
+			</control>
+			<control type="fixedlist" id="90017">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<visible>Container(9000).HasFocus(17)</visible>
+				<content>
+					<item id="1">
+						<label>$INFO[MusicPlayer.Title]</label>
+						<label2>$INFO[MusicPlayer.Artist]</label2>
+						<onclick>ActivateWindow(visualisation)</onclick>
+						<icon>$INFO[Player.Art(thumb)]</icon>
+						<!-- <texture fallback="DefaultAlbumCover.png"></texture> -->
+						<property name="unfocusedIcon">homeIcons/filesNoFocus.png</property>
 					</item>
 				</content>
 			</control>
@@ -1028,6 +1045,11 @@
 						<thumb/>
 						<visible>Skin.HasSetting(musicVisible)</visible>
 						<property name="focusId">$NUMBER[90003]</property>
+					</item>
+					<item id="17">
+						<label>31040</label>
+						<visible>Player.HasAudio + !Skin.HasSetting(homepageMusicinfo) + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))</visible>
+						<property name="focusId">$NUMBER[90017]</property>
 					</item>
 					<item id="1">
 						<label>31957</label>
@@ -1344,7 +1366,7 @@
 			<control type="group">
 				<left>1000</left>
 				<top>100</top>
-				<visible>Container(9000).HasFocus(7)</visible>
+				<visible>Container(9000).HasFocus(7) + Weather.IsFetched</visible>
 				<include>Window_OpenClose_Animation</include>
 				<include>VisibleFadeEffect</include>
 				<control type="image">
@@ -1392,7 +1414,7 @@
 						<textcolor>whiteTransparentC</textcolor>
 					</control>
 					<control type="grouplist">
-						<top>80</top>
+						<top>90</top>
 						<left>-10</left>
 						<width>1000</width>
 						<height>130</height>
@@ -1412,7 +1434,7 @@
 							<description>Temp Units</description>
 							<width min="0" max="100">auto</width>
 							<aligny>center</aligny>
-							<height>100</height>
+							<height>70</height>
 							<font>font35_title</font>
 							<label>$INFO[System.TemperatureUnits]</label>
 							<textcolor>white</textcolor>
@@ -1426,122 +1448,21 @@
 					<left>100</left>
 					<orientation>horizontal</orientation>
 					<itemgap>150</itemgap>
-					<control type="group">
-						<!-- <visible>Weather.IsFetched + !String.IsEmpty(Window.Property(Daily.$PARAM[item_id].Outlook)) + !String.IsEmpty(Window.Property(Daily.IsFetched))</visible> -->
-						<control type="label">
-							<font>font30</font>
-							<width>120</width>
-							<align>center</align>
-							<label>$INFO[Window(Weather).Property(Daily.1.ShortDay)]</label>
-						</control>
-						<control type="image">
-							<top>20</top>
-							<left>10</left>
-							<width>100</width>
-							<height>100</height>
-							<texture>resource://resource.images.weathericons.default/$INFO[Window(Weather).Property(Daily.1.OutlookIcon)]</texture>
-							<aspectratio>keep</aspectratio>
-						</control>
-						<control type="label">
-							<top>100</top>
-							<font>font14</font>
-							<width>120</width>
-							<align>center</align>
-							<label>$INFO[Window(Weather).Property(Daily.1.HighTemperature)] [COLOR=whiteTransparent3]|[/COLOR] [COLOR=whiteTransparent9]$INFO[Window(Weather).Property(Daily.1.LowTemperature)][/COLOR]</label>
-						</control>
-					</control>
-					<control type="group">
-						<control type="label">
-							<font>font30</font>
-							<width>120</width>
-							<align>center</align>
-							<label>$INFO[Window(Weather).Property(Daily.2.ShortDay)]</label>
-						</control>
-						<control type="image">
-							<top>20</top>
-							<left>10</left>
-							<width>100</width>
-							<height>100</height>
-							<texture>resource://resource.images.weathericons.default/$INFO[Window(Weather).Property(Daily.2.OutlookIcon)]</texture>
-							<aspectratio>keep</aspectratio>
-						</control>
-						<control type="label">
-							<top>100</top>
-							<font>font14</font>
-							<width>120</width>
-							<align>center</align>
-							<label>$INFO[Window(Weather).Property(Daily.2.HighTemperature)] [COLOR=whiteTransparent3]|[/COLOR] [COLOR=whiteTransparent9]$INFO[Window(Weather).Property(Daily.2.LowTemperature)][/COLOR]</label>
-						</control>
-					</control>
-					<control type="group">
-						<control type="label">
-							<font>font30</font>
-							<width>120</width>
-							<align>center</align>
-							<label>$INFO[Window(Weather).Property(Daily.3.ShortDay)]</label>
-						</control>
-						<control type="image">
-							<top>20</top>
-							<left>10</left>
-							<width>100</width>
-							<height>100</height>
-							<texture>resource://resource.images.weathericons.default/$INFO[Window(Weather).Property(Daily.3.OutlookIcon)]</texture>
-							<aspectratio>keep</aspectratio>
-						</control>
-						<control type="label">
-							<top>100</top>
-							<font>font14</font>
-							<width>120</width>
-							<align>center</align>
-							<label>$INFO[Window(Weather).Property(Daily.3.HighTemperature)] [COLOR=whiteTransparent3]|[/COLOR] [COLOR=whiteTransparent9]$INFO[Window(Weather).Property(Daily.3.LowTemperature)][/COLOR]</label>
-						</control>
-					</control>
-					<control type="group">
-						<control type="label">
-							<font>font30</font>
-							<width>120</width>
-							<align>center</align>
-							<label>$INFO[Window(Weather).Property(Daily.4.ShortDay)]</label>
-						</control>
-						<control type="image">
-							<top>20</top>
-							<left>10</left>
-							<width>100</width>
-							<height>100</height>
-							<texture>resource://resource.images.weathericons.default/$INFO[Window(Weather).Property(Daily.4.OutlookIcon)]</texture>
-							<aspectratio>keep</aspectratio>
-						</control>
-						<control type="label">
-							<top>100</top>
-							<font>font14</font>
-							<width>120</width>
-							<align>center</align>
-							<label>$INFO[Window(Weather).Property(Daily.4.HighTemperature)] [COLOR=whiteTransparent3]|[/COLOR] [COLOR=whiteTransparent9]$INFO[Window(Weather).Property(Daily.4.LowTemperature)][/COLOR]</label>
-						</control>
-					</control>
-					<control type="group">
-						<control type="label">
-							<font>font30</font>
-							<width>120</width>
-							<align>center</align>
-							<label>$INFO[Window(Weather).Property(Daily.5.ShortDay)]</label>
-						</control>
-						<control type="image">
-							<top>20</top>
-							<left>10</left>
-							<width>100</width>
-							<height>100</height>
-							<texture>resource://resource.images.weathericons.default/$INFO[Window(Weather).Property(Daily.5.OutlookIcon)]</texture>
-							<aspectratio>keep</aspectratio>
-						</control>
-						<control type="label">
-							<top>100</top>
-							<font>font14</font>
-							<width>120</width>
-							<align>center</align>
-							<label>$INFO[Window(Weather).Property(Daily.5.HighTemperature)] [COLOR=whiteTransparent3]|[/COLOR] [COLOR=whiteTransparent9]$INFO[Window(Weather).Property(Daily.5.LowTemperature)][/COLOR]</label>
-						</control>
-					</control>
+					<include content="HomeWeatherDay">
+						<param name="item_id" value="$NUMBER[1]" />
+					</include>
+					<include content="HomeWeatherDay">
+						<param name="item_id" value="$NUMBER[2]" />
+					</include>
+					<include content="HomeWeatherDay">
+						<param name="item_id" value="$NUMBER[3]" />
+					</include>
+					<include content="HomeWeatherDay">
+						<param name="item_id" value="$NUMBER[4]" />
+					</include>
+					<include content="HomeWeatherDay">
+						<param name="item_id" value="$NUMBER[5]" />
+					</include>
 				</control>
 			</control>
 			<control type="group">
