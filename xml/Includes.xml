@@ -4339,14 +4339,26 @@
 		<animation effect="fade" time="225">Hidden</animation>
 	</include>
 	<include name="KeyboardButton">
-		<width>50</width>
-		<height>50</height>
-		<texturenofocus border="3">KeyboardKeyNF.png</texturenofocus>
-		<texturefocus border="5">KeyboardKey.png</texturefocus>
+		<width>80</width>
+		<height>80</height>
+		<texturenofocus border="0">common/blankWhite1.png</texturenofocus>
+		<texture border="10" colordiffuse="99FFFFFF">common/folder-focus.png</texture>
 		<align>center</align>
 		<aligny>center</aligny>
-		<font>font13</font>
-		<focusedcolor>black</focusedcolor>
+		<font>font36_bold</font>
+		<textcolor>CCFFFFFF</textcolor>
+		<focusedcolor>white</focusedcolor>
+	</include>
+	<include name="KeyboardSideButton">
+		<width>270</width>
+		<height>80</height>
+		<texturenofocus border="0">common/blankWhite1.png</texturenofocus>
+		<texture border="10" colordiffuse="99FFFFFF">common/folder-focus.png</texture>
+		<align>left</align>
+		<aligny>center</aligny>
+		<font>font36_bold_ucase</font>
+		<textcolor>CCFFFFFF</textcolor>
+		<focusedcolor>white</focusedcolor>
 	</include>
 	<include name="CommonWindowHeader">
 		<param name="Icon" default="icon_home" />
