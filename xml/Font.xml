@@ -68,10 +68,22 @@
 			<style>lowercase</style>
 		</font>
 		<font>
+			<name>font36_bold_ucase</name>
+			<filename>selawk.ttf</filename>
+			<size>36</size>
+			<style>uppercase bold</style>
+		</font>
+		<font>
 			<name>font36_ucase</name>
 			<filename>selawk.ttf</filename>
 			<size>36</size>
 			<style>uppercase</style>
+		</font>
+		<font>
+			<name>font36_bold</name>
+			<filename>selawk.ttf</filename>
+			<size>36</size>
+			<style>bold</style>
 		</font>
 		<font>
 			<name>font36</name>
