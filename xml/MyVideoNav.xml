@@ -3,7 +3,7 @@
 	<defaultcontrol always="true">50</defaultcontrol>
 	<menucontrol>9000</menucontrol>
 	<!-- <views>50,601,503,504,531,532</views> -->
-	<views>50,601,531,532</views>
+	<views>50,601,531,532,533</views>
 	<onload condition="!Skin.HasSetting(FirstTimeRun)">ActivateWindow(1112)</onload>
 	<!-- <onload>SetFocus(60111)</onload> -->
 	<controls>
@@ -51,6 +51,8 @@
 			<include>CoverStripEpisodes</include>
 			<!-- view id = 532 -->
 			<include>PluginView</include>
+			<!-- view id = 533 -->
+			<include>ListView</include>
 		</control>
 		<control type="group">
 			<depth>DepthFooter</depth>

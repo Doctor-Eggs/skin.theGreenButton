@@ -77,20 +77,20 @@
 					</control>
 					<control type="image">
 						<depth>DepthContentPopout</depth>
-						<left>110</left>
-						<top>79</top>
-						<width>20</width>
-						<height>20</height>
+						<left>100</left>
+						<top>15</top>
+						<width>30</width>
+						<height>30</height>
 						<aspectratio>keep</aspectratio>
 						<texture colordiffuse="$VAR[posterNoFocus]">$INFO[ListItem.Overlay]</texture>
 						<visible>!Control.HasFocus(50) + !Control.HasFocus(60)</visible>
 					</control>
 					<control type="image">
 						<depth>DepthContentPopout</depth>
-						<left>110</left>
-						<top>79</top>
-						<width>20</width>
-						<height>20</height>
+						<left>100</left>
+						<top>15</top>
+						<width>30</width>
+						<height>30</height>
 						<aspectratio>keep</aspectratio>
 						<texture>$INFO[ListItem.Overlay]</texture>
 						<visible>Control.HasFocus(50) | Control.HasFocus(60)</visible>
@@ -122,13 +122,13 @@
 					</control>
 					<control type="image">
 						<depth>DepthContentPopout</depth>
-						<left>97</left>
-						<top>75</top>
-						<width>20</width>
-						<height>20</height>
+						<left>77</left>
+						<top>3</top>
+						<width>40</width>
+						<height>40</height>
 						<aspectratio>keep</aspectratio>
 						<texture>$INFO[ListItem.Overlay]</texture>
-						<visible>Control.HasFocus(50) | Control.HasFocus(60)</visible>
+						<!-- <visible>Control.HasFocus(50) | Control.HasFocus(60)</visible> -->
 					</control>
 				</focusedlayout>
 			</control>
