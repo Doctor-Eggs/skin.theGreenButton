@@ -141,7 +141,8 @@
 		<font>
 			<name>fontContextMenu</name>
 			<filename>selawk.ttf</filename>
-			<size>18</size>
+			<style>bold</style>
+			<size>30</size>
 		</font>
 		<!-- Title Fonts -->
 		<font>
