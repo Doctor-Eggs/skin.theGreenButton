@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="skin.theGreenButton" version="19.0.8" name="The Green Button" provider-name="Doctor Eggs">
+<addon id="skin.theGreenButton" version="19.0.9" name="The Green Button" provider-name="Doctor Eggs">
 	<requires>
 		<import addon="xbmc.gui" version="5.15.0"/>
 		<!-- <import addon="script.embuary.helper" version="1.3.6"/>
@@ -29,4 +29,26 @@
 			<screenshot>resources/screenshot-08.jpg</screenshot>
 		</assets>
 	</extension>
+<!-- 	<extension point="kodi.context.item">
+		<menu id="kodi.core.main">
+			<menu>
+				<label>My submenu</label>
+				<item library="contextitem1.py">
+					<label>Yo?</label>
+					<visible>true</visible>
+				</item>
+				<item library="contextitem2.py">
+					<label>Yo2</label>
+					<visible>true</visible>
+				</item>
+				<menu>
+					<label>Subsubmenu</label>
+					<item library="contextitem3.py">
+						<label>Submenu</label>
+						<visible>true</visible>
+					</item>
+				</menu>
+			</menu>
+		</menu>
+	</extension> -->
 </addon>

@@ -1130,6 +1130,7 @@
 	</variable>
 	<variable name="PosterThumb">
 		<!-- <value condition="!String.IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value> -->
+		<value condition="Container.Content(episodes)">$INFO[ListItem.Art(tvshow.poster)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value>$INFO[ListItem.Icon]</value>
 	</variable>
@@ -1954,6 +1955,13 @@
 					<property name="sortId">$NUMBER[29]</property>
 					<visible>Container.Content(tvshows)</visible>
 				</item>
+				<item id="10">
+					<label>Seasons</label>
+					<!-- <property name="upId">$NUMBER[1]</property>
+					<property name="xspPath">$VAR[recentlyAddedVideoXSP]</property>
+					<property name="sortId">$NUMBER[29]</property> -->
+					<visible>Container.Content(seasons)</visible>
+				</item>
 				<!-- <item id="4">
 					<label>$INFO[Container(60102).ListItem.Property(xspPath)]</label>
 					<property name="xspPath">videodb://movies/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22genre%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60104).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</property>
@@ -1967,11 +1975,23 @@
 			<include>subHeaderLayout</include>
 			<!-- <content>
 				<item id="1">
-					<label>all seasons</label>
+					<label>$INFO[Container(601).ListItemPosition(4).TvShowDBID]</label>
+					<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
+				</item>
+				<item id="2">
+					<label>$INFO[Container(50).ListItemPosition(4).TvShowDBID]</label>
+					<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
+				</item>
+				<item id="3">
+					<label>$INFO[Container(531).ListItemPosition(4).TvShowDBID]</label>
+					<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
+				</item>
+				<item id="4">
+					<label>$INFO[Container(532).ListItemPosition(4).TvShowDBID]</label>
 					<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
 				</item>
 			</content> -->
-			<content>videodb://tvshows/titles/$INFO[ListItem.TvShowDBID]</content>
+			<content>videodb://tvshows/titles/$INFO[Container(50).ListItemPosition(4).TvShowDBID]$INFO[Container(531).ListItemPosition(4).TvShowDBID]$INFO[Container(533).ListItemPosition(4).TvShowDBID]</content>
 		</control>
 		<!-- <control type="fixedlist" id="60113">
 			<onup>SetFocus(60101,1)</onup>
@@ -2988,14 +3008,60 @@
 	</include>
 	<include name="CommonNowPlaying">
 		<control type="group">
-			<left>250</left>
+			<left>0</left>
 			<visible>Player.HasMedia + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia)) + !Control.IsVisible(507)</visible>
 			<include>VisibleFadeEffect</include>
 			<animation effect="fade" time="200" condition="Window.Previous(Home)">WindowOpen</animation>
 			<animation effect="fade" time="200" condition="Window.Next(Home)">WindowClose</animation>
+			<control type="image">
+				<depth>diffuse background</depth>
+				<width>1920</width>
+				<height>1080</height>
+				<visible>Player.HasVideo + !Slideshow.IsActive + !Window.IsActive(movieinformation)</visible>
+				<texture fallback="special://skin/backgrounds/SKINDEFAULT.png" diffuse="diffuse/nowPlayingCover.png">$INFO[Skin.CurrentTheme,special://skin/backgrounds/,.jpg]</texture>
+			</control>
+			<control type="button" id="61">
+				<onup>60</onup>
+				<ondown>60101</ondown>
+				<left>18</left>
+				<top>161r</top>
+				<width>250</width>
+				<height>141</height>
+				<onclick>fullscreen</onclick>
+				<texturefocus border="5">videoWindowFocus.png</texturefocus>
+				<texturenofocus border="5">videoWindowNoFocus.png</texturenofocus>
+				<visible>Player.HasVideo + !Slideshow.IsActive + !Window.IsActive(movieinformation)</visible>
+			</control>
+			<control type="videowindow">
+				<depth>DepthBackground</depth>
+				<left>21</left>
+				<top>158r</top>
+				<width>244</width>
+				<height>135</height>
+				<visible>Player.HasVideo + !Slideshow.IsActive + !Window.IsActive(movieinformation)</visible>
+			</control>
+			<control type="image">
+				<depth>now playing shadow</depth>
+				<left>21</left>
+				<top>158r</top>
+				<width>244</width>
+				<height>135</height>
+				<visible>Player.HasVideo + !Slideshow.IsActive + !Window.IsActive(movieinformation) + !Control.HasFocus(61)</visible>
+				<texture>common/nowPlayingShadow.png</texture>
+			</control>
+			<control type="image">
+				<description>Player Icon</description>
+				<left>25</left>
+				<top>70r</top>
+				<width>100</width>
+				<height>56</height>
+				<aspectratio>keep</aspectratio>
+				<texture colordiffuse="CCFFFFFF">$VAR[nowPlayingForced]</texture>
+				<visible>Player.HasVideo + !Slideshow.IsActive + !Window.IsActive(movieinformation) + !Control.HasFocus(61)</visible>
+			</control>
 			<control type="button">
 				<description>push button</description>
-				<left>30</left>
+				<left>280</left>
 				<top>55r</top>
 				<width>45</width>
 				<height>45</height>
@@ -3012,7 +3078,7 @@
 			</control>
 			<control type="image">
 				<description>Player Icon</description>
-				<left>35</left>
+				<left>285</left>
 				<top>50r</top>
 				<width>35</width>
 				<height>35</height>
@@ -3022,7 +3088,7 @@
 			</control>
 
 			<control type="image">
-				<left>35</left>
+				<left>285</left>
 				<top>50r</top>
 				<width>180</width>
 				<height>60</height>
@@ -3032,7 +3098,7 @@
 				<visible>false + VideoPlayer.Content(LiveTV)</visible>
 			</control>
 			<control type="label">
-				<left>30</left>
+				<left>280</left>
 				<top>60r</top>
 				<width>700</width>
 				<height>20</height>
@@ -3044,7 +3110,7 @@
 				<visible>[!VideoPlayer.HasEpg | !VideoPlayer.Content(LiveTV)] + !Control.HasFocus(61)</visible>
 			</control>
 			<control type="label">
-				<left>30</left>
+				<left>280</left>
 				<top>60r</top>
 				<width>700</width>
 				<height>20</height>
@@ -3056,7 +3122,7 @@
 				<visible>[!VideoPlayer.HasEpg | !VideoPlayer.Content(LiveTV)] + Control.HasFocus(61)</visible>
 			</control>
 			<control type="label">
-				<left>30</left>
+				<left>280</left>
 				<top>60r</top>
 				<width>700</width>
 				<height>20</height>
@@ -3068,7 +3134,7 @@
 				<visible>VideoPlayer.HasEpg + VideoPlayer.Content(LiveTV) + !Control.HasFocus(61)</visible>
 			</control>
 			<control type="label">
-				<left>30</left>
+				<left>280</left>
 				<top>60r</top>
 				<width>700</width>
 				<height>20</height>
@@ -3080,7 +3146,7 @@
 				<visible>VideoPlayer.HasEpg + VideoPlayer.Content(LiveTV) + Control.HasFocus(61)</visible>
 			</control>
 			<control type="label">
-				<left>85</left>
+				<left>335</left>
 				<top>32r</top>
 				<width>700</width>
 				<height>20</height>
@@ -3093,7 +3159,7 @@
 				<visible>Player.HasAudio</visible>
 			</control>
 			<control type="label">
-				<left>30</left>
+				<left>280</left>
 				<top>37r</top>
 				<width>700</width>
 				<height>20</height>
@@ -3105,7 +3171,7 @@
 				<visible>Player.HasVideo + VideoPlayer.Content(Movies) + !Control.HasFocus(61)</visible>
 			</control>
 			<control type="label">
-				<left>30</left>
+				<left>280</left>
 				<top>37r</top>
 				<width>700</width>
 				<height>20</height>
@@ -3117,7 +3183,7 @@
 				<visible>Player.HasVideo + VideoPlayer.Content(Movies) + Control.HasFocus(61)</visible>
 			</control>
 			<control type="label">
-				<left>85</left>
+				<left>335</left>
 				<top>30r</top>
 				<width>700</width>
 				<height>20</height>
@@ -3130,7 +3196,7 @@
 				<visible>Player.HasVideo + VideoPlayer.Content(Episodes)</visible>
 			</control>
 			<control type="label">
-				<left>85</left>
+				<left>335</left>
 				<top>30r</top>
 				<width>700</width>
 				<height>20</height>
@@ -3143,7 +3209,7 @@
 				<visible>Player.HasVideo + VideoPlayer.Content(MusicVideos)</visible>
 			</control>
 			<control type="label">
-				<left>40</left>
+				<left>290</left>
 				<top>37r</top>
 				<width>700</width>
 				<height>20</height>
@@ -3155,7 +3221,7 @@
 				<visible>Player.HasVideo + VideoPlayer.Content(LiveTV) + !Control.HasFocus(61)</visible>
 			</control>
 			<control type="label">
-				<left>40</left>
+				<left>290</left>
 				<top>37r</top>
 				<width>700</width>
 				<height>20</height>
@@ -3342,6 +3408,198 @@
 				<include>VideoStereoscopicsFlaggingConditions</include>
 				<include>VideoTypeHackFlaggingConditions</include>
 			</control>
+		</control>
+	</include>
+	<include name="TitleYearDurationList">
+		<control type="group">
+			<control type="label">
+				<width>1500</width>
+				<height>35</height>
+				<font>font36_Bold</font>
+				<textcolor>white</textcolor>
+				<scroll>true</scroll>
+				<label>$VAR[TYDLine1]</label>
+			</control>
+			<control type="group">
+				<left>0</left>
+				<top>50</top>
+				<visible>!String.IsEqual(ListItem.label,..)</visible>
+				<!-- <visible>!Container.Content(episodes)</visible> -->
+				<control type="label">
+					<font>font36</font>
+					<textcolor>white</textcolor>
+					<scroll>false</scroll>
+					<width>600</width>
+					<label>$VAR[TYDLine2]</label>
+				</control>
+				<control type="image">
+					<left>120</left>
+					<width>180</width>
+					<height>35</height>
+					<top>10</top>
+					<texture>$VAR[videoRating]</texture>
+					<visible>Container.Content(movies) | Container.Content(tvshows)</visible>
+				</control>
+				<control type="image">
+					<left>0</left>
+					<width>180</width>
+					<height>35</height>
+					<top>50</top>
+					<texture>$VAR[videoRating]</texture>
+					<visible>Container.Content(episodes)</visible>
+				</control>
+				<control type="label">
+					<top>90</top>
+					<font>font36</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+					<label>$INFO[ListItem.Premiered]</label>
+					<visible>Container.Content(episodes)</visible>
+				</control>
+				<control type="image">
+					<left>-110</left>
+					<width>100</width>
+					<height>48</height>
+					<top>8</top>
+					<texture>flagging/ratings/$VAR[Rating].png</texture>
+					<visible>!Player.HasVideo</visible>
+				</control>
+			</control>
+			<control type="image">
+				<left>600</left>
+				<width>275</width>
+				<height>400</height>
+				<aspectratio>keep</aspectratio>
+				<texture diffuse="diffuse/folderRounded.png">$VAR[PosterThumb]</texture>
+			</control>
+			<control type="image">
+				<top>200</top>
+				<left>0</left>
+				<width>250</width>
+				<height>250</height>
+				<aspectratio>keep</aspectratio>
+				<texture diffuse="diffuse/folderRounded.png">$INFO[ListItem.Icon]</texture>
+				<visible>Container.Content(episodes)</visible>
+			</control>
+			<!-- <control type="group">
+				<left>0</left>
+				<top>50</top>
+				<visible>Container.Content(episodes)</visible>
+				<control type="label">
+					<font>font36</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+					<label>$VAR[TYDLine2]</label>
+				</control>
+			</control> -->
+			<control type="label">
+				<top>450</top>
+				<left>0</left>
+				<height>160</height>
+				<width>900</width>
+				<wrapmultiline>true</wrapmultiline>
+				<font>font30</font>
+				<textcolor>lightblue</textcolor>
+				<scroll>true</scroll>
+				<label>$INFO[ListItem.Plot]</label>
+				<!-- <visible>Container.Content(tvshows)</visible> -->
+			</control>
+			<control type="group">
+				<top>100</top>
+				<width>1500</width>
+				<height>150</height>
+				<visible>!Control.IsVisible(65001) + !String.IsEqual(ListItem.label,..)</visible>
+				<control type="label">
+					<font>font36</font>
+					<textcolor>lightblue</textcolor>
+					<scroll>true</scroll>
+					<label>$VAR[DurationInMinutes]</label>
+					<visible>Container.Content(movies)</visible>
+				</control>
+				<control type="label">
+					<font>font16</font>
+					<textcolor>lightblue</textcolor>
+					<scroll>true</scroll>
+					<label>$INFO[ListItem.Property(TotalSeasons)] Seasons[CR]$INFO[ListItem.Property(UnWatchedEpisodes)] Unwatched Episodes</label>
+					<visible>Container.Content(tvshows)</visible>
+				</control>
+				<control type="label">
+					<font>font16</font>
+					<textcolor>lightblue</textcolor>
+					<scroll>true</scroll>
+					<label>$INFO[ListItem.Property(TotalEpisodes)] episodes[CR]$INFO[ListItem.Property(UnWatchedEpisodes)] Unwatched</label>
+					<visible>Container.Content(seasons)</visible>
+				</control>
+			</control>
+			
+			<control type="group">
+				<top>100</top>
+				<width>1500</width>
+				<height>35</height>
+				<visible>Control.IsVisible(65001)</visible>
+				<control type="label">
+					<top>10</top>
+					<font>font24</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+					<label>ends: $INFO[ListItem.EndTime] ($VAR[DurationInMinutes])</label>
+				</control>
+				<control type="label">
+					<top>50</top>
+					<font>font24</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+					<label>added: $INFO[ListItem.DateAdded], $INFO[ListItem.Genre]</label>
+				</control>
+				<control type="label">
+					<top>90</top>
+					<font>font14</font>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+					<haspath>true</haspath>
+					<label>path: $INFO[ListItem.FileNameAndPath]</label>
+				</control>
+			</control>
+			<!-- <control type="grouplist">
+				<left>10</left>
+				<top>570</top>
+				<width>1280</width>
+				<align>center</align>
+				<orientation>horizontal</orientation>
+				<itemgap>2</itemgap>
+				<control type="label">
+					<width>150</width>
+					<align>right</align>
+					<font>font13</font>
+					<textcolor>blue</textcolor>
+					<shadowcolor>black</shadowcolor>
+					<label>$LOCALIZE[180]: </label>
+					<visible>!ListItem.IsParentFolder</visible>
+				</control>
+				<control type="label">
+					<width>150</width>
+					<align>left</align>
+					<font>font13</font>
+					<textcolor>white</textcolor>
+					<shadowcolor>black</shadowcolor>
+					<label>$INFO[Container(5041).ListItem.Duration]</label>
+				</control>
+			</control>
+			<control type="grouplist">
+				<description>Media Codec Flagging Images</description>
+				<left>0</left>
+				<top>610</top>
+				<width>1280</width>
+				<align>center</align>
+				<itemgap>2</itemgap>
+				<orientation>horizontal</orientation>
+				<include>VideoCodecFlaggingConditions</include>
+				<include>AudioCodecFlaggingConditions</include>
+				<include>AudioChannelsFlaggingConditions</include>
+				<include>AspectCodecFlaggingConditions</include>
+				<include>VideoStereoscopicsFlaggingConditions</include>
+				<include>VideoTypeHackFlaggingConditions</include>
+			</control> -->
 		</control>
 	</include>
 	<include name="TitleDescription">
