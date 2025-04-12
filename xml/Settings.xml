@@ -120,6 +120,11 @@
 						<onclick>ActivateWindow(PlayerSettings)</onclick>
 						<icon/>
 					</item>
+					<item id="9">
+						<label>$LOCALIZE[10003]</label>
+						<onclick>ActivateWindow(filemanager)</onclick>
+						<icon/>
+					</item>
 					<item id="2">
 						<label>14211</label>
 						<label2>31431</label2>
@@ -138,13 +143,13 @@
 						<label2>31432</label2>
 						<onclick>ActivateWindow(PVRSettings)</onclick>
 						<icon>special://skin/backgrounds/tv.jpg</icon>
-					</item><!-- 
+					</item>
 					<item id="4">
 						<label>24001</label>
 						<label2>31433</label2>
 						<onclick>ActivateWindow(AddonBrowser)</onclick>
 						<icon/>
-					</item> -->
+					</item>
 					<item id="5">
 						<label>14036</label>
 						<label2>31434</label2>
