@@ -1486,5 +1486,6 @@
 				<visible>false</visible>
 			</control>
 		</control>
+		<include>CommonNowPlaying</include>
 	</controls>
 </window>

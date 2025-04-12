@@ -53,45 +53,6 @@
 			<visible>Player.HasAudio + !Skin.HasSetting(ShowBackgroundVis)</visible>
 			<visible>String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))</visible>
 		</control>
-		<control type="button" id="61">
-			<onup>60</onup>
-			<ondown>60101</ondown>
-			<left>18</left>
-			<top>161r</top>
-			<width>250</width>
-			<height>141</height>
-			<onclick>fullscreen</onclick>
-			<texturefocus border="5">videoWindowFocus.png</texturefocus>
-			<texturenofocus border="5">videoWindowNoFocus.png</texturenofocus>
-			<visible>Player.HasVideo + !Slideshow.IsActive + !Window.IsActive(movieinformation)</visible>
-		</control>
-		<control type="videowindow">
-			<depth>DepthBackground</depth>
-			<left>21</left>
-			<top>158r</top>
-			<width>244</width>
-			<height>135</height>
-			<visible>Player.HasVideo + !Slideshow.IsActive + !Window.IsActive(movieinformation)</visible>
-		</control>
-		<control type="image">
-			<depth>now playing shadow</depth>
-			<left>21</left>
-			<top>158r</top>
-			<width>244</width>
-			<height>135</height>
-			<visible>Player.HasVideo + !Slideshow.IsActive + !Window.IsActive(movieinformation) + !Control.HasFocus(61)</visible>
-			<texture>common/nowPlayingShadow.png</texture>
-		</control>
-		<control type="image">
-			<description>Player Icon</description>
-			<left>25</left>
-			<top>70r</top>
-			<width>100</width>
-			<height>56</height>
-			<aspectratio>keep</aspectratio>
-			<texture colordiffuse="CCFFFFFF">$VAR[nowPlayingForced]</texture>
-			<visible>Player.HasVideo + !Slideshow.IsActive + !Window.IsActive(movieinformation) + !Control.HasFocus(61)</visible>
-		</control>
 		<control type="label">
 			<visible>false</visible>
 			<label>=$VAR[nowPlayingForced]=</label>

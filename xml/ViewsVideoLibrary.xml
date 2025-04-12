@@ -72,20 +72,20 @@
 					</control>
 					<control type="image">
 						<depth>DepthContentPopout</depth>
-						<left>179</left>
-						<top>284</top>
-						<width>35</width>
-						<height>35</height>
+						<left>164</left>
+						<top>60</top>
+						<width>50</width>
+						<height>50</height>
 						<aspectratio>keep</aspectratio>
 						<texture colordiffuse="$VAR[posterNoFocus]">$INFO[ListItem.Overlay]</texture>
 						<visible>!Control.HasFocus(601) + !Control.HasFocus(60)</visible>
 					</control>
 					<control type="image">
 						<depth>DepthContentPopout</depth>
-						<left>179</left>
-						<top>284</top>
-						<width>35</width>
-						<height>35</height>
+						<left>164</left>
+						<top>60</top>
+						<width>50</width>
+						<height>50</height>
 						<aspectratio>keep</aspectratio>
 						<texture>$INFO[ListItem.Overlay]</texture>
 						<visible>Control.HasFocus(601) | Control.HasFocus(60)</visible>
@@ -107,14 +107,14 @@
 					</control>
 					<control type="image">
 						<depth>DepthContentPopout</depth>
-						<left>198</left>
-						<top>309</top>
-						<width>40</width>
-						<height>40</height>
+						<left>179</left>
+						<top>23</top>
+						<width>60</width>
+						<height>60</height>
 						<aspectratio>keep</aspectratio>
 						<texture>$INFO[ListItem.Overlay]</texture>
-						<animation reversible="false" effect="zoom" end="198,309,40,40" start="179,284,35,35" time="150">focus</animation>
-						<animation reversible="false" effect="zoom" start="198,309,40,40" end="179,284,35,35" time="150">unfocus</animation>
+						<animation reversible="false" effect="zoom" end="179,23,60,60" start="164,60,50,50" time="150">focus</animation>
+						<animation reversible="false" effect="zoom" start="179,23,60,60" end="164,60,50,50" time="150">unfocus</animation>
 					</control>
 				</focusedlayout>
 			</control>
@@ -221,20 +221,20 @@
 					</control>
 					<control type="image">
 						<depth>DepthContentPopout</depth>
-						<left>179</left>
-						<top>284</top>
-						<width>35</width>
-						<height>35</height>
+						<left>164</left>
+						<top>60</top>
+						<width>50</width>
+						<height>50</height>
 						<aspectratio>keep</aspectratio>
 						<texture colordiffuse="$VAR[posterNoFocus]">$INFO[ListItem.Overlay]</texture>
 						<visible>!Control.HasFocus(531) + !Control.HasFocus(60)</visible>
 					</control>
 					<control type="image">
 						<depth>DepthContentPopout</depth>
-						<left>179</left>
-						<top>284</top>
-						<width>35</width>
-						<height>35</height>
+						<left>164</left>
+						<top>60</top>
+						<width>50</width>
+						<height>50</height>
 						<aspectratio>keep</aspectratio>
 						<texture>$INFO[ListItem.Overlay]</texture>
 						<visible>Control.HasFocus(531) | Control.HasFocus(60)</visible>
@@ -256,14 +256,14 @@
 					</control>
 					<control type="image">
 						<depth>DepthContentPopout</depth>
-						<left>198</left>
-						<top>309</top>
-						<width>40</width>
-						<height>40</height>
+						<left>179</left>
+						<top>23</top>
+						<width>60</width>
+						<height>60</height>
 						<aspectratio>keep</aspectratio>
 						<texture>$INFO[ListItem.Overlay]</texture>
-						<animation reversible="false" effect="zoom" end="198,309,40,40" start="179,284,35,35" time="150">focus</animation>
-						<animation reversible="false" effect="zoom" start="198,309,40,40" end="179,284,35,35" time="150">unfocus</animation>
+						<animation reversible="false" effect="zoom" end="179,23,60,60" start="164,60,50,50" time="150">focus</animation>
+						<animation reversible="false" effect="zoom" start="179,23,60,60" end="164,60,50,50" time="150">unfocus</animation>
 					</control>
 				</focusedlayout>
 			</control>
@@ -356,6 +356,183 @@
 					<label>$VAR[DurationInMinutes]</label>
 				</control>
 			</control>
+		</control>
+	</include>
+	<include name="ListView">
+		<control type="group">
+			<visible>Control.IsVisible(533)</visible>
+			<left>0</left>
+			<top>0</top>
+			<width>1920</width>
+			<height>1080</height>
+			<!-- <onup condition="Control.IsVisible(60102)">60102</onup>
+			<onup condition="Control.IsVisible(60112)">60112</onup>
+			<onup condition="Control.IsVisible(19)">19</onup>
+			<onup condition="Control.IsVisible(60104)">60104</onup>
+			<onup condition="Control.IsVisible(60105)">60105</onup>
+			<onup condition="Control.IsVisible(60106)">60106</onup>
+			<onup condition="Control.IsVisible(60107)">60107</onup>
+			<onup>60101</onup>
+			<ondown condition="Control.IsVisible(9000)">9000</ondown>
+			<ondown>61</ondown>
+			<usecontrolcoords>true</usecontrolcoords> -->
+			<control type="group">
+				<control type="image">
+					<left>0</left>
+					<top>240</top>
+					<width>1920</width>
+					<height>840</height>
+					<texture colordiffuse="22FFFFFF" diffuse="diffuse/listViewPoster2.png">$INFO[ListItem.Art(fanart)]</texture>
+					<aspectratio scalediffuse="false" align="left" aligny="top">keep</aspectratio>
+					<visible>!Container.Content(Seasons) + !Container.Content(Episodes)</visible>
+				</control>
+				<control type="image">
+					<left>0</left>
+					<top>240</top>
+					<width>1920</width>
+					<height>840</height>
+					<texture colordiffuse="22FFFFFF" diffuse="diffuse/listViewPoster2.png">$INFO[Container.Art(fanart)]</texture>
+					<aspectratio scalediffuse="false" align="left" aligny="top">keep</aspectratio>
+					<visible></visible>
+				</control>
+				<control type="image">
+					<left>0</left>
+					<top>240</top>
+					<width>1920</width>
+					<height>840</height>
+					<texture>common/listView5050.png</texture>
+					<!-- <aspectratio>scale</aspectratio> -->
+				</control>
+			</control>
+			<include>VisibleFadeEffect</include>
+			
+			<control type="fixedlist" id="533">
+				<!-- <content sortby="sorttitle" sortorder="ascending">$VAR[forcedContentPath]</content> -->
+				<visible>Container.Content(Movies) | Container.Content(Seasons) | Container.Content(TVShows) | Container.Content(Sets) | Container.Content(Episodes)</visible>
+				<visible>!Container.Content(LiveTV)</visible>
+				<left>0</left>
+				<top>250</top>
+				<width>885</width>
+				<height>800</height>
+				<focusposition>4</focusposition>
+				<movement>4</movement>
+				<onleft condition="Control.IsVisible(60102)">60102</onleft>
+				<!-- <onleft condition="Control.IsVisible(60112)">60112</onleft>
+				<onleft condition="Control.IsVisible(60113)">60113</onleft>
+				<onleft condition="Control.IsVisible(19)">19</onleft>
+				<onleft condition="Control.IsVisible(60104)">60104</onleft>
+				<onleft condition="Control.IsVisible(60105)">60105</onleft>
+				<onleft condition="Control.IsVisible(60106)">60106</onleft>
+				<onleft condition="Control.IsVisible(60107)">60107</onleft> -->
+				<onleft>60101</onleft>
+				<!-- <ondown condition="Control.IsVisible(9000)">9000</ondown>
+				<ondown condition="Control.IsVisible(60)">60</ondown>
+				<ondown condition="Control.IsVisible(61)">61</ondown> -->
+				<onup>533</onup>
+				<ondown>533</ondown>
+				<!-- <ondown>60102</ondown>
+				<onleft>60</onleft> -->
+				<onright>60</onright>
+				<!-- <ondown condition="Control.IsVisible(9000)">9000</ondown>
+				<ondown>60</ondown> -->
+				<viewtype label="535">list</viewtype>
+				<pagecontrol>60</pagecontrol>
+				<scrolltime>200</scrolltime>
+				<orientation>vertical</orientation>
+				<!-- <preloaditems>4</preloaditems> -->
+				<itemlayout width="900" height="60">
+					<control type="label">
+						<left>85</left>
+						<top>10</top>
+						<height>60</height>
+						<width>830</width>
+						<wrapmultiline>true</wrapmultiline>
+						<font>font30</font>
+						<textcolor>lightblue</textcolor>
+						<scroll>false</scroll>
+						<label>$INFO[ListItem.label]</label>
+					</control>
+					<control type="image">
+						<depth>DepthContentPopout</depth>
+						<left>30</left>
+						<top>15</top>
+						<width>30</width>
+						<height>30</height>
+						<aspectratio>keep</aspectratio>
+						<texture colordiffuse="lightblueTransparent">overlaywatchedNoBG.png</texture>
+						<visible>!String.IsEmpty(ListItem.PlayCount)</visible>
+					</control>
+				</itemlayout>
+				<focusedlayout width="900" height="60">
+					<control type="image">
+						<left>75</left>
+						<top>0</top>
+						<width>800</width>
+						<height>60</height>
+						<texture border="10" colordiffuse="99FFFFFF">common/folder-focus.png</texture>
+						<animation reversible="false" effect="fade" time="150">focus</animation>
+						<animation reversible="false" effect="fade" time="150">unfocus</animation>
+					</control>
+					<control type="label">
+						<left>85</left>
+						<top>10</top>
+						<height>60</height>
+						<width>830</width>
+						<wrapmultiline>true</wrapmultiline>
+						<font>font30</font>
+						<textcolor>white</textcolor>
+						<scroll>false</scroll>
+						<label>$INFO[ListItem.label]</label>
+					</control>
+					<control type="image">
+						<depth>DepthContentPopout</depth>
+						<left>25</left>
+						<top>10</top>
+						<width>40</width>
+						<height>40</height>
+						<aspectratio>keep</aspectratio>
+						<texture>overlaywatchedNoBG.png</texture>
+						<animation reversible="false" effect="zoom" end="25,10,40,40" start="30,15,30,30" time="150">focus</animation>
+						<animation reversible="false" effect="zoom" start="25,10,40,40" end="30,15,30,30" time="150">unfocus</animation>
+						<visible>!String.IsEmpty(ListItem.PlayCount)</visible>
+					</control>
+					<control type="image">
+						<depth>DepthContentPopout</depth>
+						<left>5</left>
+						<top>20</top>
+						<width>20</width>
+						<height>20</height>
+						<aspectratio>keep</aspectratio>
+						<texture>upToSubMenu.png</texture>
+						<animation reversible="false" effect="fade" time="150">focus</animation>
+						<animation reversible="false" effect="fade" time="150">unfocus</animation>
+					</control>
+				</focusedlayout>
+			</control>
+			<control type="scrollbar" id="60">
+				<left>930</left>
+				<top>250</top>
+				<width>25</width>
+				<height>800</height>
+				<texturesliderbackground border="0,14,0,14">ScrollBarV.png</texturesliderbackground>
+				<texturesliderbar border="0,14,0,14">ScrollBarV_bar.png</texturesliderbar>
+				<texturesliderbarfocus border="0,14,0,14">ScrollBarV_bar_focus.png</texturesliderbarfocus>
+				<textureslidernib>ScrollBarNib.png</textureslidernib>
+				<textureslidernibfocus>ScrollBarNib.png</textureslidernibfocus>
+				<onleft>533</onleft>
+				<onright>533</onright>
+				<ondown condition="Control.IsVisible(61)">61</ondown>
+				<ondown>9000</ondown>
+				<showonepage>false</showonepage>
+				<orientation>vertical</orientation>
+				<visible>Control.IsVisible(533)</visible>
+			</control>
+		</control>
+		<control type="group">
+			<left>1000</left>
+			<top>280</top>
+			<visible>Control.HasFocus(533)</visible>
+			<include>TitleYearDurationList</include>
 		</control>
 	</include>
 	<include name="PosterWrapView">
