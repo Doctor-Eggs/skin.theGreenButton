@@ -163,6 +163,64 @@
 		<value condition="String.IsEmpty(ListItem.PlayCount)">mark as watched</value>
 		<value>mark as unwatched</value>
 	</variable>
+	<variable name="RatingFlagVar">
+		<value condition="String.IsEmpty(ListItem.MPAA) | String.Contains(ListItem.MPAA,NR) | String.IsEqual(ListItem.MPAA,Rated) | String.IsEqual(ListItem.MPAA,Rated ) | String.IsEqual(ListItem.MPAA,Not Rated)">NR.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,US:R) | String.IsEqual(ListItem.MPAA,USA:R) | String.IsEqual(ListItem.MPAA,Rated R) | String.IsEqual(ListItem.MPAA,R)">R.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,US:NC-17) | String.IsEqual(ListItem.MPAA,USA:NC-17) | String.IsEqual(ListItem.MPAA,Rated NC-17) | String.IsEqual(ListItem.MPAA,NC-17)">NC-17.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,US:PG-13) | String.IsEqual(ListItem.MPAA,USA:PG-13) | String.IsEqual(ListItem.MPAA,Rated PG-13) | String.IsEqual(ListItem.MPAA,PG-13)">PG-13.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,US:PG) | String.IsEqual(ListItem.MPAA,USA:PG) | String.IsEqual(ListItem.MPAA,Rated PG) | String.IsEqual(ListItem.MPAA,PG)">PG.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,US:G) | String.IsEqual(ListItem.MPAA,USA:G) | String.IsEqual(ListItem.MPAA,Rated G) | String.IsEqual(ListItem.MPAA,G) | String.IsEqual(ListItem.MPAA,Rated Approved) | String.IsEqual(ListItem.MPAA,Approved) | String.IsEqual(ListItem.MPAA,Rated Passed) | String.IsEqual(ListItem.MPAA,Passed)">G.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,UK:U)| String.IsEqual(ListItem.MPAA,United Kingdom:U)">BBFC_U_Certificate_UK.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,UK:PG) | String.IsEqual(ListItem.MPAA,United Kingdom:PG)">BBFC_PG_Certificate_UK.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,UK:12A) | String.IsEqual(ListItem.MPAA,United Kingdom:12A)">BBFC_12A_Certificate_UK.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,UK:12) | String.IsEqual(ListItem.MPAA,United Kingdom:12)">BBFC_12_Certificate_UK.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,UK:15) | String.IsEqual(ListItem.MPAA,United Kingdom:15)">BBFC_15_Certificate_UK.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,UK:18) | String.IsEqual(ListItem.MPAA,United Kingdom:18)">BBFC_18_Certificate_UK.png</value>
+		<value condition="String.IsEqual(ListItem.MPAA,Germany:16) | String.Contains(ListItem.MPAA,ab 16) | String.IsEqual(ListItem.MPAA,16) | String.Contains(ListItem.MPAA,FSK 16) | String.IsEqual(ListItem.MPAA,Rated 16)">FSK-16.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Germany:0) | String.Contains(ListItem.MPAA,ab 0) | String.IsEqual(ListItem.MPAA,0) | String.Contains(ListItem.MPAA,FSK 0) | String.Contains(ListItem.MPAA,Rated 0)">FSK-0.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Germany:6) | String.Contains(ListItem.MPAA,ab 6) | String.IsEqual(ListItem.MPAA,6) | String.Contains(ListItem.MPAA,FSK 6) | String.Contains(ListItem.MPAA,Rated 6)">FSK-6.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Germany:12) | String.Contains(ListItem.MPAA,ab 12) | String.IsEqual(ListItem.MPAA,12) | String.Contains(ListItem.MPAA,FSK 12) | String.Contains(ListItem.MPAA,Rated 12)">FSK-12.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Germany:18) | String.Contains(ListItem.MPAA,ab 18) | String.IsEqual(ListItem.MPAA,18) | String.Contains(ListItem.MPAA,FSK 18) | String.Contains(ListItem.MPAA,Rated 18)">FSK-18.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Germany) |String.Contains(ListItem.MPAA,FSK) | String.Contains(ListItem.MPAA,o.A) | String.Contains(ListItem.MPAA,Rated 0)">FSK-0.png</value>
+		<value condition="String.Contains(ListItem.MPAA,besorolás alatt)">HU_BA.png</value>
+		<value condition="String.Contains(ListItem.MPAA,korhatárra való tekintett nélkül megtekintetheto)">HU_KN.png</value>
+		<value condition="String.Contains(ListItem.MPAA,12 éven aluliak számára a megtekintése nagykorú felügyelete mellett ajánlott)">HU_12.png</value>
+		<value condition="String.Contains(ListItem.MPAA,16 éven aluliak számára nem ajánlott)">HU_16.png</value>
+		<value condition="String.Contains(ListItem.MPAA,18 éven aluliak számára nem ajánlott)">HU_18.png</value>
+		<value condition="String.Contains(ListItem.MPAA,France:U) | String.Contains(ListItem.MPAA,Tout public) | String.Contains(ListItem.MPAA,partir de 3 ans) | String.Contains(ListItem.MPAA,partir de 6 ans)">csaU.png</value>
+		<value condition="String.Contains(ListItem.MPAA,France:-10) | String.Contains(ListItem.MPAA,Interdit aux moins de 10 ans) | String.Contains(ListItem.MPAA,des propos ou des images peuvent heurter)">csa10.png</value>
+		<value condition="String.Contains(ListItem.MPAA,France:-12) | String.Contains(ListItem.MPAA,Interdit aux moins de 12 ans)">csa12.png</value>
+		<value condition="String.Contains(ListItem.MPAA,France:-16) | String.Contains(ListItem.MPAA,Interdit aux moins de 16 ans)">csa16.png</value>
+		<value condition="String.Contains(ListItem.MPAA,France:-18) | String.Contains(ListItem.MPAA,Interdit aux moins de 18 ans)">csa18.png</value>
+		<value condition="String.Contains(ListItem.MPAA,전체)">KR_Certificate_All.png</value>
+		<value condition="String.Contains(ListItem.MPAA,12세)">KR_Certificate_12.png</value>
+		<value condition="String.Contains(ListItem.MPAA,15세)">KR_Certificate_15.png</value>
+		<value condition="String.Contains(ListItem.MPAA,불가)">KR_Certificate_18.png</value>
+		<value condition="String.Contains(ListItem.MPAA,제한)">KR_Certificate_R.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Brazil:Livre) | String.Contains(ListItem.MPAA,Livre)">MPAA_Brazil_Livre.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Brazil:10) | String.Contains(ListItem.MPAA,10 anos)">MPAA_Brazil_10.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Brazil:12) | String.Contains(ListItem.MPAA,12 anos)">MPAA_Brazil_12.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Brazil:14) | String.Contains(ListItem.MPAA,14 anos)">MPAA_Brazil_14.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Brazil:16) | String.Contains(ListItem.MPAA,16 anos)">MPAA_Brazil_16.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Brazil:18) | String.Contains(ListItem.MPAA,18 anos)">MPAA_Brazil_18.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Australia:R) | String.Contains(ListItem.MPAA,Australia:R18)">australia_R.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Australia:MA) | String.Contains(ListItem.MPAA,Australia:MA15)">australia_MA.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Australia:M)">australia_M.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Australia:PG)">australia_PG.png</value>
+		<value condition="String.Contains(ListItem.MPAA,Australia:G)">australia_G.png</value>
+		<value condition="String.Contains(ListItem.MPAA,NL:AL)">NL-AL.png</value>
+		<value condition="String.Contains(ListItem.MPAA,NL:6)">NL-6.png</value>
+		<value condition="String.Contains(ListItem.MPAA,NL:9)">NL-9.png</value>
+		<value condition="String.Contains(ListItem.MPAA,NL:12)">NL-12.png</value>
+		<value condition="String.Contains(ListItem.MPAA,NL:16)">NL-16.png</value>
+		<value condition="String.Contains(ListItem.MPAA,NL:18)">NL-18.png</value>
+		<value condition="String.Contains(ListItem.MPAA,GR:K)">GR-K.png</value>
+		<value condition="String.Contains(ListItem.MPAA,GR:8)">GR-8.png</value>
+		<value condition="String.Contains(ListItem.MPAA,GR:12)">GR-12.png</value>
+		<value condition="String.Contains(ListItem.MPAA,GR:16)">GR-16.png</value>
+		<value condition="String.Contains(ListItem.MPAA,GR:18)">GR-18.png</value>
+		<value>$INFO[ListItem.MPAA,,.png]</value>
+	</variable>
 	<variable name="videoRating">
 		<value condition="Integer.IsGreater(ListItem.Rating(themoviedb),9.9)">leftrating/rating50.png</value>
 		<value condition="Integer.IsGreater(ListItem.Rating(themoviedb),9.5)">leftrating/rating48.png</value>
@@ -1459,19 +1517,18 @@
 			<top>0</top>
 			<width>$PARAM[DialogBackgroundWidth]</width>
 			<height>$PARAM[DialogBackgroundHeight]</height>
-			<texture border="40">$VAR[SelectBack]</texture>
+			<texture fallback="special://skin/backgrounds/SKINDEFAULT.png" colordiffuse="F0FFFFFF">$INFO[Skin.String(MasterCustomBackgroundPath)]</texture>
 		</control>
 		<control type="label" id="$PARAM[DialogHeaderId]">
 			<description>header label</description>
-			<left>20</left>
-			<top>20</top>
+			<left>715</left>
+			<top>70</top>
 			<width>$PARAM[DialogHeaderWidth]</width>
 			<height>30</height>
-			<font>fontDialog_Title</font>
+			<font>font40_bold_ucase</font>
 			<label>$PARAM[DialogHeaderLabel]</label>
 			<align>left</align>
-			<aligny>center</aligny>
-			<textcolor>FF06225d</textcolor>
+			<textcolor>white</textcolor>
 		</control>
 		<!-- <control type="button">
 			<description>Close Window button</description>
@@ -1525,6 +1582,7 @@
 			<texture>$INFO[ListItem.Icon]</texture>
 			<bordertexture border="8">ThumbShadow.png</bordertexture>
 			<bordersize>8</bordersize>
+			<visible>!Control.IsVisible(450) + !Control.IsVisible(451)</visible>
 		</control>
 		<control type="image">
 			<description>LOGO</description>
@@ -1559,7 +1617,7 @@
 			<top>90</top>
 			<width>$PARAM[DialogHeaderWidth]</width>
 			<height>30</height>
-			<font>font36</font>
+			<font>font54_bold</font>
 			<label>$PARAM[DialogHeaderLabel]</label>
 			<align>left</align>
 			<aligny>center</aligny>
@@ -3504,6 +3562,22 @@
 				<label>$INFO[ListItem.Plot]</label>
 				<!-- <visible>Container.Content(tvshows)</visible> -->
 			</control>
+			<control type="image">
+				<width>150</width>
+				<height>150</height>
+				<top>650</top>
+				<left>0</left>
+				<aspectratio>keep</aspectratio>
+				<texture>mpaa/$VAR[RatingFlagVar]</texture>
+			</control>
+			<control type="image">
+				<width>150</width>
+				<height>150</height>
+				<top>650</top>
+				<left>400</left>
+				<aspectratio align="right">keep</aspectratio>
+				<texture>$INFO[ListItem.Studio,resource://resource.images.studios.white/,.png]</texture>
+			</control>
 			<control type="group">
 				<top>100</top>
 				<width>1500</width>
@@ -3517,14 +3591,14 @@
 					<visible>Container.Content(movies)</visible>
 				</control>
 				<control type="label">
-					<font>font16</font>
+					<font>font30</font>
 					<textcolor>lightblue</textcolor>
 					<scroll>true</scroll>
 					<label>$INFO[ListItem.Property(TotalSeasons)] Seasons[CR]$INFO[ListItem.Property(UnWatchedEpisodes)] Unwatched Episodes</label>
 					<visible>Container.Content(tvshows)</visible>
 				</control>
 				<control type="label">
-					<font>font16</font>
+					<font>font30</font>
 					<textcolor>lightblue</textcolor>
 					<scroll>true</scroll>
 					<label>$INFO[ListItem.Property(TotalEpisodes)] episodes[CR]$INFO[ListItem.Property(UnWatchedEpisodes)] Unwatched</label>
@@ -4866,5 +4940,75 @@
 			<label2>$INFO[ListItem.FilenameAndPath]</label2>
 			<visible>!String.IsEmpty(ListItem.FilenameAndPath)</visible>
 		</item>
+	</include>
+	<!-- Auto Complete -->
+	<include name="ExtendedInfoAutoComplete">
+		<control type="group">
+			<animation effect="fade" start="100" end="0" time="300" condition="String.IsEmpty(Container(5000).ListItem.Label)">Conditional</animation>
+			<visible>!System.HasHiddenInput</visible>
+			<!-- <control type="image">
+				<top>540</top>
+				<width>1340</width>
+				<height>220</height>
+				<texture border="40">dialogs/default/bg.png</texture>
+			</control>
+			<control type="image">
+				<left>30</left>
+				<top>572</top>
+				<width>1280</width>
+				<height>161</height>
+				<texture border="5">dialogs/default/inner.png</texture>
+			</control> -->
+			<control type="panel" id="5000">
+				<left>20</left>
+				<top>372</top>
+				<width>1880</width>
+				<height>160</height>
+				<onleft>5000</onleft>
+				<onright>5000</onright>
+				<onup>3005</onup>
+				<ondown>312</ondown>
+				<onback>noop</onback>
+				<scrolltime tween="quadratic" easing="out">200</scrolltime>
+				<itemlayout height="80" width="470">
+					<control type="image">
+						<width>450</width>
+						<height>60</height>
+						<texture border="4">thumbs/panel_border.png</texture>
+					</control>
+					<control type="label">
+						<width>450</width>
+						<height>60</height>
+						<left>10</left>
+						<align>left</align>
+						<aligny>center</aligny>
+						<textcolor>whiteTransparentC</textcolor>
+						<font>font36_bold</font>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</itemlayout>
+				<focusedlayout height="80" width="470">
+					<control type="image">
+						<width>470</width>
+						<height>60</height>
+						<!-- <texture colordiffuse="$VAR[HighlightBarColor]" border="5">listselect_fo.png</texture> -->
+						<visible>Control.HasFocus(5000)</visible>
+						<texturenofocus border="0">common/blankWhite1.png</texturenofocus>
+						<texture border="10" colordiffuse="99FFFFFF">common/folder-focus.png</texture>
+					</control>
+					<control type="label">
+						<width>450</width>
+						<height>60</height>
+						<left>10</left>
+						<align>left</align>
+						<aligny>center</aligny>
+						<font>font36_bold</font>
+						<textcolor>white</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</focusedlayout>
+				<content>plugin://plugin.program.autocompletion?info=autocomplete&amp;&amp;id=$INFO[Control.GetLabel(312).Index(1)]&amp;&amp;limit=8</content>
+			</control>
+		</control>
 	</include>
 </includes>

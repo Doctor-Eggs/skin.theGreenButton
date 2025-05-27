@@ -40,6 +40,34 @@
 			<style>lowercase bold</style>
 		</font>
 		<font>
+			<name>font24</name>
+			<filename>selawk.ttf</filename>
+			<size>24</size>
+		</font>
+		<font>
+			<name>font24_light</name>
+			<filename>selawkl.ttf</filename>
+			<size>24</size>
+		</font>
+		<font>
+			<name>font24_Bold</name>
+			<filename>selawk.ttf</filename>
+			<style>bold</style>
+			<size>24</size>
+		</font>
+		<font>
+			<name>font24_Bold_lcase</name>
+			<filename>selawk.ttf</filename>
+			<style>lowercase bold</style>
+			<size>24</size>
+		</font>
+		<font>
+			<name>font24_lcase</name>
+			<filename>selawk.ttf</filename>
+			<size>24</size>
+			<style>lowercase</style>
+		</font>
+		<font>
 			<name>font30</name>
 			<filename>selawk.ttf</filename>
 			<size>30</size>
@@ -107,6 +135,12 @@
 			<size>40</size>
 		</font>
 		<font>
+			<name>font40_bold_ucase</name>
+			<filename>selawk.ttf</filename>
+			<style>uppercase bold</style>
+			<size>40</size>
+		</font>
+		<font>
 			<name>font40_light</name>
 			<filename>selawkl.ttf</filename>
 			<size>40</size>
@@ -126,6 +160,38 @@
 			<name>font48_light</name>
 			<filename>selawkl.ttf</filename>
 			<size>48</size>
+		</font>
+		<font>
+			<name>font54</name>
+			<filename>selawk.ttf</filename>
+			<size>54</size>
+		</font>
+		<font>
+			<name>font54_bold</name>
+			<filename>selawk.ttf</filename>
+			<style>bold</style>
+			<size>54</size>
+		</font>
+		<font>
+			<name>font54_light</name>
+			<filename>selawkl.ttf</filename>
+			<size>54</size>
+		</font>
+		<font>
+			<name>font60</name>
+			<filename>selawk.ttf</filename>
+			<size>60</size>
+		</font>
+		<font>
+			<name>font60_bold</name>
+			<filename>selawk.ttf</filename>
+			<style>bold</style>
+			<size>60</size>
+		</font>
+		<font>
+			<name>font60_light</name>
+			<filename>selawkl.ttf</filename>
+			<size>60</size>
 		</font>
 		<font>
 			<name>font24</name>

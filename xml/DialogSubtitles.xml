@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window type="dialog">
 	<coordinates>
-		<left>380</left>
+		<left>0</left>
 		<top>0</top>
 	</coordinates>
 	<controls>
 		<control type="group" id="250">
-			<depth>DepthDialog-</depth>
-			<animation effect="slide" start="0,0" end="900,0" time="375" tween="quadratic" easing="out">WindowClose</animation>
-			<animation type="Conditional" condition="Control.HasFocus(150) | Control.HasFocus(160)" reversible="true">
-				<effect type="slide" end="-250,0" time="300" />
-			</animation>
+			<animation effect="fade" start="100" end="0" time="150" condition="Window.Is(contentsettings) + Window.IsActive(AddonSettings)">Conditional</animation>
+			<animation effect="fade" start="100" end="0" time="300" condition="[Window.Is(osdaudiosettings) | Window.Is(osdvideosettings) | Window.Is(osdsubtitlesettings)] + [Window.IsVisible(SliderDialog) |  Window.IsVisible(FileBrowser)]">Conditional</animation>
+			<include content="DialogBackgroundCommons">
+				<param name="DialogBackgroundWidth" value="1920" />
+				<param name="DialogBackgroundHeight" value="1080" />
+				<param name="DialogHeaderWidth" value="720" />
+				<param name="DialogHeaderLabel" value="$INFO[Player.Filename]" />
+				<param name="DialogHeaderId" value="2" />
+				<param name="CloseButtonLeft" value="710" />
+				<param name="CloseButtonNav" value="10" />
+			</include>
 			<control type="button" id="8999">
 				<description>Fake button for mouse control</description>
 				<left>880</left>
@@ -24,7 +30,42 @@
 				<visible>true</visible>
 				<onfocus>SetFocus(150)</onfocus>
 			</control>
-			<control type="image">
+			<control type="label">
+				<description>Download Subtitles Label</description>
+				<label>download subtitles</label>
+				<height>100</height>
+				<left>270</left>
+				<top>80</top>
+				<font>font54_light</font>
+				<align>left</align>
+				<aligny>top</aligny>
+				<textcolor>lightblueTransparent</textcolor>
+			</control>
+			<control type="group" id="130">
+				<control type="grouplist">
+					<left>300</left>
+					<top>150</top>
+					<width>605</width>
+					<height>30</height>
+					<orientation>horizontal</orientation>
+					<itemgap>5</itemgap>
+					<control type="image">
+						<width>30</width>
+						<height>30</height>
+						<texture>DefaultIconInfo.png</texture>
+					</control>
+					<control type="label">
+						<description>notification</description>
+						<width min="10" max="560">auto</width>
+						<height>30</height>
+						<font>font36_light</font>
+						<textcolor>lightblueTransparent</textcolor>
+						<label>$LOCALIZE[31413]</label>
+						<aligny>center</aligny>
+					</control>
+				</control>
+			</control>
+			<!-- <control type="image">
 				<description>media info background image</description>
 				<left>0</left>
 				<top>0</top>
@@ -49,8 +90,9 @@
 				<onup>101</onup>
 				<ondown>101</ondown>
 				<visible>system.getbool(input.enablemouse)</visible>
-			</control>
+			</control> -->
 			<control type="group">
+				<visible>false</visible>
 				<control type="label" id="100">
 					<description>header label</description>
 					<left>330</left>
@@ -58,7 +100,7 @@
 					<width>550</width>
 					<height>30</height>
 					<font>font30_title</font>
-					<align>right</align>
+					<align>left</align>
 					<aligny>center</aligny>
 					<textcolor>white</textcolor>
 					<shadowcolor>black</shadowcolor>
@@ -71,7 +113,7 @@
 					<height>30</height>
 					<font>font13_title</font>
 					<label>$INFO[Player.Filename]</label>
-					<align>right</align>
+					<align>left</align>
 					<aligny>center</aligny>
 					<textcolor>grey</textcolor>
 					<shadowcolor>black</shadowcolor>
@@ -84,14 +126,14 @@
 					<height>4</height>
 					<texture>separator.png</texture>
 				</control>
-				<control type="image" id="110">
+				<!-- <control type="image" id="110">
 					<description>Service Logo</description>
 					<left>0</left>
 					<top>80</top>
 					<width>250</width>
 					<height>40</height>
 					<aspectratio>keep</aspectratio>
-				</control>
+				</control> -->
 				<control type="label" id="140">
 					<description>textarea</description>
 					<left>50</left>
@@ -113,19 +155,19 @@
 				</control>
 			</control>
 			<control type="group">
+				<left>815</left>
 				<control type="list" id="120">
-					<left>50</left>
-					<top>206</top>
-					<width>800</width>
-					<height>434</height>
-					<onleft>121</onleft>
+					<top>250</top>
+					<width>1000</width>
+					<height>600</height>
+					<onleft>150</onleft>
 					<onright>150</onright>
 					<onup>120</onup>
 					<ondown>120</ondown>
 					<viewtype label="535">list</viewtype>
 					<pagecontrol>121</pagecontrol>
 					<scrolltime>200</scrolltime>
-					<itemlayout width="800" height="36">
+					<itemlayout width="1000" height="50">
 						<control type="image">
 							<left>0</left>
 							<top>0</top>
@@ -134,21 +176,21 @@
 							<texture>MenuItemNF.png</texture>
 						</control>
 						<control type="image">
-							<left>5</left>
-							<top>5</top>
-							<width>26</width>
-							<height>26</height>
+							<!-- <left>5</left>
+							<top>5</top> -->
+							<width>39</width>
+							<height>39</height>
 							<texture>Subtitles/flags/$INFO[ListItem.Thumb].png</texture>
 							<aspectratio>keep</aspectratio>
 						</control>
 						<control type="label">
 							<left>40</left>
 							<top>0</top>
-							<width>90</width>
+							<width>200</width>
 							<height>38</height>
-							<font>font13</font>
+							<font>font30_bold</font>
 							<aligny>center</aligny>
-							<textcolor>white</textcolor>
+							<textcolor>66FFFFFF</textcolor>
 							<selectedcolor>selected</selectedcolor>
 							<align>left</align>
 							<info>ListItem.Label</info>
@@ -170,28 +212,28 @@
 							<visible>ListItem.property(sync)</visible>
 						</control>
 						<control type="label">
-							<left>205</left>
+							<left>245</left>
 							<top>0</top>
-							<width>495</width>
+							<width>550</width>
 							<height>38</height>
-							<font>font13</font>
+							<font>font30_bold</font>
 							<aligny>center</aligny>
-							<textcolor>white</textcolor>
+							<textcolor>66FFFFFF</textcolor>
 							<selectedcolor>selected</selectedcolor>
 							<align>left</align>
 							<info>ListItem.Label2</info>
 						</control>
 						<control type="image">
-							<left>710</left>
+							<left>800</left>
 							<top>11</top>
-							<width>90</width>
-							<height>17</height>
-							<texture>LeftRating/rating$INFO[ListItem.ActualIcon].png</texture>
+							<width>135</width>
+							<height>26</height>
+							<texture colordiffuse="66FFFFFF">LeftRating/rating$INFO[ListItem.ActualIcon].png</texture>
 							<aspectratio>keep</aspectratio>
 						</control>
 					</itemlayout>
-					<focusedlayout width="800" height="36">
-						<control type="image">
+					<focusedlayout width="1000" height="50">
+						<!-- <control type="image">
 							<left>0</left>
 							<top>0</top>
 							<width>780</width>
@@ -205,21 +247,21 @@
 							<height>38</height>
 							<texture>MenuItemFO.png</texture>
 							<visible>Control.HasFocus(120)</visible>
-						</control>
+						</control> -->
 						<control type="image">
-							<left>5</left>
-							<top>5</top>
-							<width>26</width>
-							<height>26</height>
+							<!-- <left>5</left>
+							<top>5</top> -->
+							<width>39</width>
+							<height>39</height>
 							<texture>Subtitles/flags/$INFO[ListItem.Thumb].png</texture>
 							<aspectratio>keep</aspectratio>
 						</control>
 						<control type="label">
 							<left>40</left>
 							<top>0</top>
-							<width>90</width>
+							<width>200</width>
 							<height>38</height>
-							<font>font13</font>
+							<font>font30_bold</font>
 							<aligny>center</aligny>
 							<textcolor>white</textcolor>
 							<selectedcolor>selected</selectedcolor>
@@ -243,11 +285,11 @@
 							<visible>ListItem.property(sync)</visible>
 						</control>
 						<control type="label">
-							<left>205</left>
+							<left>245</left>
 							<top>0</top>
-							<width>495</width>
+							<width>550</width>
 							<height>38</height>
-							<font>font13</font>
+							<font>font30_bold</font>
 							<aligny>center</aligny>
 							<textcolor>white</textcolor>
 							<selectedcolor>selected</selectedcolor>
@@ -255,10 +297,10 @@
 							<info>ListItem.Label2</info>
 						</control>
 						<control type="image">
-							<left>710</left>
+							<left>800</left>
 							<top>11</top>
-							<width>90</width>
-							<height>17</height>
+							<width>135</width>
+							<height>26</height>
 							<texture>LeftRating/rating$INFO[ListItem.ActualIcon].png</texture>
 							<aspectratio>keep</aspectratio>
 						</control>
@@ -266,11 +308,11 @@
 				</control>
 				<control type="spincontrol" id="121">
 					<description>Next page button</description>
-					<left>808</left>
-					<top>664</top>
+					<left>880</left>
+					<top>860</top>
 					<width>20</width>
 					<height>20</height>
-					<font>font13</font>
+					<font>font30</font>
 					<align>right</align>
 					<aligny>center</aligny>
 					<subtype>page</subtype>
@@ -287,51 +329,20 @@
 					<showonepage>false</showonepage>
 					<visible>Control.IsVisible(120)</visible>
 				</control>
-				<control type="group" id="130">
-					<control type="grouplist">
-						<left>50</left>
-						<top>659</top>
-						<width>605</width>
-						<height>30</height>
-						<orientation>horizontal</orientation>
-						<itemgap>5</itemgap>
-						<control type="image">
-							<width>30</width>
-							<height>30</height>
-							<texture>DefaultIconInfo.png</texture>
-						</control>
-						<control type="label">
-							<description>notification</description>
-							<width min="10" max="560">auto</width>
-							<height>30</height>
-							<font>font13</font>
-							<textcolor>white</textcolor>
-							<label>$LOCALIZE[31413]</label>
-							<aligny>center</aligny>
-						</control>
-					</control>
-				</control>
-				<control type="image">
+				<!-- <control type="image">
 					<left>866</left>
 					<top>348</top>
 					<width>24</width>
 					<height>24</height>
 					<texture>scroll-right-focus.png</texture>
-				</control>
+				</control> -->
 			</control>
 			<control type="group">
-				<control type="image">
-					<description>separator</description>
-					<left>542</left>
-					<top>360</top>
-					<width>720</width>
-					<height>4</height>
-					<texture>separator.png</texture>
-					<animation effect="rotate" start="0" end="90" center="auto" time="0" condition="true">Conditional</animation>
-				</control>
-				<control type="label">
-					<left>905</left>
-					<top>150</top>
+				<left>315</left>
+				<top>250</top>
+				<width>460</width>
+				<align>left</align>
+				<!-- <control type="label">
 					<width>240</width>
 					<height>26</height>
 					<label>[B]$LOCALIZE[24018][/B]</label>
@@ -349,63 +360,47 @@
 					<width>240</width>
 					<height>4</height>
 					<texture>separator.png</texture>
-				</control>
+				</control> -->
 				<control type="list" id="150">
-					<left>900</left>
-					<top>206</top>
-					<width>250</width>
-					<height>399</height>
+					<width>350</width>
+					<height>500</height>
 					<onleft>120</onleft>
 					<onright>120</onright>
-					<onup>160</onup>
+					<onup>160001</onup>
 					<ondown>160</ondown>
 					<viewtype label="535">list</viewtype>
 					<scrolltime>200</scrolltime>
-					<itemlayout width="400" height="36">
-						<control type="image">
-							<left>0</left>
-							<top>0</top>
-							<width>230</width>
-							<height>38</height>
-							<texture>MenuItemNF.png</texture>
-						</control>
+					<itemlayout width="400" height="60">
 						<control type="label">
-							<left>40</left>
+							<left>20</left>
 							<top>0</top>
-							<width>230</width>
-							<height>38</height>
-							<font>font13</font>
+							<width>350</width>
+							<height>60</height>
+							<font>font30_bold</font>
 							<aligny>center</aligny>
-							<textcolor>white</textcolor>
+							<textcolor>66FFFFFF</textcolor>
 							<selectedcolor>selected</selectedcolor>
 							<align>left</align>
 							<info>ListItem.Label</info>
 						</control>
 					</itemlayout>
-					<focusedlayout width="400" height="36">
+					<focusedlayout width="400" height="60">
 						<control type="image">
 							<left>0</left>
 							<top>0</top>
-							<width>230</width>
-							<height>38</height>
-							<texture>MenuItemNF.png</texture>
-						</control>
-						<control type="image">
-							<left>10</left>
-							<top>0</top>
-							<width>230</width>
-							<height>38</height>
-							<texture>MenuItemFO.png</texture>
+							<width>350</width>
+							<height>60</height>
+							<texture>button-nofocus.png</texture>
 							<visible>Control.HasFocus(150)</visible>
 						</control>
 						<control type="label">
-							<left>40</left>
+							<left>20</left>
 							<top>0</top>
-							<width>230</width>
-							<height>38</height>
-							<font>font13</font>
+							<width>350</width>
+							<height>60</height>
+							<font>font30_bold</font>
 							<aligny>center</aligny>
-							<textcolor>white</textcolor>
+							<textcolor>FFFFFFFF</textcolor>
 							<selectedcolor>selected</selectedcolor>
 							<align>left</align>
 							<info>ListItem.Label</info>
@@ -414,20 +409,32 @@
 				</control>
 				<control type="button" id="160">
 					<description>Manual search button</description>
-					<left>925</left>
-					<top>640</top>
-					<width>200</width>
-					<height>40</height>
+					<top>440</top>
+					<width>350</width>
+					<height>60</height>
 					<onleft>120</onleft>
 					<onright>120</onright>
 					<onup>150</onup>
-					<ondown>150</ondown>
+					<ondown>160001</ondown>
 					<label>$LOCALIZE[24120]</label>
-					<font>font12_title</font>
-					<textcolor>white</textcolor>
-					<focusedcolor>white</focusedcolor>
-					<align>center</align>
-					<hitrect x="925" y="605" w="200" h="100" />
+					<font>font30_bold</font>
+					<textoffsetx>20</textoffsetx>
+				</control>
+				<control type="button" id="160001">
+					<onclick>PreviousMenu</onclick>
+					<description>Cancel Button</description>
+					<top>520</top>
+					<width>350</width>
+					<height>60</height>
+					<align>left</align>
+					<aligny>center</aligny>
+					<font>font30_bold</font>
+					<textoffsetx>20</textoffsetx>
+					<label>Close</label>
+					<onleft>120</onleft>
+					<onright>120</onright>
+					<onup>160</onup>
+					<ondown>SetFocus(150,0,absolute)</ondown>
 				</control>
 			</control>
 		</control>

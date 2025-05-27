@@ -10,7 +10,7 @@
 	</coordinates>
 	<controls>
 		<include>MainWindowMouseButtons</include>
-		<control type="slider" id="87">
+		<!-- <control type="slider" id="87">
 			<depth>DepthOSD+</depth>
 			<description>Seek Slider</description>
 			<left>390</left>
@@ -24,18 +24,177 @@
 			<textureslidernib>osd_slider_nibNF.png</textureslidernib>
 			<textureslidernibfocus>osd_slider_nib.png</textureslidernibfocus>
 			<animation effect="fade" time="150">VisibleChange</animation>
-			<visible>![Window.IsVisible(SliderDialog) | Window.IsVisible(OSDSubtitleSettings) | Window.IsVisible(OSDVideoSettings) | Window.IsVisible(OSDAudioSettings) | Window.IsVisible(VideoBookmarks) | VideoPlayer.Content(LiveTV)]</visible>
-		</control>
+			<visible>false + ![Window.IsVisible(SliderDialog) | Window.IsVisible(OSDSubtitleSettings) | Window.IsVisible(OSDVideoSettings) | Window.IsVisible(OSDAudioSettings) | Window.IsVisible(VideoBookmarks) | VideoPlayer.Content(LiveTV)]</visible>
+		</control> -->
 		<control type="image">
-			<left>888r</left>
-			<top>96r</top>
-			<height>96</height>
-			<width>888</width>
-			<texture>OSD_Background.png</texture>
+			<height>1080</height>
+			<width>1920</width>
+			<texture diffuse="diffuse/OSDBottomButtonsBG.png" fallback="special://skin/backgrounds/SKINDEFAULT.png">$INFO[Skin.String(MasterCustomBackgroundPath)]</texture>
+		</control>
+		<control type="grouplist" id="100100">
+			<top>110r</top>
+			<onup>100</onup>
+			<ondown>100</ondown>
+			<align>right</align>
+			<orientation>horizontal</orientation>
+			<itemgap>4</itemgap>
+			<control type="image" id="100101">
+				<width>40</width>
+				<height>40</height>
+				<aspectratio>keep</aspectratio>
+				<texture colordiffuse="99FFFFFF">osdsubtitles.png</texture>
+				<visible>![Control.HasFocus(100104) | Control.HasFocus(100106) | Control.HasFocus(100108)]</visible>
+			</control>
+			<control type="image" id="100102">
+				<width>40</width>
+				<height>40</height>
+				<aspectratio>keep</aspectratio>
+				<texture>osdsubtitles.png</texture>
+				<visible>Control.HasFocus(100104) | Control.HasFocus(100106) | Control.HasFocus(100108)</visible>
+			</control>
+			<control type="image" id="100103">
+				<width>5</width>
+				<texture />
+			</control>
+			<!-- <control type="image" id="100101">
+				<width>10</width>
+				<height>40</height>
+				<texture colordiffuse="99FFFFFF">OSD_Divider.png</texture>
+			</control>
+			<control type="image" id="100101">
+				<width>5</width>
+				<texture />
+			</control> -->
+			<control type="togglebutton" id="100104">
+				<width>40</width>
+				<height>40</height>
+				<label>31351</label>
+				<altlabel>208</altlabel>
+				<font/>
+				<texturefocus>radiobutton-selected-focus.png</texturefocus>
+				<texturenofocus colordiffuse="99FFFFFF">radiobutton-selected-nofocus.png</texturenofocus>
+				<usealttexture>!VideoPlayer.SubtitlesEnabled</usealttexture>
+				<alttexturefocus>radiobutton-focus.png</alttexturefocus>
+				<alttexturenofocus colordiffuse="99FFFFFF">radiobutton-nofocus.png</alttexturenofocus>
+				<onclick>ShowSubtitles</onclick>
+			</control>
+			<control type="image" id="100105">
+				<width>5</width>
+				<height>40</height>
+				<texture />
+			</control>
+			<control type="button" id="100106">
+				<width>40</width>
+				<height>40</height>
+				<label>31351</label>
+				<altlabel>208</altlabel>
+				<font/>
+				<texturefocus>subtitles/download-selected.png</texturefocus>
+				<texturenofocus colordiffuse="99FFFFFF">subtitles/download.png</texturenofocus>
+				<onclick>ActivateWindow(subtitlesearch)</onclick>
+			</control>
+			<control type="image" id="100107">
+				<width>5</width>
+				<height>40</height>
+				<texture />
+			</control>
+			<control type="button" id="100108">
+				<width>40</width>
+				<height>40</height>
+				<label>31351</label>
+				<altlabel>208</altlabel>
+				<font/>
+				<texturefocus>subtitles/settings-selected.png</texturefocus>
+				<texturenofocus colordiffuse="99FFFFFF">subtitles/settings.png</texturenofocus>
+				<onclick>ActivateWindow(OSDSubtitleSettings)</onclick>
+				<!-- <animation effect="fade" start="100" end="50" time="75" condition="!Player.PauseEnabled">Conditional</animation> -->
+			</control>
+			<control type="image" id="100129">
+				<width>10</width>
+				<texture />
+			</control>
+			<control type="image" id="100109">
+				<width>10</width>
+				<height>40</height>
+				<texture colordiffuse="99FFFFFF">OSD_Divider.png</texture>
+			</control>
+			<control type="image" id="100139">
+				<width>10</width>
+				<texture />
+			</control>
+			<control type="image" id="100110">
+				<width>40</width>
+				<height>40</height>
+				<aspectratio>keep</aspectratio>
+				<texture colordiffuse="99FFFFFF">osdvolumenf.png</texture>
+				<visible>![Control.HasFocus(100113)]</visible>
+			</control>
+			<control type="image" id="100112">
+				<width>40</width>
+				<height>40</height>
+				<aspectratio>keep</aspectratio>
+				<texture>osdvolumenf.png</texture>
+				<visible>Control.HasFocus(100113)</visible>
+			</control>
+			<control type="button" id="100113">
+				<width>40</width>
+				<height>40</height>
+				<label>31351</label>
+				<altlabel>208</altlabel>
+				<font/>
+				<texturefocus>subtitles/settings-selected.png</texturefocus>
+				<texturenofocus colordiffuse="99FFFFFF">subtitles/settings.png</texturenofocus>
+				<onclick>ActivateWindow(OSDAudioSettings)</onclick>
+				<!-- <animation effect="fade" start="100" end="50" time="75" condition="!Player.PauseEnabled">Conditional</animation> -->
+			</control>
+			<control type="image" id="100124">
+				<width>10</width>
+				<texture />
+			</control>
+			<control type="image" id="100114">
+				<width>10</width>
+				<height>40</height>
+				<texture colordiffuse="99FFFFFF">OSD_Divider.png</texture>
+			</control>
+			<control type="image" id="100134">
+				<width>10</width>
+				<texture />
+			</control>
+			<control type="image" id="100115">
+				<width>40</width>
+				<height>40</height>
+				<aspectratio>keep</aspectratio>
+				<texture colordiffuse="99FFFFFF">osdvideosettingsnf.png</texture>
+				<visible>![Control.HasFocus(100117)]</visible>
+			</control>
+			<control type="image" id="100116">
+				<width>40</width>
+				<height>40</height>
+				<aspectratio>keep</aspectratio>
+				<texture>osdvideosettingsnf.png</texture>
+				<visible>Control.HasFocus(100117)</visible>
+			</control>
+			<control type="button" id="100117">
+				<width>40</width>
+				<height>40</height>
+				<label>31351</label>
+				<altlabel>208</altlabel>
+				<font/>
+				<texturefocus>subtitles/settings-selected.png</texturefocus>
+				<texturenofocus colordiffuse="99FFFFFF">subtitles/settings.png</texturenofocus>
+				<onclick>ActivateWindow(OSDVideoSettings)</onclick>
+				<!-- <animation effect="fade" start="100" end="50" time="75" condition="!Player.PauseEnabled">Conditional</animation> -->
+			</control>
+			<control type="image" id="100120">
+				<width>10</width>
+				<texture/>
+			</control>
 		</control>
 		<control type="grouplist" id="100">
 			<left>1050</left>
 			<top>60r</top>
+			<onup>100100</onup>
+			<ondown>100100</ondown>
 			<orientation>horizontal</orientation>
 			<height>55</height>
 			<align>right</align>

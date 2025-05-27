@@ -2,8 +2,8 @@
 <window>
 	<defaultcontrol always="true">5</defaultcontrol>
 	<coordinates>
-		<left>240</left>
-		<top>142</top>
+		<left>0</left>
+		<top>0</top>
 	</coordinates>
 	<include>dialogeffect</include>
 	<controls>
@@ -11,39 +11,50 @@
 			<animation effect="fade" start="100" end="0" time="150" condition="Window.Is(contentsettings) + Window.IsActive(AddonSettings)">Conditional</animation>
 			<animation effect="fade" start="100" end="0" time="300" condition="[Window.Is(osdaudiosettings) | Window.Is(osdvideosettings) | Window.Is(osdsubtitlesettings)] + [Window.IsVisible(SliderDialog) |  Window.IsVisible(FileBrowser)]">Conditional</animation>
 			<include content="DialogBackgroundCommons">
-				<param name="DialogBackgroundWidth" value="800" />
-				<param name="DialogBackgroundHeight" value="458" />
+				<param name="DialogBackgroundWidth" value="1920" />
+				<param name="DialogBackgroundHeight" value="1080" />
 				<param name="DialogHeaderWidth" value="720" />
 				<param name="DialogHeaderId" value="2" />
 				<param name="CloseButtonLeft" value="710" />
 				<param name="CloseButtonNav" value="10" />
 			</include>
+			<control type="label">
+				<description>Settings Label</description>
+				<label>settings</label>
+				<height>34</height>
+				<left>270</left>
+				<top>80</top>
+				<font>font54_light</font>
+				<align>left</align>
+				<aligny>top</aligny>
+				<textcolor>lightblueTransparent</textcolor>
+			</control>
 			<control type="grouplist" id="5">
 				<animation effect="slide" start="0,0" end="-10,0" time="0" condition="Control.IsVisible(60)">Conditional</animation>
 				<description>control area</description>
-				<left>35</left>
-				<top>70</top>
-				<width>730</width>
-				<height>308</height>
-				<itemgap>4</itemgap>
+				<left>715</left>
+				<top>250</top>
+				<width>1000</width>
+				<height>600</height>
+				<itemgap>10</itemgap>
 				<pagecontrol>60</pagecontrol>
-				<onup>9001</onup>
-				<ondown>9001</ondown>
-				<onleft>60</onleft>
-				<onright>60</onright>
+				<onup>5</onup>
+				<ondown>5</ondown>
+				<onleft>9001</onleft>
+				<onright>9001</onright>
 			</control>
 			<control type="scrollbar" id="60">
-				<left>758</left>
-				<top>70</top>
+				<left>1725</left>
+				<top>250</top>
 				<width>25</width>
-				<height>308</height>
+				<height>600</height>
 				<texturesliderbackground border="0,14,0,14">ScrollBarV.png</texturesliderbackground>
 				<texturesliderbar border="0,14,0,14">ScrollBarV_bar.png</texturesliderbar>
 				<texturesliderbarfocus border="0,14,0,14">ScrollBarV_bar_focus.png</texturesliderbarfocus>
 				<textureslidernib>ScrollBarNib.png</textureslidernib>
 				<textureslidernibfocus>ScrollBarNib.png</textureslidernibfocus>
 				<onleft>5</onleft>
-				<onright>5</onright>
+				<onright>9001</onright>
 				<ondown>60</ondown>
 				<onup>60</onup>
 				<showonepage>false</showonepage>
@@ -52,47 +63,60 @@
 			<control type="button" id="7">
 				<description>Default Button</description>
 				<height>40</height>
-				<font>font13</font>
-				<texturefocus border="5">button-focus2.png</texturefocus>
+				<left>100</left>
+				<font>font30_bold</font>
+				<textoffsetx>100</textoffsetx>
+				<texturenofocus border="5">common/blank.png</texturenofocus>
+				<texturefocus border="5">common/blank.png</texturefocus>
 			</control>
 			<control type="radiobutton" id="8">
 				<description>Default RadioButton</description>
 				<height>40</height>
-				<font>font13</font>
-				<texturefocus border="5">button-focus2.png</texturefocus>
+				<left>100</left>
+				<font>font30_bold</font>
+				<textoffsetx>150</textoffsetx>
+				<radioposx>100</radioposx>
+				<texturenofocus border="5">common/blank.png</texturenofocus>
+				<texturefocus border="5">common/blank.png</texturefocus>
+				<textcolor>66FFFFFF</textcolor>
+				<focusedcolor>FFFFFFFF</focusedcolor>
 			</control>
 			<control type="spincontrolex" id="9">
 				<description>Default SpinControlex</description>
 				<height>40</height>
-				<font>font13</font>
-				<textcolor>grey2</textcolor>
-				<focusedcolor>white</focusedcolor>
-				<texturenofocus border="5">button-nofocus.png</texturenofocus>
-				<texturefocus border="5">button-focus2.png</texturefocus>
+				<left>100</left>
+				<font>font30_bold</font>
+				<textoffsetx>100</textoffsetx>
+				<texturenofocus border="5">common/blank.png</texturenofocus>
+				<texturefocus border="5">common/blank.png</texturefocus>
 				<aligny>center</aligny>
+				<textcolor>66FFFFFF</textcolor>
+				<focusedcolor>FFFFFFFF</focusedcolor>
 			</control>
 			<control type="image" id="11">
 				<description>separator image</description>
 				<height>2</height>
-				<texture>separator2.png</texture>
+				<texture colordiffuse="66FFFFFF">separator2.png</texture>
 			</control>
 			<control type="edit" id="12">
 				<description>Default Edit</description>
 				<height>40</height>
-				<font>font13</font>
-				<textcolor>grey2</textcolor>
-				<focusedcolor>white</focusedcolor>
-				<texturenofocus border="5">button-nofocus.png</texturenofocus>
-				<texturefocus border="5">button-focus2.png</texturefocus>
+				<left>100</left>
+				<font>font30</font>
+				<textoffsetx>100</textoffsetx>
+				<texturenofocus border="5">common/blank.png</texturenofocus>
+				<texturefocus border="5">common/blank.png</texturefocus>
 			</control>
 			<control type="sliderex" id="13">
 				<description>Default Slider</description>
 				<height>40</height>
-				<texturenofocus border="5">button-nofocus.png</texturenofocus>
-				<texturefocus border="5">button-focus2.png</texturefocus>
-				<font>font13</font>
-				<textcolor>grey2</textcolor>
-				<focusedcolor>white</focusedcolor>
+				<left>100</left>
+				<texturenofocus border="5">common/blank.png</texturenofocus>
+				<texturefocus border="5">common/blank.png</texturefocus>
+				<font>font30_bold</font>
+				<textcolor>66FFFFFF</textcolor>
+				<focusedcolor>FFFFFFFF</focusedcolor>
+				<textoffsetx>100</textoffsetx>
 			</control>
 			<control type="label" id="14">
 				<description>Default Heading</description>
@@ -104,51 +128,52 @@
 				<shadowcolor>black</shadowcolor>
 			</control>
 			<control type="grouplist" id="9001">
-				<left>170</left>
-				<top>393</top>
+				<left>315</left>
+				<top>250</top>
 				<width>460</width>
-				<align>center</align>
+				<align>left</align>
 				<itemgap>20</itemgap>
-				<orientation>horizontal</orientation>
+				<orientation>vertical</orientation>
 				<control type="button" id="28">
 					<description>OK Button</description>
 					<top>0</top>
 					<width>200</width>
-					<height>40</height>
-					<align>center</align>
+					<height>60</height>
+					<align>left</align>
 					<aligny>center</aligny>
-					<font>font12_title</font>
-					<onleft>30</onleft>
-					<onright>29</onright>
-					<onup>5</onup>
-					<ondown>5</ondown>
+					<font>font30_bold</font>
+					<onleft>5</onleft>
+					<onright>5</onright>
+					<onup>30</onup>
+					<ondown>29</ondown>
 				</control>
 				<control type="button" id="29">
 					<description>Cancel Button</description>
 					<top>0</top>
-					<width>200</width>
-					<height>40</height>
-					<align>center</align>
+					<width>350</width>
+					<height>60</height>
+					<align>left</align>
 					<aligny>center</aligny>
-					<font>font12_title</font>
+					<font>font30_bold</font>
+					<textoffsetx>20</textoffsetx>
 					<label/>
-					<onleft>28</onleft>
-					<onright>30</onright>
-					<onup>5</onup>
-					<ondown>5</ondown>
+					<onleft>5</onleft>
+					<onright>5</onright>
+					<onup>28</onup>
+					<ondown>30</ondown>
 				</control>
 				<control type="button" id="30">
 					<description>Settings Button</description>
 					<top>0</top>
 					<width>200</width>
-					<height>40</height>
-					<align>center</align>
+					<height>60</height>
+					<align>left</align>
 					<aligny>center</aligny>
-					<font>font12_title</font>
-					<onleft>29</onleft>
-					<onright>28</onright>
-					<onup>5</onup>
-					<ondown>5</ondown>
+					<font>font30_bold</font>
+					<onleft>5</onleft>
+					<onright>5</onright>
+					<onup>29</onup>
+					<ondown>28</ondown>
 				</control>
 			</control>
 		</control>
