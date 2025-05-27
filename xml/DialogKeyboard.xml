@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
-	<defaultcontrol always="true">300</defaultcontrol>
+	<defaultcontrol always="true">312</defaultcontrol>
 	<!-- <include>dialogeffect</include>
 	<depth>DepthDialog+</depth> -->
 	<coordinates>
@@ -48,7 +48,7 @@
 			<animation effect="fade" time="200">WindowOpen</animation>
 			<animation effect="fade" time="300">WindowClose</animation>
 		</control>
-		<control type="group">
+		<control type="group" id="4000">
 			<include>VisibleFadeEffect</include>
 			<visible>!Window.IsVisible(numericinput)</visible>
 			<!-- <include content="DialogBackgroundCommons">
@@ -133,6 +133,11 @@
 				<font>font40</font>
 				<align>left</align>
 				<aligny>center</aligny>
+				<onup condition="!Control.IsVisible(5000)">3001</onup>
+				<onup condition="Control.IsVisible(5000)">5000</onup>
+				<ondown>3001</ondown>
+				<onleft>300</onleft>
+				<onright>300</onright>
 				<texturefocus/>
 				<texturenofocus/>
 			</control>
@@ -150,7 +155,10 @@
 				<description>Done button</description>
 				<label>20177</label>
 				<align>center</align>
-				<onup>309</onup>
+				<onup condition="!Control.IsVisible(5000)">309</onup>
+				<onup condition="Control.IsVisible(5000)">5000</onup>
+				<onleft>312</onleft>
+				<onright>312</onright>
 				<ondown>8</ondown>
 				<width>330</width>
 				<height>60</height>
@@ -256,6 +264,7 @@
 			<control type="group">
 				<left>340</left>
 				<top>430r</top>
+				<onup>312</onup>
 				<!-- 1st row -->
 				<control type="grouplist" id="3001">
 					<onleft>303</onleft>
@@ -264,73 +273,85 @@
 					<orientation>horizontal</orientation>
 					<control type="button" id="100">
 						<description>(0,0) key button</description>
-						<onup>305</onup>
+						<!-- <onup>305</onup> -->
+						<onup>312</onup>
 						<ondown>120</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="101">
 						<description>(0,1) key button</description>
-						<onup>306</onup>
+						<!-- <onup>306</onup> -->
+						<onup>312</onup>
 						<ondown>121</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="102">
 						<description>(0,2) key button</description>
-						<onup>32</onup>
+						<!-- <onup>32</onup> -->
+						<onup>312</onup>
 						<ondown>122</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="103">
 						<description>(0,3) key button</description>
-						<onup>32</onup>
+						<!-- <onup>32</onup> -->
+						<onup>312</onup>
 						<ondown>123</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="104">
 						<description>(0,4) key button</description>
-						<onup>32</onup>
+						<!-- <onup>32</onup> -->
+						<onup>312</onup>
 						<ondown>124</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="105">
 						<description>(0,5) key button</description>
-						<onup>32</onup>
+						<!-- <onup>32</onup> -->
+						<onup>312</onup>
 						<ondown>125</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="106">
 						<description>(0,6) key button</description>
-						<onup>32</onup>
+						<!-- <onup>32</onup> -->
+						<onup>312</onup>
 						<ondown>126</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="107">
 						<description>(0,7) key button</description>
-						<onup>32</onup>
+						<!-- <onup>32</onup> -->
+						<onup>312</onup>
 						<ondown>127</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="108">
 						<description>(0,8) key button</description>
-						<onup>32</onup>
+						<!-- <onup>32</onup> -->
+						<onup>312</onup>
 						<ondown>128</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="109">
 						<description>(0,9) key button</description>
-						<onup>32</onup>
+						<!-- <onup>32</onup> -->
+						<onup>312</onup>
 						<ondown>129</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="110">
 						<description>(0,10) key button</description>
-						<onup>32</onup>
+						<!-- <onup>32</onup> -->
+						<onup>312</onup>
 						<ondown>130</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="111">
 						<description>(0,11) key button</description>
-						<onup>32</onup>
+						<!-- <onup>32</onup> -->
+						<onup>312</onup>
 						<ondown>131</ondown>
 						<!-- <texturenofocus flipx="true" border="5,25,25,5">KeyboardCornerTopNF.png</texturenofocus>
 						<texturefocus flipx="true" border="5,25,25,5">KeyboardCornerTop.png</texturefocus> -->
@@ -581,7 +602,7 @@
 					</control>
 				</control>
 				<!-- 5th row -->
-				<control type="grouplist">
+				<control type="grouplist" id="3005">
 					<onleft>307</onleft>
 					<onright>307</onright>
 					<top>320</top>
@@ -591,14 +612,16 @@
 						<description>previous button</description>
 						<label>&lt;</label>
 						<onup>160</onup>
-						<ondown>100</ondown>
+						<ondown condition="!Control.IsVisible(5000)">100</ondown>
+						<ondown condition="Control.IsVisible(5000)">5000</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="306">
 						<description>next button</description>
 						<label>&gt;</label>
 						<onup>161</onup>
-						<ondown>101</ondown>
+						<ondown condition="!Control.IsVisible(5000)">101</ondown>
+						<ondown condition="Control.IsVisible(5000)">5000</ondown>
 						<include>KeyboardButton</include>
 					</control>
 					<control type="button" id="32">
@@ -606,7 +629,8 @@
 						<width>800</width>
 						<label>20182</label>
 						<onup>3004</onup>
-						<ondown>3001</ondown>
+						<ondown condition="!Control.IsVisible(5000)">3001</ondown>
+						<ondown condition="Control.IsVisible(5000)">5000</ondown>
 						<align>center</align>
 						<include>KeyboardSideButton</include>
 					</control>
@@ -620,6 +644,7 @@
 					<texture>KeyboardBackKey.png</texture>
 				</control> -->
 			</control>
+			<include condition="System.AddonIsEnabled(plugin.program.autocompletion)">ExtendedInfoAutoComplete</include>
 		</control>
 	</controls>
 </window>

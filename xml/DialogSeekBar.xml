@@ -8,6 +8,14 @@
 	<animation effect="fade" start="100" end="0" time="150">WindowClose</animation>
 	<depth>DepthOSD</depth>
 	<controls>
+		<control type="image">
+			<left>20</left>
+			<top>20</top>
+			<height>200</height>
+			<width>400</width>
+			<aspectratio>keep</aspectratio>
+			<texture>$INFO[Player.Art(clearlogo)]</texture>
+		</control>
 		<control type="image" id="1">
 			<description>texture behind the clock</description>
 			<left>1590</left>
@@ -29,7 +37,7 @@
 			<label>$INFO[System.Time]</label>
 		</control>
 		<control type="group">
-			<visible>player.chaptercount + Window.IsVisible(FullScreenVideo)</visible>
+			<visible>false + player.chaptercount + Window.IsVisible(FullScreenVideo)</visible>
 			<left>705r</left>
 			<top>-6</top>
 			<include>VisibleFadeEffect</include>
@@ -65,6 +73,19 @@
 				<font>font13_title</font>
 				<textcolor>grey2</textcolor>
 				<label>$INFO[player.chapter]$INFO[player.chaptercount, / ]</label>
+				<visible>player.chaptercount</visible>
+			</control>
+			<control type="label" id="1">
+				<description>Chapter Pos No</description>
+				<left>20</left>
+				<top>30</top>
+				<width>110</width>
+				<height>20</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>font13_title</font>
+				<textcolor>grey2</textcolor>
+				<label>YoYOYO!</label>
 				<visible>player.chaptercount</visible>
 			</control>
 		</control>
