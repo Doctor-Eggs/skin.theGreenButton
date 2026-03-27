@@ -683,6 +683,18 @@ msgctxt "#31964"
 msgid "Profile avatar"
 msgstr "Profile avatar"
 
+msgctxt "#31965"
+msgid "Library PVR"
+msgstr "Library PVR"
+
+msgctxt "#31966"
+msgid "Enable Library PVR"
+msgstr "Enable Library PVR"
+
+msgctxt "#31967"
+msgid "DVR Source"
+msgstr "DVR Source"
+
 
 msgctxt "#900011"
 msgid "4"

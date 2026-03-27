@@ -97,6 +97,17 @@
 					<height>530</height>
 					<texture colordiffuse="33000000">common/blankWhite.png</texture>
 				</control>
+			</control>
+			<control type="group">
+				<include>VisibleFadeEffect</include>
+				<visible>Control.IsVisible(535)</visible>
+				<control type="image">
+					<left>-10</left>
+					<top>240</top>
+					<width>2000</width>
+					<height>530</height>
+					<texture colordiffuse="33000000">common/blankWhite.png</texture>
+				</control>
 				<!-- <control type="image">
 					<left>50</left>
 					<top>652</top>

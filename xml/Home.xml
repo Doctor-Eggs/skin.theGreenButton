@@ -628,7 +628,10 @@
 				<content>
 					<item id="1">
 						<label>recorded tv</label>
-						<onclick>ActivateWindow(TVRecordings)</onclick>
+						<onclick condition="Skin.HasSetting(EnableLibraryPVR)">Skin.SetString(FakePVRBrowseMode,date_recorded)</onclick>
+						<onclick condition="Skin.HasSetting(EnableLibraryPVR)">Skin.SetString(FakePVRLayout,$INFO[Skin.String(FakePVRViewDateRecorded)])</onclick>
+						<onclick condition="Skin.HasSetting(EnableLibraryPVR)">ActivateWindow(1114)</onclick>
+						<onclick condition="!Skin.HasSetting(EnableLibraryPVR)">ActivateWindow(TVRecordings,pvr://recordings/tv/active/,return)</onclick>
 						<icon>homeIcons/recordedTV.png</icon>
 						<property name="unfocusedIcon">homeIcons/recordedTVNoFocus.png</property>
 					</item>

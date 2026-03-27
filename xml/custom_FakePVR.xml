@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="1114">
+	<defaultcontrol always="true">534</defaultcontrol>
+	<onload condition="!Skin.HasSetting(FirstTimeRun)">ActivateWindow(1112)</onload>
+	<onload>Skin.Reset(FakePVRNavigation)</onload>
+	<onload condition="String.IsEqual(Skin.String(FakePVRLayout),535)">SetFocus(535)</onload>
+	<onload condition="String.IsEmpty(Skin.String(FakePVRBrowseMode))">Skin.SetString(FakePVRBrowseMode,date_recorded)</onload>
+	<onload condition="String.IsEmpty(Skin.String(FakePVRLayout))">Skin.SetString(FakePVRLayout,534)</onload>
+	<onload condition="String.IsEmpty(Skin.String(FakePVRViewDateRecorded))">Skin.SetString(FakePVRViewDateRecorded,534)</onload>
+	<onload condition="String.IsEmpty(Skin.String(FakePVRViewTitle))">Skin.SetString(FakePVRViewTitle,535)</onload>
+	<onload condition="String.IsEmpty(Skin.String(FakePVRViewAirDate))">Skin.SetString(FakePVRViewAirDate,534)</onload>
+
+	<controls>
+		<include>CommonBackground</include>
+		<include>ContentPanelBackgrounds</include>
+		<control type="group">
+			<include>Window_OpenClose_Animation</include>
+			<include>PVRShows</include>
+			<include>PVREpisodes</include>
+		</control>
+		<control type="group">
+			<depth>DepthFooter</depth>
+			<include>CommonPageCount</include>
+			<include>CommonNowPlaying</include>
+			<visible>true</visible>
+		</control>
+		<include>MainWindowMouseButtons</include>
+		<include>BehindDialogFadeOut</include>
+		<include>ScrollOffsetLabel</include>
+		<include content="CommonWindowHeader">
+			<param name="Icon" value="icon_video" />
+			<param name="Label" value="recorded tv" />
+			<param name="ShowLabel2" value="1" />
+		</include>
+		<include>FakePVRHeader</include>
+	</controls>
+</window>

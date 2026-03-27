@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="1101">
+    <defaultcontrol always="true">50</defaultcontrol>
+    <controls>
+        <!-- Fixed List Control -->
+        <control type="fixedlist" id="50">
+            <left>100</left>
+            <top>200</top>
+            <width>1720</width>
+            <height>600</height>
+            <onleft>50</onleft>
+            <onright>50</onright>
+            <onup>50</onup>
+            <ondown>50</ondown>
+            <pagecontrol>60</pagecontrol>
+            <scrolltime>200</scrolltime>
+            <focusposition>1</focusposition> <!-- Key for Fixed List -->
+            
+            <!-- Define where movies come from -->
+            <content target="videos">videodb://movies/titles/</content> 
+
+            <!-- Layout for the item in focus -->
+            <focusedlayout height="100" width="400">
+                <control type="image">
+                    <width>400</width>
+                    <height>100</height>
+                    <texture>list-focus.png</texture>
+                </control>
+                <control type="label">
+                    <label>$INFO[ListItem.Label]</label>
+                    <textcolor>white</textcolor>
+                </control>
+            </focusedlayout>
+
+            <!-- Layout for unfocused items -->
+            <itemlayout height="100" width="400">
+                <control type="label">
+                    <label>$INFO[ListItem.Label]</label>
+                    <textcolor>grey</textcolor>
+                </control>
+                <control type="label">
+                    <label>DBID: $INFO[ListItem.DBID]</label>
+                </control>
+            </itemlayout>
+        </control>
+    </controls>
+</window>

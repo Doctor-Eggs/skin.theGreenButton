@@ -108,6 +108,10 @@
 						<label>Live TV</label>
 						<label2></label2>
 					</item>
+					<item id="4">
+						<label>Library PVR</label>
+						<label2></label2>
+					</item>
 					<!-- <item id="3">
 						<label>31102</label>
 						<label2>31112</label2>
@@ -1006,6 +1010,182 @@
 					<showonepage>false</showonepage>
 					<orientation>vertical</orientation>
 					<visible>Container(9000).Hasfocus(3)</visible>
+				</control>
+				<control type="grouplist" id="9004">
+					<visible>Container(9000).Hasfocus(4)</visible>
+					<width>750</width>
+					<height>800</height>
+					<itemgap>-1</itemgap>
+					<pagecontrol>62</pagecontrol>
+					<onleft>9000</onleft>
+					<onright>62</onright>
+					<onup>9004</onup>
+					<ondown>9004</ondown>
+					<control type="label">
+						<width>750</width>
+						<height>45</height>
+						<font>font30</font>
+						<label>Library PVR</label>
+						<textcolor>lightblue</textcolor>
+						<align>left</align>
+						<aligny>center</aligny>
+					</control>
+					<control type="radiobutton" id="131">
+						<width>500</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>Enable Library PVR</label>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>Skin.ToggleSetting(EnableLibraryPVR)</onclick>
+						<selected>Skin.HasSetting(EnableLibraryPVR)</selected>
+						<ondown>132</ondown>
+					</control>
+					<!-- Mode toggle: cycles between path and playlist -->
+					<control type="button" id="132">
+						<width>500</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>Source Mode</label>
+						<label2>$VAR[LibraryPVRModeLabel]</label2>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick condition="String.IsEqual(Skin.String(LibraryPVRMode),playlist)">Skin.SetString(LibraryPVRMode,path)</onclick>
+						<onclick condition="!String.IsEqual(Skin.String(LibraryPVRMode),playlist)">Skin.SetString(LibraryPVRMode,playlist)</onclick>
+						<visible>Skin.HasSetting(EnableLibraryPVR)</visible>
+						<onup>131</onup>
+						<ondown condition="String.IsEqual(Skin.String(LibraryPVRMode),playlist)">134</ondown>
+						<ondown condition="!String.IsEqual(Skin.String(LibraryPVRMode),playlist)">133</ondown>
+					</control>
+					<!-- Path mode: enter or browse for folder path -->
+					<control type="button" id="133">
+						<width>500</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>DVR Source 1</label>
+						<label2>$INFO[Skin.String(LibraryPVRPathDisplay)]</label2>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>RunScript(special://skin/resources/set_pvr_path.py,1)</onclick>
+						<visible>Skin.HasSetting(EnableLibraryPVR) + !String.IsEqual(Skin.String(LibraryPVRMode),playlist)</visible>
+						<onup>132</onup>
+						<ondown>137</ondown>
+					</control>
+					<control type="button" id="137">
+						<width>500</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>DVR Source 2</label>
+						<label2>$INFO[Skin.String(LibraryPVRPath2Display)]</label2>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>RunScript(special://skin/resources/set_pvr_path.py,2)</onclick>
+						<visible>Skin.HasSetting(EnableLibraryPVR) + !String.IsEqual(Skin.String(LibraryPVRMode),playlist)</visible>
+						<onup>133</onup>
+						<ondown>138</ondown>
+					</control>
+					<control type="button" id="138">
+						<width>500</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>DVR Source 3</label>
+						<label2>$INFO[Skin.String(LibraryPVRPath3Display)]</label2>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>RunScript(special://skin/resources/set_pvr_path.py,3)</onclick>
+						<visible>Skin.HasSetting(EnableLibraryPVR) + !String.IsEqual(Skin.String(LibraryPVRMode),playlist)</visible>
+						<onup>137</onup>
+					</control>
+					<!-- Playlist mode: configure shows playlist -->
+					<control type="group" id="134">
+						<height>70</height>
+						<visible>Skin.HasSetting(EnableLibraryPVR) + String.IsEqual(Skin.String(LibraryPVRMode),playlist)</visible>
+						<control type="button" id="135">
+							<width>500</width>
+							<height>40</height>
+							<font>font16</font>
+							<label>Configure Shows Playlist</label>
+							<label2>$VAR[LibraryPVRShowsStatus]</label2>
+							<textcolor>99FFFFFF</textcolor>
+							<focusedcolor>white</focusedcolor>
+							<invalidcolor>invalid</invalidcolor>
+							<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+							<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+							<onclick>RunScript(special://skin/resources/pvr_playlist_setup.py,TGB_PVR_Shows)</onclick>
+							<onup>132</onup>
+							<ondown>136</ondown>
+						</control>
+						<control type="label">
+							<top>42</top>
+							<width>500</width>
+							<height>25</height>
+							<font>font13</font>
+							<label>Set playlist type to: TV Shows</label>
+							<textcolor>66FFFFFF</textcolor>
+							<align>left</align>
+							<aligny>center</aligny>
+						</control>
+					</control>
+					<!-- Playlist mode: configure episodes playlist -->
+					<control type="group">
+						<height>70</height>
+						<visible>Skin.HasSetting(EnableLibraryPVR) + String.IsEqual(Skin.String(LibraryPVRMode),playlist)</visible>
+						<control type="button" id="136">
+							<width>500</width>
+							<height>40</height>
+							<font>font16</font>
+							<label>Configure Episodes Playlist</label>
+							<label2>$VAR[LibraryPVREpisodesStatus]</label2>
+							<textcolor>99FFFFFF</textcolor>
+							<focusedcolor>white</focusedcolor>
+							<invalidcolor>invalid</invalidcolor>
+							<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+							<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+							<onclick>RunScript(special://skin/resources/pvr_playlist_setup.py,TGB_PVR_Episodes)</onclick>
+							<onup>135</onup>
+						</control>
+						<control type="label">
+							<top>42</top>
+							<width>500</width>
+							<height>25</height>
+							<font>font13</font>
+							<label>Set playlist type to: Episodes</label>
+							<textcolor>66FFFFFF</textcolor>
+							<align>left</align>
+							<aligny>center</aligny>
+						</control>
+					</control>
+				</control>
+				<control type="scrollbar" id="62">
+					<left>1060</left>
+					<top>60</top>
+					<width>25</width>
+					<height>530</height>
+					<texturesliderbackground border="0,14,0,14">ScrollBarV.png</texturesliderbackground>
+					<texturesliderbar border="0,14,0,14">ScrollBarV_bar.png</texturesliderbar>
+					<texturesliderbarfocus border="0,14,0,14">ScrollBarV_bar_focus.png</texturesliderbarfocus>
+					<textureslidernib>ScrollBarNib.png</textureslidernib>
+					<textureslidernibfocus>ScrollBarNib.png</textureslidernibfocus>
+					<onleft>9004</onleft>
+					<onright>9000</onright>
+					<showonepage>false</showonepage>
+					<orientation>vertical</orientation>
+					<visible>Container(9000).Hasfocus(4)</visible>
 				</control>
 				<!-- <control type="grouplist" id="9003">
 					<visible>Container(9000).Hasfocus(3)</visible>

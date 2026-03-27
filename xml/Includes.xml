@@ -89,6 +89,40 @@
 		<value condition="String.StartsWith(Container.FolderPath,videodb://tvshows) | String.StartsWith(Container.FolderPath,special://skin/playlists/tvshow)">special://skin/playlists/tvshow/InProgressTVShows.xsp</value>
 		<value>videodb://movies/titles/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22year%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22inprogress%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%22true%22%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</value>
 	</variable>
+	<variable name="LibraryPVRModeLabel">
+		<value condition="String.IsEqual(Skin.String(LibraryPVRMode),playlist)">Playlist</value>
+		<value>Path</value>
+	</variable>
+	<variable name="LibraryPVRShowsStatus">
+		<value condition="!String.IsEmpty(Skin.String(TGB_PVR_ShowsConfigured))">configured</value>
+		<value>not set</value>
+	</variable>
+	<variable name="LibraryPVREpisodesStatus">
+		<value condition="!String.IsEmpty(Skin.String(TGB_PVR_EpisodesConfigured))">configured</value>
+		<value>not set</value>
+	</variable>
+	<variable name="FakePVRContentPath">
+		<value condition="!String.IsEmpty(Skin.String(LibraryPVRSource)) + String.IsEqual(Skin.String(FakePVRBrowseMode),title)">videodb://tvshows/titles/?xsp=%7B%22type%22%3A%22tvshows%22%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22playlist%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Skin.String(LibraryPVRSource)]%22%5D%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22method%22%3A%22sorttitle%22%7D%7D</value>
+		<value condition="!String.IsEmpty(Skin.String(LibraryPVRSource))">videodb://tvshows/titles/-1/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22playlist%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Skin.String(LibraryPVRSource)]%22%5D%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22method%22%3A%22dateadded%22%7D%7D</value>
+	</variable>
+	<variable name="FakePVR534Content">
+		<!-- Playlist mode -->
+		<value condition="!String.IsEmpty(Skin.String(LibraryPVRSource)) + String.IsEqual(Skin.String(LibraryPVRMode),playlist) + String.IsEqual(Skin.String(FakePVRBrowseMode),air_date)">videodb://tvshows/titles/-1/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22playlist%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Skin.String(LibraryPVRSource)]%22%5D%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22method%22%3A%22year%22%7D%7D</value>
+		<value condition="!String.IsEmpty(Skin.String(LibraryPVRSource)) + String.IsEqual(Skin.String(LibraryPVRMode),playlist)">videodb://tvshows/titles/-1/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22playlist%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Skin.String(LibraryPVRSource)]%22%5D%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22method%22%3A%22dateadded%22%7D%7D</value>
+		<!-- Path mode (default) -->
+		<value condition="!String.IsEmpty(Skin.String(LibraryPVRURL_Episodes_Air)) + String.IsEqual(Skin.String(FakePVRBrowseMode),air_date)">$INFO[Skin.String(LibraryPVRURL_Episodes_Air)]</value>
+		<value condition="!String.IsEmpty(Skin.String(LibraryPVRURL_Episodes_Date))">$INFO[Skin.String(LibraryPVRURL_Episodes_Date)]</value>
+	</variable>
+	<variable name="FakePVR535Content">
+		<!-- Playlist mode -->
+		<value condition="String.IsEqual(Skin.String(LibraryPVRMode),playlist) + String.IsEqual(Skin.String(FakePVRBrowseMode),title)">special://profile/playlists/video/TGB_PVR_Shows.xsp</value>
+		<value condition="String.IsEqual(Skin.String(LibraryPVRMode),playlist) + String.IsEqual(Skin.String(FakePVRBrowseMode),air_date)">videodb://tvshows/titles/-1/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22playlist%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Skin.String(LibraryPVRSource)]%22%5D%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22method%22%3A%22year%22%7D%7D</value>
+		<value condition="String.IsEqual(Skin.String(LibraryPVRMode),playlist)">videodb://tvshows/titles/-1/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22playlist%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Skin.String(LibraryPVRSource)]%22%5D%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22method%22%3A%22dateadded%22%7D%7D</value>
+		<!-- Path mode (default) -->
+		<value condition="!String.IsEmpty(Skin.String(LibraryPVRURL_Episodes_Air)) + String.IsEqual(Skin.String(FakePVRBrowseMode),air_date)">$INFO[Skin.String(LibraryPVRURL_Episodes_Air)]</value>
+		<value condition="!String.IsEmpty(Skin.String(LibraryPVRURL_Shows)) + String.IsEqual(Skin.String(FakePVRBrowseMode),title)">$INFO[Skin.String(LibraryPVRURL_Shows)]</value>
+		<value condition="!String.IsEmpty(Skin.String(LibraryPVRURL_Episodes_Date))">$INFO[Skin.String(LibraryPVRURL_Episodes_Date)]</value>
+	</variable>
 	<variable name="forcedContentPath">
 		<!-- GENRE -->
 		<value condition="Control.IsVisible(60104) + Container.Content(tvshows)">videodb://tvshows/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22genre%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60104).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22tvshows%22%7D</value>
@@ -102,6 +136,11 @@
 		<!-- EPISODES -->
 		<value condition="Control.IsVisible(60112) + !String.IsEmpty(Container(60112).ListItem.property(xspPath))">$INFO[Container(60112).ListItem.property(xspPath)]</value>
 		<value condition="Control.IsVisible(60112)">videodb://tvshows/titles/$INFO[Container(60112).ListItem.TvShowDBID]/$INFO[Container(60112).ListItem.Season]/?tvshowid=$INFO[Container(60112).ListItem.TvShowDBID]</value>
+		<!-- FAKE PVR-->
+		<value condition="Control.IsVisible(60113) + Container(60113).HasFocus(11) + String.IsEqual(Skin.String(LibraryPVRMode),playlist)">special://profile/playlists/video/TGB_PVR_Episodes.xsp</value>
+		<value condition="Control.IsVisible(60113) + Container(60113).HasFocus(11)">$INFO[Skin.String(LibraryPVRURL_Episodes_Date)]</value>
+		<value condition="Control.IsVisible(60113) + Container(60113).HasFocus(12) + String.IsEqual(Skin.String(LibraryPVRMode),playlist)">special://profile/playlists/video/TGB_PVR_Shows.xsp</value>
+		<value condition="Control.IsVisible(60113) + Container(60113).HasFocus(12)">$INFO[Skin.String(LibraryPVRURL_Shows)]</value>
 		<!-- ADDON -->
 		<value condition="Control.IsVisible(60113)">$INFO[Container(60113).ListItem.FolderPath]</value>
 		<value condition="Control.IsVisible(60115)">$INFO[Container(60115).ListItem.FolderPath]</value>
@@ -1130,6 +1169,8 @@
 	</variable>
 	<variable name="PosterThumb">
 		<!-- <value condition="!String.IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value> -->
+		<value condition="Container.Content(episodes) + String.IsEqual(Skin.String(FakePVRBrowseMode),title)">$INFO[ListItem.icon]</value>
+		<value condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title)">$INFO[ListItem.Art(fanart)]</value>
 		<value condition="Container.Content(episodes)">$INFO[ListItem.Art(tvshow.poster)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value>$INFO[ListItem.Icon]</value>
@@ -1249,13 +1290,13 @@
         <value>-</value>
     </variable>
 	<variable name="TYDLine1">
-		<value condition="Container.Content(seasons) | Container.Content(episodes)">$INFO[ListItem.TVShowTitle]</value>
+		<value condition="Container.Content(seasons) | Container.Content(episodes) | String.IsEqual(Skin.String(FakePVRLayout),535) + !String.IsEqual(Skin.String(FakePVRBrowseMode),title)">$INFO[ListItem.TVShowTitle]</value>
 		<value>$INFO[ListItem.label]</value>
 	</variable>
 	<variable name="TYDLine2">
 		<value condition="Container.Content(seasons)">$INFO[ListItem.label]</value>
-		<value condition="Container.Content(episodes)">S$INFO[ListItem.Season]:E$INFO[ListItem.Episode] - $INFO[ListItem.Title]</value>
-		<value condition="Container.Content(movies) | Container.Content(tvshows)">$INFO[ListItem.Year]</value>
+		<value condition="Container.Content(episodes) | String.IsEqual(Skin.String(FakePVRLayout),535) + !String.IsEqual(Skin.String(FakePVRBrowseMode),title)">S$INFO[ListItem.Season]:E$INFO[ListItem.Episode] - $INFO[ListItem.Title]</value>
+		<value condition="Container.Content(movies) | Container.Content(tvshows) | String.IsEqual(Skin.String(FakePVRBrowseMode),title)">$INFO[ListItem.Year]</value>
 		<value condition="Container.Content(videos)">$VAR[DurationInMinutes]</value>
 		<value>$INFO[ListItem.Label]</value>
 	</variable>
@@ -1705,364 +1746,531 @@
 	</include>
 
 	<include name="VideoLibraryHeader">
-		<control type="label" id="90002">
-		  <top>150</top>
-		  <width>1000</width>
-		  <scroll>true</scroll>
-		  <label>$INFO[Control.GetLabel(19).index(1)]</label>
-		  <visible>0</visible>
-		</control>
-		<control type="label" id="90003">
-		  <top>200</top>
-		  <left>20</left>
-		  <width>2000</width>
-		  <label>$VAR[forcedContentPath]</label>
-		  <visible>1</visible>
-		</control>
-		<!--  -->
-		<!-- <control type="label" id="90004">
-		  <top>250</top>
-		  <left>20</left>
-		  <width>2000</width>
-		  <label>$VAR[updateOnFocus]</label>
-		</control> -->
+		<control type="group">
+			<!-- <visible>!Control.IsVisible(534)</visible> -->
+			<control type="label" id="90002">
+				<top>150</top>
+				<width>1000</width>
+				<scroll>true</scroll>
+				<label>$INFO[Control.GetLabel(19).index(1)]</label>
+				<visible>0</visible>
+			</control>
+			<control type="label" id="90003">
+				<top>200</top>
+				<left>20</left>
+				<width>2000</width>
+				<label>$VAR[forcedContentPath]</label>
+				<visible>1</visible>
+			</control>
+			<!--  -->
+			<!-- <control type="label" id="90004">
+			<top>250</top>
+			<left>20</left>
+			<width>2000</width>
+			<label>$VAR[updateOnFocus]</label>
+			</control> -->
 
-		<control type="button" id="10">
-			<description>Watched Toggle</description>
-			<include>ButtonCommonValues</include>
-			<width>250</width>
-			<height>35</height>
-			<font>font12</font>
-			<label>$LOCALIZE[20367]</label>
-			<visible>false</visible>
-		</control>
-		<control type="panel" id="60101">
-			<top>80</top>
-			<left>150</left>
-			<width>1820</width>
-			<height>100</height>
-			<onleft>60101</onleft>
-			<onright>60101</onright>
-			<onup>61</onup>
-			<ondown condition="Control.IsVisible(60102)">60102</ondown>
-			<ondown condition="Control.IsVisible(60112)">60112</ondown>
-			<ondown condition="Control.IsVisible(60113)">60113</ondown>
-			<ondown condition="Control.IsVisible(19) + Container.Content(movies)">Container.Update(videodb://movies/titles/,true)</ondown>
-			<ondown condition="Control.IsVisible(19) + Container.Content(tvshows) | Container.Content(episodes)">Container.Update(videodb://tvshows/titles/,true)</ondown>
-			<ondown condition="Control.IsVisible(19)">19</ondown>
-			<ondown condition="Control.IsVisible(60104)">60104</ondown>
-			<ondown condition="Control.IsVisible(60105)">60105</ondown>
-			<ondown condition="Control.IsVisible(60106)">60106</ondown>
-			<ondown condition="Control.IsVisible(60107)">60107</ondown>
-			<ondown>50</ondown>
-			<scrolltime tween="sine" easing="out">200</scrolltime>
-			<autoscroll>true</autoscroll>
-			<viewtype label="536">icon</viewtype>
-			<orientation>horizontal</orientation>
-			<!-- <visible>!Control.IsVisible(503) + !Control.IsVisible(504)</visible> -->
-			<content>
-				<item id="1">
-					<label>view</label>
-					<icon>buttons/view.png</icon>
-					<property name="hover">buttons/view_focus.png</property>
-					<onclick>Container.NextViewMode</onclick>
-					<visible>true</visible>
-				</item>
-				<item id="2">
-					<label>browse by</label>
-					<icon>buttons/browseBy.png</icon>
-					<property name="hover">buttons/browseBy_focus.png</property>
-					<visible>true</visible>
-				</item>
-				<item id="3">
-					<label>$INFO[Control.GetLabel(10)]</label>
-					<icon>buttons/allVideos.png</icon>
-					<property name="hover">buttons/allVideos_focus.png</property>
-					<onclick>SendClick(videolibrary,10)</onclick>
-					<visible>String.IsEmpty(Container.PluginName) +[Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
-				</item>
-				<item id="4">
-					<label>search</label>
-					<icon>buttons/search.png</icon>
-					<property name="hover">buttons/search_focus.png</property>
-					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
-				</item>
-				<item id="5">
-					<label>update</label>
-					<icon>buttons/update.png</icon>
-					<property name="hover">buttons/update_focus.png</property>
-					<onclick>UpdateLibrary(video)</onclick>
-					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
-				</item>
-				<item id="6">
-					<label>genre</label>
-					<icon>buttons/genre.png</icon>
-					<property name="hover">buttons/genre_focus.png</property>
-					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
-				</item>
-				<item id="7">
-					<label>sort</label>
-					<icon>buttons/sort.png</icon>
-					<property name="hover">buttons/sort_focus.png</property>
-					<onclick>SendClick(videolibrary,3)</onclick>
-					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
-				</item>
-				<item id="8">
-					<label>year</label>
-					<icon>buttons/year.png</icon>
-					<property name="hover">buttons/year_focus.png</property>
-					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
-				</item>
-				<item id="9">
-					<label>settings</label>
-					<icon>buttons/settings.png</icon>
-					<property name="hover">buttons/settings_focus.png</property>
-					<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
-				</item>
-				<item id="10">
-					<label>country</label>
-					<icon>buttons/country.png</icon>
-					<property name="hover">buttons/country_focus.png</property>
-					<visible>String.IsEmpty(Container.PluginName) + Container.Content(movies)</visible>
-				</item>
-				<item id="11">
-					<label>=$INFO[Container.PluginName]=$INFO[Container.PluginCategory]==$INFO[Container.Content]=</label>
-					<icon>buttons/ratingsMain.png</icon>
-					<property name="hover">buttons/ratingsMain_focus.png</property>
-					<visible>false</visible>
-					<!-- <visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible> -->
-				</item>
-				 <item id="12">
-					<label>twelve</label>
-					<icon>buttons/ratingsMain.png</icon>
-					<thumb>thumb2.png</thumb>
-					<onclick>ActivateWindow(Music)</onclick>
-					<visible>false + Control.IsVisible(60112)</visible>
-				</item>
-				<!-- <item id="12">
-					<label>people</label>
-					<icon>icon2.png</icon>
-					<thumb>thumb2.png</thumb>
-				</item> -->
-			</content>
-			<itemlayout height="40" width="200">
-				<control type="label">
-					<left>50</left>
-					<top>0</top>
-					<width>140</width>
-					<height>22</height>
-					<font>font16_lcase</font>
-					<textcolor>lightblue</textcolor>
-					<selectedcolor>green</selectedcolor>
-					<align>left</align>
-					<label>$INFO[ListItem.Label]</label>
-				</control>
-				<control type="image">
-					<top>4</top>
-					<width>48</width>
-					<height>38</height>
-					<aspectratio>keep</aspectratio>
-					<texture>$INFO[ListItem.icon]</texture>
-				</control>
-			</itemlayout>
-			<focusedlayout height="40" width="200">
-				<control type="label">
-					<left>50</left>
-					<top>0</top>
-					<width>140</width>
-					<height>22</height>
-					<font>font16_Bold_lcase</font>
-					<textcolor>white</textcolor>
-					<align>left</align>
-					<label>$INFO[ListItem.Label]</label>
-				</control>
-				<control type="image">
-					<top>4</top>
-					<width>48</width>
-					<height>38</height>
-					<aspectratio>keep</aspectratio>
-					<texture>$INFO[ListItem.Property(hover)]</texture>
-				</control>
-			</focusedlayout>
-		</control>
+			<control type="button" id="10">
+				<description>Watched Toggle</description>
+				<include>ButtonCommonValues</include>
+				<width>250</width>
+				<height>35</height>
+				<font>font12</font>
+				<label>$LOCALIZE[20367]</label>
+				<visible>false</visible>
+			</control>
+			<control type="panel" id="60101">
+				<top>80</top>
+				<left>150</left>
+				<width>1820</width>
+				<height>100</height>
+				<onleft>60101</onleft>
+				<onright>60101</onright>
+				<onup>61</onup>
+				<ondown condition="Container(60101).HasFocus(2) + Control.IsVisible(60113)">60113</ondown>
+				<ondown condition="Container(60101).HasFocus(2) + Container.Content(episodes)">60112</ondown>
+				<ondown condition="Container(60101).HasFocus(2)">60102</ondown>
+				<ondown condition="Container(60101).HasFocus(4)">19</ondown>
+				<ondown condition="Container(60101).HasFocus(6)">60104</ondown>
+				<ondown condition="Container(60101).HasFocus(8)">60105</ondown>
+				<ondown condition="Container(60101).HasFocus(10)">60106</ondown>
+				<ondown>50</ondown>
+				<scrolltime tween="sine" easing="out">200</scrolltime>
+				<autoscroll>true</autoscroll>
+				<viewtype label="536">icon</viewtype>
+				<orientation>horizontal</orientation>
+				<!-- <visible>!Control.IsVisible(503) + !Control.IsVisible(504)</visible> -->
+				<content>
+					<item id="1">
+						<label>view</label>
+						<icon>buttons/view.png</icon>
+						<property name="hover">buttons/view_focus.png</property>
+						<onclick>Container.NextViewMode</onclick>
+						<visible>true</visible>
+					</item>
+					<item id="2">
+						<label>browse by</label>
+						<icon>buttons/browseBy.png</icon>
+						<property name="hover">buttons/browseBy_focus.png</property>
+						<visible>true</visible>
+					</item>
+					<item id="3">
+						<label>$INFO[Control.GetLabel(10)]</label>
+						<icon>buttons/allVideos.png</icon>
+						<property name="hover">buttons/allVideos_focus.png</property>
+						<onclick>SendClick(videolibrary,10)</onclick>
+						<visible>String.IsEmpty(Container.PluginName) +[Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
+					</item>
+					<item id="4">
+						<label>search</label>
+						<icon>buttons/search.png</icon>
+						<property name="hover">buttons/search_focus.png</property>
+						<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
+					</item>
+					<item id="5">
+						<label>update</label>
+						<icon>buttons/update.png</icon>
+						<property name="hover">buttons/update_focus.png</property>
+						<onclick>UpdateLibrary(video)</onclick>
+						<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
+					</item>
+					<item id="6">
+						<label>genre</label>
+						<icon>buttons/genre.png</icon>
+						<property name="hover">buttons/genre_focus.png</property>
+						<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
+					</item>
+					<item id="7">
+						<label>sort</label>
+						<icon>buttons/sort.png</icon>
+						<property name="hover">buttons/sort_focus.png</property>
+						<onclick>SendClick(videolibrary,3)</onclick>
+						<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
+					</item>
+					<item id="8">
+						<label>year</label>
+						<icon>buttons/year.png</icon>
+						<property name="hover">buttons/year_focus.png</property>
+						<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
+					</item>
+					<item id="9">
+						<label>settings</label>
+						<icon>buttons/settings.png</icon>
+						<property name="hover">buttons/settings_focus.png</property>
+						<visible>String.IsEmpty(Container.PluginName) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)]</visible>
+					</item>
+					<item id="10">
+						<label>country</label>
+						<icon>buttons/country.png</icon>
+						<property name="hover">buttons/country_focus.png</property>
+						<visible>String.IsEmpty(Container.PluginName) + Container.Content(movies)</visible>
+					</item>
+					<item id="11">
+						<label>=$INFO[Container.PluginName]=$INFO[Container.PluginCategory]==$INFO[Container.Content]=</label>
+						<icon>buttons/ratingsMain.png</icon>
+						<property name="hover">buttons/ratingsMain_focus.png</property>
+						<visible>false</visible>
+						<!-- <visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)</visible> -->
+					</item>
+					<item id="12">
+						<label>twelve</label>
+						<icon>buttons/ratingsMain.png</icon>
+						<thumb>thumb2.png</thumb>
+						<onclick>ActivateWindow(Music)</onclick>
+						<visible>false + Control.IsVisible(60112)</visible>
+					</item>
+					<!-- <item id="12">
+						<label>people</label>
+						<icon>icon2.png</icon>
+						<thumb>thumb2.png</thumb>
+					</item> -->
+				</content>
+				<itemlayout height="40" width="200">
+					<control type="label">
+						<left>50</left>
+						<top>0</top>
+						<width>140</width>
+						<height>22</height>
+						<font>font16_lcase</font>
+						<textcolor>lightblue</textcolor>
+						<selectedcolor>green</selectedcolor>
+						<align>left</align>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="image">
+						<top>4</top>
+						<width>48</width>
+						<height>38</height>
+						<aspectratio>keep</aspectratio>
+						<texture>$INFO[ListItem.icon]</texture>
+					</control>
+				</itemlayout>
+				<focusedlayout height="40" width="200">
+					<control type="label">
+						<left>50</left>
+						<top>0</top>
+						<width>140</width>
+						<height>22</height>
+						<font>font16_Bold_lcase</font>
+						<textcolor>white</textcolor>
+						<align>left</align>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="image">
+						<top>4</top>
+						<width>48</width>
+						<height>38</height>
+						<aspectratio>keep</aspectratio>
+						<texture>$INFO[ListItem.Property(hover)]</texture>
+					</control>
+				</focusedlayout>
+			</control>
 
-		<control type="button" id="60111">
-			<description>I redirect to the correct submenu</description>
-			<left>1000</left>
-			<height>100</height>
-			<label>REDIRECT</label>
-			<onfocus>SetFocus(60101,1,absolute)</onfocus>
-			<onfocus condition="Container.Content(movies) | Container.Content(sets)">SetFocus(60102,0,absolute)</onfocus>
-			<onfocus condition="Container.Content(tvshows)">SetFocus(60102,0,absolute)</onfocus>
-			<visible allowhiddenfocus="true">false</visible>
+			<control type="fixedlist" id="60102">
+				<onup>SetFocus(60101,1)</onup>
+				<visible allowhiddenfocus="true">Control.HasFocus(60102) | [!Container.Content(episodes) + !Container(60101).HasFocus(4) + !Container(60101).HasFocus(6) + !Container(60101).HasFocus(8) + !Container(60101).HasFocus(10)]</visible>
+				<include>subHeaderLayout</include>
+				<content>
+					<item id="1">
+						<label>all movies</label>
+						<property name="upId">$NUMBER[1]</property>
+						<property name="xspPath">$VAR[allVideoXSP]</property>
+						<!-- <property name="xspPath">videodb://movies/titles/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22year%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22title%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%22%22%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</property> -->
+						<property name="sortId">$NUMBER[29]</property>
+						<visible>Container.Content(movies) | Container.Content(sets)</visible>
+					</item>
+					<item id="2">
+						<label>recently added</label>
+						<property name="upId">$NUMBER[1]</property>
+						<property name="xspPath">$VAR[recentlyAddedVideoXSP]</property>
+						<property name="sortId">$NUMBER[29]</property>
+						<visible>Container.Content(movies) | Container.Content(sets)</visible>
+					</item>
+					<item id="3">
+						<label>in progress</label>
+						<property name="upId">$NUMBER[1]</property>
+						<property name="xspPath">$VAR[inProgressVideoXSP]</property>
+						<property name="sortId">$NUMBER[29]</property>
+						<visible>Container.Content(movies) | Container.Content(sets)</visible>
+					</item>
+					<item id="5">
+						<label>sets</label>
+						<property name="xspPath">videodb://movies/sets/</property>
+						<property name="upId">$NUMBER[1]</property>
+						<visible>Container.Content(movies) | Container.Content(sets)</visible>
+					</item>
+					<item id="6">
+						<label>all tv shows</label>
+						<property name="xspPath">videodb://tvshows/titles/</property>
+						<property name="upId">$NUMBER[1]</property>
+						<visible>Container.Content(tvshows)</visible>
+					</item>
+					<item id="7">
+						<label>next up</label>
+						<property name="xspPath">plugin://script.embuary.helper/?info=getnextup</property>
+						<property name="upId">$NUMBER[1]</property>
+						<visible>false + Container.Content(tvshows)</visible>
+					</item>
+					<item id="8">
+						<label>in progress</label>
+						<property name="upId">$NUMBER[1]</property>
+						<property name="xspPath">$VAR[inProgressVideoXSP]</property>
+						<property name="sortId">$NUMBER[29]</property>
+						<visible>Container.Content(tvshows)</visible>
+					</item>
+					<item id="9">
+						<label>recently added</label>
+						<property name="upId">$NUMBER[1]</property>
+						<property name="xspPath">$VAR[recentlyAddedVideoXSP]</property>
+						<property name="sortId">$NUMBER[29]</property>
+						<visible>Container.Content(tvshows)</visible>
+					</item>
+					<item id="10">
+						<label>Seasons</label>
+						<!-- <property name="upId">$NUMBER[1]</property>
+						<property name="xspPath">$VAR[recentlyAddedVideoXSP]</property>
+						<property name="sortId">$NUMBER[29]</property> -->
+						<visible>Container.Content(seasons)</visible>
+					</item>
+					<!-- <item id="4">
+						<label>$INFO[Container(60102).ListItem.Property(xspPath)]</label>
+						<property name="xspPath">videodb://movies/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22genre%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60104).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</property>
+						<property name="upId">$NUMBER[2]</property>
+					</item> -->
+				</content>
+			</control>
+			<control type="fixedlist" id="60112">
+				<onup>SetFocus(60101,1)</onup>
+				<visible allowhiddenfocus="true">Control.HasFocus(60112) | [Container.Content(episodes) + !Container(60101).HasFocus(4) + !Container(60101).HasFocus(6) + !Container(60101).HasFocus(8) + !Container(60101).HasFocus(10)]</visible>
+				<include>subHeaderLayout</include>
+				<!-- <content>
+					<item id="1">
+						<label>$INFO[Container(601).ListItemPosition(4).TvShowDBID]</label>
+						<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
+					</item>
+					<item id="2">
+						<label>$INFO[Container(50).ListItemPosition(4).TvShowDBID]</label>
+						<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
+					</item>
+					<item id="3">
+						<label>$INFO[Container(531).ListItemPosition(4).TvShowDBID]</label>
+						<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
+					</item>
+					<item id="4">
+						<label>$INFO[Container(532).ListItemPosition(4).TvShowDBID]</label>
+						<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
+					</item>
+				</content> -->
+				<content>videodb://tvshows/titles/$INFO[Container(50).ListItemPosition(4).TvShowDBID]$INFO[Container(531).ListItemPosition(4).TvShowDBID]$INFO[Container(533).ListItemPosition(4).TvShowDBID]</content>
+			</control>
+			<control type="fixedlist" id="60113">
+				<onup>SetFocus(60101,1)</onup>
+				<visible allowhiddenfocus="true">[Control.HasFocus(534) | Control.HasFocus(535) | Control.HasFocus(6034) | Control.HasFocus(6035) | Control.HasFocus(65001) | Control.HasFocus(60113) | Container(60101).HasFocus(2)] + !Control.IsVisible(60102) + !Control.IsVisible(60112)</visible>
+				<include>subHeaderLayout</include>
+				<content>
+					<item id="11">
+						<label>date recorded</label>
+						<property name="upId">$NUMBER[1]</property>
+						<property name="sortId">$NUMBER[29]</property>
+					</item>
+					<item id="12">
+						<label>title</label>
+						<property name="upId">$NUMBER[1]</property>
+						<property name="sortId">$NUMBER[29]</property>
+					</item>
+					<item id="13">
+						<label>original air date</label>
+						<property name="upId">$NUMBER[1]</property>
+						<property name="sortId">$NUMBER[29]</property>
+					</item>
+				</content>
+			</control>
+				
+			<control type="edit" id="19">
+				<top>180</top>
+				<visible>Control.HasFocus(19) | Container(60101).HasFocus(4)</visible>
+				<onfocus condition="Container.Content(movies)">Container.Update(videodb://movies/titles/,true)</onfocus>
+				<onfocus condition="Container.Content(tvshows) | Container.Content(episodes)">Container.Update(videodb://tvshows/titles/,true)</onfocus>
+				<!-- <onup>Container.Update($VAR[forcedContentPath],replace)</onup>
+				<ondown>Container.Update($VAR[forcedContentPath],replace)</ondown>
+				<onleft>Container.Update($VAR[forcedContentPath],replace)</onleft>
+				<onright>Container.Update($VAR[forcedContentPath],replace)</onright> -->
+				<onup>SetFocus(60101,3)</onup>
+				<ondown>SetFocus(601)</ondown>
+				<description>Search string</description>
+				<hinttext>Search $VAR[videoTypeText]</hinttext>
+				<width>790</width>
+				<height>40</height>
+				<font>font30_lcase</font>
+				<textcolor>white</textcolor>
+				<texturefocus border="5"/>
+				<texturenofocus border="5"/>
+				<align>left</align>
+			</control>
+			<control type="fixedlist" id="60104">
+				<onup>SetFocus(60101,5)</onup>
+				<visible>Control.HasFocus(60104) | Container(60101).HasFocus(6)</visible>
+				<include>subHeaderLayout</include>
+				<content sortby="year" sortorder="ascending">$VAR[videoGenre]</content>
+			</control>
+			<control type="fixedlist" id="60105">
+				<onup>SetFocus(60101,7)</onup>
+				<visible>Control.HasFocus(60105) | Container(60101).HasFocus(8)</visible>
+				<include>subHeaderLayout</include>
+				<content sortby="year" sortorder="descending">$VAR[videoYears]</content>
+			</control>
+			<control type="list" id="60106">
+				<onup>SetFocus(60101,9)</onup>
+				<visible>Control.HasFocus(60106) | Container(60101).HasFocus(10)</visible>
+				<include>subHeaderLayout</include>
+				<content>videodb://movies/countries/</content>
+			</control>
+			<control type="list" id="60107">
+				<onup>SetFocus(60101,9)</onup>
+				<visible>false</visible>
+				<include>subHeaderLayout</include>
+				<content>videodb://movies/countries/</content>
+			</control>
+			<!-- <control type="list" id="60107">
+				<onup>SetFocus(60101,3)</onup>
+				<visible>Control.HasFocus(60107) | Container(60101).HasFocus(12)</visible>
+				<include>subHeaderLayout</include>
+				<content>
+					<item id="1">
+						<label>PEOPLE</label>
+					</item>
+					<item id="2">
+						<label>IS</label>
+					</item>
+					<item id="3">
+						<label>SEARCH</label>
+					</item>
+					<item id="4">
+						<label>!!!!!</label>
+					</item>
+				</content>
+			</control> -->
 		</control>
-		<control type="fixedlist" id="60102">
-			<onup>SetFocus(60101,1)</onup>
-			<visible allowhiddenfocus="true">Control.HasFocus(60102) | String.IsEmpty(Container.PluginName) + [Container(60101).HasFocus(2) + !Control.IsVisible(60112)] | Control.HasFocus(60111) | !Container(60101).HasFocus(4) + !Control.IsVisible(60104) + !Control.IsVisible(60105) + !Control.IsVisible(60106) + !Control.IsVisible(60107) + !Control.IsVisible(60112)</visible>
-			<include>subHeaderLayout</include>
-			<content>
-				<item id="1">
-					<label>all movies</label>
-					<property name="upId">$NUMBER[1]</property>
-					<property name="xspPath">$VAR[allVideoXSP]</property>
-					<!-- <property name="xspPath">videodb://movies/titles/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22year%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22title%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%22%22%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</property> -->
-					<property name="sortId">$NUMBER[29]</property>
-					<visible>Container.Content(movies) | Container.Content(sets)</visible>
-				</item>
-				<item id="2">
-					<label>recently added</label>
-					<property name="upId">$NUMBER[1]</property>
-					<property name="xspPath">$VAR[recentlyAddedVideoXSP]</property>
-					<property name="sortId">$NUMBER[29]</property>
-					<visible>Container.Content(movies) | Container.Content(sets)</visible>
-				</item>
-				<item id="3">
-					<label>in progress</label>
-					<property name="upId">$NUMBER[1]</property>
-					<property name="xspPath">$VAR[inProgressVideoXSP]</property>
-					<property name="sortId">$NUMBER[29]</property>
-					<visible>Container.Content(movies) | Container.Content(sets)</visible>
-				</item>
-				<item id="5">
-					<label>sets</label>
-					<property name="xspPath">videodb://movies/sets/</property>
-					<property name="upId">$NUMBER[1]</property>
-					<visible>Container.Content(movies) | Container.Content(sets)</visible>
-				</item>
-				<item id="6">
-					<label>all tv shows</label>
-					<property name="xspPath">videodb://tvshows/titles/</property>
-					<property name="upId">$NUMBER[1]</property>
-					<visible>Container.Content(tvshows)</visible>
-				</item>
-				<item id="7">
-					<label>next up</label>
-					<property name="xspPath">plugin://script.embuary.helper/?info=getnextup</property>
-					<property name="upId">$NUMBER[1]</property>
-					<visible> false + [Container.Content(tvshows)]</visible>
-				</item>
-				<item id="8">
-					<label>in progress</label>
-					<property name="upId">$NUMBER[1]</property>
-					<property name="xspPath">$VAR[inProgressVideoXSP]</property>
-					<property name="sortId">$NUMBER[29]</property>
-					<visible>Container.Content(tvshows)</visible>
-				</item>
-				<item id="9">
-					<label>recently added</label>
-					<property name="upId">$NUMBER[1]</property>
-					<property name="xspPath">$VAR[recentlyAddedVideoXSP]</property>
-					<property name="sortId">$NUMBER[29]</property>
-					<visible>Container.Content(tvshows)</visible>
-				</item>
-				<item id="10">
-					<label>Seasons</label>
-					<!-- <property name="upId">$NUMBER[1]</property>
-					<property name="xspPath">$VAR[recentlyAddedVideoXSP]</property>
-					<property name="sortId">$NUMBER[29]</property> -->
-					<visible>Container.Content(seasons)</visible>
-				</item>
-				<!-- <item id="4">
-					<label>$INFO[Container(60102).ListItem.Property(xspPath)]</label>
-					<property name="xspPath">videodb://movies/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22genre%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60104).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</property>
-					<property name="upId">$NUMBER[2]</property>
-				</item> -->
-			</content>
-		</control>
-		<control type="fixedlist" id="60112">
-			<onup>SetFocus(60101,1)</onup>
-			<visible>Control.HasFocus(60112) | String.IsEmpty(Container.PluginName) + [Container.Content(episodes) + !Control.HasFocus(60102)] + !Control.IsVisible(19) + !Control.IsVisible(60104) + !Control.IsVisible(60105) + !Control.IsVisible(60106) + !Control.IsVisible(60107)</visible>
-			<include>subHeaderLayout</include>
-			<!-- <content>
-				<item id="1">
-					<label>$INFO[Container(601).ListItemPosition(4).TvShowDBID]</label>
-					<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
-				</item>
-				<item id="2">
-					<label>$INFO[Container(50).ListItemPosition(4).TvShowDBID]</label>
-					<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
-				</item>
-				<item id="3">
-					<label>$INFO[Container(531).ListItemPosition(4).TvShowDBID]</label>
-					<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
-				</item>
-				<item id="4">
-					<label>$INFO[Container(532).ListItemPosition(4).TvShowDBID]</label>
-					<property name="xspPath">videodb://tvshows/titles/$INFO[Container(601).ListItem.TvShowDBID]/-1/?tvshowid=$INFO[Container(601).ListItem.TvShowDBID]</property>
-				</item>
-			</content> -->
-			<content>videodb://tvshows/titles/$INFO[Container(50).ListItemPosition(4).TvShowDBID]$INFO[Container(531).ListItemPosition(4).TvShowDBID]$INFO[Container(533).ListItemPosition(4).TvShowDBID]</content>
-		</control>
-		<!-- <control type="fixedlist" id="60113">
-			<onup>SetFocus(60101,1)</onup>
-			<visible>Control.HasFocus(60113) | true</visible>
-			<include>subHeaderClickLayout</include>
-			<content>plugin://$INFO[Container.PluginName]</content>
-		</control> -->
-			
-		<control type="edit" id="19">
-			<top>180</top>
-			<visible>Control.HasFocus(19) | Container(60101).HasFocus(4)</visible>
-			<!-- <onup>Container.Update($VAR[forcedContentPath],replace)</onup>
-			<ondown>Container.Update($VAR[forcedContentPath],replace)</ondown>
-			<onleft>Container.Update($VAR[forcedContentPath],replace)</onleft>
-			<onright>Container.Update($VAR[forcedContentPath],replace)</onright> -->
-			<onup>SetFocus(60101,3)</onup>
-			<ondown>SetFocus(601)</ondown>
-			<description>Search string</description>
-			<hinttext>Search $VAR[videoTypeText]</hinttext>
-			<width>790</width>
-			<height>40</height>
-			<font>font30_lcase</font>
-			<textcolor>white</textcolor>
-			<texturefocus border="5"/>
-			<texturenofocus border="5"/>
-			<align>left</align>
-		</control>
-		<control type="fixedlist" id="60104">
-			<onup>SetFocus(60101,5)</onup>
-			<visible>Control.HasFocus(60104) | Container(60101).HasFocus(6)</visible>
-			<include>subHeaderLayout</include>
-			<content sortby="year" sortorder="ascending">$VAR[videoGenre]</content>
-		</control>
-		<control type="fixedlist" id="60105">
-			<onup>SetFocus(60101,7)</onup>
-			<visible>Control.HasFocus(60105) | Container(60101).HasFocus(8)</visible>
-			<include>subHeaderLayout</include>
-			<content sortby="year" sortorder="descending">$VAR[videoYears]</content>
-		</control>
-		<control type="list" id="60106">
-			<onup>SetFocus(60101,9)</onup>
-			<visible>Control.HasFocus(60106) | Container(60101).HasFocus(10000)</visible>
-			<include>subHeaderLayout</include>
-			<content>videodb://movies/directors/</content>
-		</control>
-		<control type="list" id="60107">
-			<onup>SetFocus(60101,9)</onup>
-			<visible>Control.HasFocus(60107) | Container(60101).HasFocus(10)</visible>
-			<include>subHeaderLayout</include>
-			<content>videodb://movies/countries/</content>
-		</control>
-		<!-- <control type="list" id="60107">
-			<onup>SetFocus(60101,3)</onup>
-			<visible>Control.HasFocus(60107) | Container(60101).HasFocus(12)</visible>
-			<include>subHeaderLayout</include>
-			<content>
-				<item id="1">
-					<label>PEOPLE</label>
-				</item>
-				<item id="2">
-					<label>IS</label>
-				</item>
-				<item id="3">
-					<label>SEARCH</label>
-				</item>
-				<item id="4">
-					<label>!!!!!</label>
-				</item>
-			</content>
-		</control> -->
 	</include>
+
+	<include name="FakePVRHeader">
+		<control type="group">
+			<visible>Window.IsActive(1114) | Skin.HasSetting(FakePVRNavigation)</visible>
+			<control type="panel" id="60101">
+				<top>80</top>
+				<left>150</left>
+				<width>1820</width>
+				<height>100</height>
+				<onleft>60101</onleft>
+				<onright>60101</onright>
+				<onup>61</onup>
+				<ondown condition="Skin.HasSetting(FakePVRNavigation)">60113</ondown>
+				<ondown condition="Container(60101).HasFocus(2)">60113</ondown>
+				<ondown condition="String.IsEqual(Skin.String(FakePVRLayout),535)">535</ondown>
+				<ondown>534</ondown>
+				<scrolltime tween="sine" easing="out">200</scrolltime>
+				<autoscroll>true</autoscroll>
+				<viewtype label="536">icon</viewtype>
+				<orientation>horizontal</orientation>
+				<content>
+					<item id="1">
+						<label>view</label>
+						<icon>buttons/view.png</icon>
+						<property name="hover">buttons/view_focus.png</property>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),date_recorded) + String.IsEqual(Skin.String(FakePVRLayout),534)">Skin.SetString(FakePVRLayout,535)</onclick>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),date_recorded) + String.IsEqual(Skin.String(FakePVRLayout),534)">Skin.SetString(FakePVRViewDateRecorded,535)</onclick>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),date_recorded) + String.IsEqual(Skin.String(FakePVRLayout),535)">Skin.SetString(FakePVRLayout,534)</onclick>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),date_recorded) + String.IsEqual(Skin.String(FakePVRLayout),535)">Skin.SetString(FakePVRViewDateRecorded,534)</onclick>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + String.IsEqual(Skin.String(FakePVRLayout),534)">Skin.SetString(FakePVRLayout,535)</onclick>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + String.IsEqual(Skin.String(FakePVRLayout),534)">Skin.SetString(FakePVRViewTitle,535)</onclick>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + String.IsEqual(Skin.String(FakePVRLayout),535)">Skin.SetString(FakePVRLayout,534)</onclick>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + String.IsEqual(Skin.String(FakePVRLayout),535)">Skin.SetString(FakePVRViewTitle,534)</onclick>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),air_date) + String.IsEqual(Skin.String(FakePVRLayout),534)">Skin.SetString(FakePVRLayout,535)</onclick>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),air_date) + String.IsEqual(Skin.String(FakePVRLayout),534)">Skin.SetString(FakePVRViewAirDate,535)</onclick>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),air_date) + String.IsEqual(Skin.String(FakePVRLayout),535)">Skin.SetString(FakePVRLayout,534)</onclick>
+						<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),air_date) + String.IsEqual(Skin.String(FakePVRLayout),535)">Skin.SetString(FakePVRViewAirDate,534)</onclick>
+					</item>
+					<item id="2">
+						<label>browse by</label>
+						<icon>buttons/browseBy.png</icon>
+						<property name="hover">buttons/browseBy_focus.png</property>
+					</item>
+				</content>
+				<itemlayout height="40" width="200">
+					<control type="label">
+						<left>50</left>
+						<top>0</top>
+						<width>140</width>
+						<height>22</height>
+						<font>font16_lcase</font>
+						<textcolor>lightblue</textcolor>
+						<selectedcolor>green</selectedcolor>
+						<align>left</align>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="image">
+						<top>4</top>
+						<width>48</width>
+						<height>38</height>
+						<aspectratio>keep</aspectratio>
+						<texture>$INFO[ListItem.icon]</texture>
+					</control>
+				</itemlayout>
+				<focusedlayout height="40" width="200">
+					<control type="label">
+						<left>50</left>
+						<top>0</top>
+						<width>140</width>
+						<height>22</height>
+						<font>font16_Bold_lcase</font>
+						<textcolor>white</textcolor>
+						<align>left</align>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="image">
+						<top>4</top>
+						<width>48</width>
+						<height>38</height>
+						<aspectratio>keep</aspectratio>
+						<texture>$INFO[ListItem.Property(hover)]</texture>
+					</control>
+				</focusedlayout>
+			</control>
+			<control type="fixedlist" id="60113">
+				<onup>SetFocus(60101,1)</onup>
+				<visible allowhiddenfocus="true">true</visible>
+				<include>FakePVRSubHeaderLayout</include>
+				<content>
+					<item id="11">
+						<label>date recorded</label>
+						<property name="upId">$NUMBER[1]</property>
+						<property name="sortId">$NUMBER[29]</property>
+					</item>
+					<item id="12">
+						<label>title</label>
+						<property name="upId">$NUMBER[1]</property>
+						<property name="sortId">$NUMBER[29]</property>
+					</item>
+					<item id="13">
+						<label>original air date</label>
+						<property name="upId">$NUMBER[1]</property>
+						<property name="sortId">$NUMBER[29]</property>
+					</item>
+				</content>
+			</control>
+		</control>
+	</include>
+
+	<include name="FakePVRSubHeaderLayout">
+		<ondown condition="Skin.HasSetting(FakePVRNavigation)">50</ondown>
+		<ondown condition="String.IsEqual(Skin.String(FakePVRLayout),535)">535</ondown>
+		<ondown>534</ondown>
+		<top>170</top>
+		<left>150</left>
+		<height>60</height>
+		<viewtype label="535">list</viewtype>
+		<orientation>horizontal</orientation>
+		<movement>1</movement>
+		<itemlayout height="50" width="240">
+			<control type="label">
+				<left>0</left>
+				<top>0</top>
+				<font>font16_lcase</font>
+				<textcolor>$VAR[subNoFocusColor]</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+			</control>
+		</itemlayout>
+		<focusedlayout height="50" width="360">
+			<control type="label">
+				<left>0</left>
+				<top>0</top>
+				<font>font30_Bold_lcase</font>
+				<textcolor>$VAR[subFocusColor]</textcolor>
+				<align>center</align>
+				<label>&lt; $INFO[ListItem.Label] &gt;</label>
+			</control>
+			<control type="button">
+				<label>apply browse mode</label>
+				<onfocus condition="Container(60113).HasFocus(11)">Skin.SetString(FakePVRBrowseMode,date_recorded)</onfocus>
+				<onfocus condition="Container(60113).HasFocus(11) + String.IsEqual(Skin.String(FakePVRViewDateRecorded),535)">Skin.SetString(FakePVRLayout,535)</onfocus>
+				<onfocus condition="Container(60113).HasFocus(11) + !String.IsEqual(Skin.String(FakePVRViewDateRecorded),535)">Skin.SetString(FakePVRLayout,534)</onfocus>
+				<!-- <onfocus condition="Container(60113).HasFocus(11)">Container.Update(videodb://tvshows/titles/-1/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5CPlayOn%5C%5C%22%7D%2C%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5COsmosis%5C%5CDVR%28en%29%5C%5C%22%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22method%22%3A%22dateadded%22%7D%7D,replace)</onfocus>
+				<onfocus condition="Container(60113).HasFocus(11)">Container.SetSortMethod(40)</onfocus> -->
+				<onfocus condition="Container(60113).HasFocus(12)">Skin.SetString(FakePVRBrowseMode,title)</onfocus>
+				<onfocus condition="Container(60113).HasFocus(12) + String.IsEqual(Skin.String(FakePVRViewTitle),535)">Skin.SetString(FakePVRLayout,535)</onfocus>
+				<onfocus condition="Container(60113).HasFocus(12) + !String.IsEqual(Skin.String(FakePVRViewTitle),535)">Skin.SetString(FakePVRLayout,534)</onfocus>
+				<!-- <onfocus condition="Container(60113).HasFocus(12)">Container.Update(videodb://tvshows/titles/?xsp=%7B%22type%22%3A%22tvshows%22%2C%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5CPlayOn%5C%5C%22%7D%2C%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5COsmosis%5C%5CDVR%28en%29%5C%5C%22%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22method%22%3A%22sorttitle%22%7D%7D,replace)</onfocus> -->
+				<onfocus condition="Container(60113).HasFocus(13)">Skin.SetString(FakePVRBrowseMode,air_date)</onfocus>
+				<onfocus condition="Container(60113).HasFocus(13) + String.IsEqual(Skin.String(FakePVRViewAirDate),535)">Skin.SetString(FakePVRLayout,535)</onfocus>
+				<onfocus condition="Container(60113).HasFocus(13) + !String.IsEqual(Skin.String(FakePVRViewAirDate),535)">Skin.SetString(FakePVRLayout,534)</onfocus>
+				<!-- <onfocus condition="Container(60113).HasFocus(13)">Container.Update(videodb://tvshows/titles/-1/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5CPlayOn%5C%5C%22%7D%2C%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5COsmosis%5C%5CDVR%28en%29%5C%5C%22%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22method%22%3A%22year%22%7D%7D,replace)</onfocus> -->
+				<visible>false</visible>
+			</control>
+		</focusedlayout>
+	</include>
+
 	<include name="PVRChannelHeader">
 		<control type="button" id="10">
 			<description>Watched Toggle</description>
@@ -2364,6 +2572,7 @@
 			</content>
 		</control>
 	</include>
+
 	<include name="addOnsHeader">
 		<control type="button" id="10">
 			<description>Watched Toggle</description>
@@ -2495,20 +2704,10 @@
 			</focusedlayout>
 		</control>
 
-		<control type="button" id="60111">
-			<description>I redirect to the correct submenu</description>
-			<left>1000</left>
-			<height>100</height>
-			<label>REDIRECT</label>
-			<onfocus>SetFocus(60101,1,absolute)</onfocus>
-			<onfocus condition="Container.Content(movies) | Container.Content(sets)">SetFocus(60102,0,absolute)</onfocus>
-			<onfocus condition="Container.Content(tvshows)">SetFocus(60102,0,absolute)</onfocus>
-			<visible allowhiddenfocus="true">false</visible>
-		</control>
 		<control type="fixedlist" id="60102">
 			<onup>SetFocus(60101,1)</onup>
 			<ondown>50</ondown>
-			<visible allowhiddenfocus="true">Control.HasFocus(60102) | Container(60101).HasFocus(2) | Control.HasFocus(60111) | !Container(60101).HasFocus(6) + !Control.IsVisible(11) + !Control.IsVisible(60115) + !Control.IsVisible(60116) + !Control.IsVisible(60107)</visible>
+			<visible allowhiddenfocus="true">Control.HasFocus(60102) | Container(60101).HasFocus(2) | !Container(60101).HasFocus(6) + !Control.IsVisible(11) + !Control.IsVisible(60115) + !Control.IsVisible(60116) + !Control.IsVisible(60107)</visible>
 			<include>subHeaderLayout</include>
 			<content>
 				<item id="1">
@@ -2609,6 +2808,7 @@
 			</content>
 		</control>
 	</include>
+
 	<include name="musicHeader">
 		<control type="button" id="10">
 			<description>Watched Toggle</description>
@@ -2739,20 +2939,10 @@
 			</focusedlayout>
 		</control>
 
-		<control type="button" id="60111">
-			<description>I redirect to the correct submenu</description>
-			<left>1000</left>
-			<height>100</height>
-			<label>REDIRECT</label>
-			<onfocus>SetFocus(60101,1,absolute)</onfocus>
-			<onfocus condition="Container.Content(movies) | Container.Content(sets)">SetFocus(60102,0,absolute)</onfocus>
-			<onfocus condition="Container.Content(tvshows)">SetFocus(60102,0,absolute)</onfocus>
-			<visible allowhiddenfocus="true">false</visible>
-		</control>
 		<control type="fixedlist" id="60102">
 			<onup>SetFocus(60101,1)</onup>
 			<ondown>50</ondown>
-			<visible allowhiddenfocus="true">Control.HasFocus(60102) | Container(60101).HasFocus(2) | Control.HasFocus(60111) | !Container(60101).HasFocus(6) + !Control.IsVisible(11) + !Control.IsVisible(60115) + !Control.IsVisible(60116) + !Control.IsVisible(60107)</visible>
+			<visible allowhiddenfocus="true">Control.HasFocus(60102) | Container(60101).HasFocus(2) | !Container(60101).HasFocus(6) + !Control.IsVisible(11) + !Control.IsVisible(60115) + !Control.IsVisible(60116) + !Control.IsVisible(60107)</visible>
 			<include>subHeaderLayout</include>
 			<content>
 				<item id="1">
@@ -2858,6 +3048,7 @@
 		<ondown>601</ondown>
 		<top>170</top>
 		<left>150</left>
+		<height>60</height>
 		<viewtype label="535">list</viewtype>
 		<orientation>horizontal</orientation>
 		<movement>1</movement>
@@ -2884,6 +3075,8 @@
 			<control type="button">
 				<label>here</label>
 				<onfocus>Container.Update($VAR[forcedContentPath],replace)</onfocus>
+				<onfocus condition="Control.HasFocus(60113) + Container(60113).HasFocus(11)">Container.SetViewMode(534)</onfocus>
+				<onfocus condition="Control.HasFocus(60113) + Container(60113).HasFocus(12)">Container.SetViewMode(535)</onfocus>
 				<visible>0</visible>
 			</control>
 		</focusedlayout>
@@ -3255,7 +3448,7 @@
 			<control type="group">
 				<left>0</left>
 				<top>50</top>
-				<visible>!Container.Content(episodes)</visible>
+				<visible>!Container.Content(episodes) + !String.IsEqual(Skin.String(FakePVRLayout),535) | String.IsEqual(Skin.String(FakePVRBrowseMode),title) + !Container.Content(episodes)</visible>
 				<control type="label">
 					<font>font36</font>
 					<textcolor>white</textcolor>
@@ -3268,7 +3461,7 @@
 					<height>35</height>
 					<top>10</top>
 					<texture>$VAR[videoRating]</texture>
-					<visible>Container.Content(movies) | Container.Content(tvshows)</visible>
+					<visible>Container.Content(movies) | Container.Content(tvshows) | String.IsEqual(Skin.String(FakePVRBrowseMode),title)</visible>
 				</control>
 				<control type="image">
 					<left>-110</left>
@@ -3282,7 +3475,7 @@
 			<control type="group">
 				<left>0</left>
 				<top>50</top>
-				<visible>Container.Content(episodes)</visible>
+				<visible>Container.Content(episodes) | String.IsEqual(Skin.String(FakePVRLayout),535) + !String.IsEqual(Skin.String(FakePVRBrowseMode),title)</visible>
 				<control type="label">
 					<font>font36</font>
 					<textcolor>white</textcolor>
@@ -3294,7 +3487,7 @@
 				<top>100</top>
 				<width>1500</width>
 				<height>150</height>
-				<visible>!Control.IsVisible(65001)</visible>
+				<visible>!Control.IsVisible(65001) | String.IsEqual(Skin.String(FakePVRLayout),535)</visible>
 				<control type="label">
 					<font>font36</font>
 					<textcolor>lightblue</textcolor>
@@ -3307,7 +3500,7 @@
 					<textcolor>lightblue</textcolor>
 					<scroll>true</scroll>
 					<label>$INFO[ListItem.Property(TotalSeasons)] Seasons[CR]$INFO[ListItem.Property(UnWatchedEpisodes)] Unwatched Episodes</label>
-					<visible>Container.Content(tvshows)</visible>
+					<visible>Container.Content(tvshows) | String.IsEqual(Skin.String(FakePVRBrowseMode),title) + !Container.Content(episodes)</visible>
 				</control>
 				<control type="label">
 					<top>-50</top>
@@ -3319,7 +3512,7 @@
 					<textcolor>lightblue</textcolor>
 					<scroll>true</scroll>
 					<label>$INFO[ListItem.Plot]</label>
-					<visible>Container.Content(tvshows)</visible>
+					<visible>Container.Content(tvshows) | String.IsEqual(Skin.String(FakePVRBrowseMode),title) + !Container.Content(episodes)</visible>
 				</control>
 				<control type="label">
 					<font>font16</font>
@@ -3336,7 +3529,7 @@
 					<textcolor>lightblue</textcolor>
 					<scroll>true</scroll>
 					<label>$VAR[DurationInMinutes][CR]$INFO[ListItem.Plot]</label>
-					<visible>Container.Content(episodes)</visible>
+					<visible>Container.Content(episodes) | String.IsEqual(Skin.String(FakePVRLayout),535) + !String.IsEqual(Skin.String(FakePVRBrowseMode),title)</visible>
 				</control>
 			</control>
 			
@@ -3344,7 +3537,7 @@
 				<top>100</top>
 				<width>1500</width>
 				<height>35</height>
-				<visible>Control.IsVisible(65001)</visible>
+				<visible>Control.IsVisible(65001) + !String.IsEqual(Skin.String(FakePVRLayout),535)</visible>
 				<control type="label">
 					<top>10</top>
 					<font>font24</font>
@@ -3745,6 +3938,37 @@
 				<align>right</align>
 				<aligny>center</aligny>
 				<label>$INFO[Container.CurrentItem] [COLOR=lightblue]| $INFO[Container.NumItems][/COLOR]</label>
+				<visible>!Window.IsActive(1114)</visible>
+				<include>Window_OpenClose_Animation</include>
+			</control>
+			<control type="label">
+				<description>Page Count Label - FakePVR 534</description>
+				<right>40</right>
+				<top>130r</top>
+				<width>500</width>
+				<height>20</height>
+				<font>font36</font>
+				<textcolor>white</textcolor>
+				<scroll>false</scroll>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[Container(534).CurrentItem] [COLOR=lightblue]| $INFO[Container(534).NumItems][/COLOR]</label>
+				<visible>Window.IsActive(1114) + String.IsEqual(Skin.String(FakePVRLayout),534)</visible>
+				<include>Window_OpenClose_Animation</include>
+			</control>
+			<control type="label">
+				<description>Page Count Label - FakePVR 535</description>
+				<right>40</right>
+				<top>130r</top>
+				<width>500</width>
+				<height>20</height>
+				<font>font36</font>
+				<textcolor>white</textcolor>
+				<scroll>false</scroll>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[Container(535).CurrentItem] [COLOR=lightblue]| $INFO[Container(535).NumItems][/COLOR]</label>
+				<visible>Window.IsActive(1114) + String.IsEqual(Skin.String(FakePVRLayout),535)</visible>
 				<include>Window_OpenClose_Animation</include>
 			</control>
 			<control type="label">

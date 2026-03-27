@@ -5,7 +5,6 @@
 	<!-- <views>50,601,503,504,531,532</views> -->
 	<views>50,601,531,532,533</views>
 	<onload condition="!Skin.HasSetting(FirstTimeRun)">ActivateWindow(1112)</onload>
-	<!-- <onload>SetFocus(60111)</onload> -->
 	<controls>
 		<include>CommonBackground</include>
 		<include>ContentPanelBackgrounds</include>
