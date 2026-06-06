@@ -270,7 +270,8 @@
 						<label>1210</label>
 						<icon>buttons/remove.png</icon>
 						<property name="hover">buttons/remove_focus.png</property>
-						<onclick>RunScript(special://skin/resources/remove_episode.py,$INFO[Container(534).ListItem.DBID])</onclick>
+						<onclick>SetFocus(534)</onclick>
+						<onclick>Action(Delete)</onclick>
 					</item>
 				</content>
 			</control>
@@ -303,7 +304,7 @@
 				<scrolltime>200</scrolltime>
 				<orientation>horizontal</orientation>
 				<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + String.IsEqual(ListItem.DBType,tvshow)">Skin.SetBool(FakePVRNavigation)</onclick>
-				<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + String.IsEqual(ListItem.DBType,tvshow)">ActivateWindow(Videos,videodb://tvshows/titles/$INFO[ListItem.DBID]/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22method%22%3A%22episode%22%7D%7D,return)</onclick>
+				<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + String.IsEqual(ListItem.DBType,tvshow)">ActivateWindow(Videos,"videodb://tvshows/titles/$INFO[ListItem.DBID]/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22rules%22%3A%7B%22and%22%3A%5B%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22method%22%3A%22episode%22%7D%7D",return)</onclick>
 				<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + !String.IsEqual(ListItem.DBType,tvshow)">PlayMedia($INFO[ListItem.FileNameAndPath])</onclick>
 				<onclick condition="!String.IsEqual(Skin.String(FakePVRBrowseMode),title)">PlayMedia($INFO[ListItem.FileNameAndPath])</onclick>
 				<content>$VAR[FakePVR535Content]</content>

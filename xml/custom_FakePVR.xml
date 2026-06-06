@@ -7,7 +7,8 @@
 	<onload condition="String.IsEmpty(Skin.String(FakePVRBrowseMode))">Skin.SetString(FakePVRBrowseMode,date_recorded)</onload>
 	<onload condition="String.IsEmpty(Skin.String(FakePVRLayout))">Skin.SetString(FakePVRLayout,534)</onload>
 	<onload condition="String.IsEmpty(Skin.String(FakePVRViewDateRecorded))">Skin.SetString(FakePVRViewDateRecorded,534)</onload>
-	<onload condition="String.IsEmpty(Skin.String(FakePVRViewTitle))">Skin.SetString(FakePVRViewTitle,535)</onload>
+	<onload>Skin.SetString(FakePVRViewTitle,535)</onload>
+	<onload condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title)">Skin.SetString(FakePVRLayout,535)</onload>
 	<onload condition="String.IsEmpty(Skin.String(FakePVRViewAirDate))">Skin.SetString(FakePVRViewAirDate,534)</onload>
 
 	<controls>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <includes>
 	<include file="Defaults.xml" />
 	<include file="Includes_DialogSelect.xml" />
@@ -89,6 +89,25 @@
 		<value condition="String.StartsWith(Container.FolderPath,videodb://tvshows) | String.StartsWith(Container.FolderPath,special://skin/playlists/tvshow)">special://skin/playlists/tvshow/InProgressTVShows.xsp</value>
 		<value>videodb://movies/titles/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22year%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22inprogress%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%22true%22%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</value>
 	</variable>
+	<variable name="genreFilterPath">
+		<value condition="Container.Content(tvshows)">videodb://tvshows/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22genre%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60104).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22tvshows%22%7D</value>
+		<value>videodb://movies/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22genre%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60104).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</value>
+	</variable>
+	<variable name="yearFilterPath">
+		<value condition="Container.Content(tvshows)">videodb://tvshows/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22year%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60105).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22tvshows%22%7D</value>
+		<value>videodb://movies/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22year%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60105).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</value>
+	</variable>
+	<variable name="forcedContentPath">
+		<value condition="Control.IsVisible(60104)">$VAR[genreFilterPath]</value>
+		<value condition="Control.IsVisible(60105)">$VAR[yearFilterPath]</value>
+		<value condition="Control.IsVisible(11)">pvr://channels/tv/$INFO[Container(11).ListItem.label]</value>
+		<value condition="Control.IsVisible(60107)">videodb://movies/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22country%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60107).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</value>
+		<value condition="Control.IsVisible(60112) + !String.IsEmpty(Container(60112).ListItem.property(xspPath))">$INFO[Container(60112).ListItem.property(xspPath)]</value>
+		<value condition="Control.IsVisible(60112)">videodb://tvshows/titles/$INFO[Container(60112).ListItem.TvShowDBID]/$INFO[Container(60112).ListItem.Season]/?tvshowid=$INFO[Container(60112).ListItem.TvShowDBID]</value>
+		<value condition="Control.IsVisible(60115)">$INFO[Container(60115).ListItem.FolderPath]</value>
+		<value condition="Control.IsVisible(60116)">$INFO[Container(60116).ListItem.property(xspPath)]</value>
+		<value>$INFO[Container(60102).ListItem.property(xspPath)]</value>
+	</variable>
 	<variable name="LibraryPVRModeLabel">
 		<value condition="String.IsEqual(Skin.String(LibraryPVRMode),playlist)">Playlist</value>
 		<value>Path</value>
@@ -122,31 +141,6 @@
 		<value condition="!String.IsEmpty(Skin.String(LibraryPVRURL_Episodes_Air)) + String.IsEqual(Skin.String(FakePVRBrowseMode),air_date)">$INFO[Skin.String(LibraryPVRURL_Episodes_Air)]</value>
 		<value condition="!String.IsEmpty(Skin.String(LibraryPVRURL_Shows)) + String.IsEqual(Skin.String(FakePVRBrowseMode),title)">$INFO[Skin.String(LibraryPVRURL_Shows)]</value>
 		<value condition="!String.IsEmpty(Skin.String(LibraryPVRURL_Episodes_Date))">$INFO[Skin.String(LibraryPVRURL_Episodes_Date)]</value>
-	</variable>
-	<variable name="forcedContentPath">
-		<!-- GENRE -->
-		<value condition="Control.IsVisible(60104) + Container.Content(tvshows)">videodb://tvshows/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22genre%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60104).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22tvshows%22%7D</value>
-		<value condition="Control.IsVisible(60104)">videodb://movies/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22genre%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60104).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</value>
-		<!-- YEAR -->
-		<value condition="Control.IsVisible(60105) + Container.Content(tvshows)">videodb://tvshows/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22year%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60105).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22tvshows%22%7D</value>
-		<value condition="Control.IsVisible(60105)">videodb://movies/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22year%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60105).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</value>
-		<value condition="Control.IsVisible(11)">pvr://channels/tv/$INFO[Container(11).ListItem.label]</value>
-		<!-- COUNTRIES -->
-		<value condition="Control.IsVisible(60107)">videodb://movies/titles/?xsp=%7B%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22country%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%5B%22$INFO[Container(60107).ListItem.label]%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</value>
-		<!-- EPISODES -->
-		<value condition="Control.IsVisible(60112) + !String.IsEmpty(Container(60112).ListItem.property(xspPath))">$INFO[Container(60112).ListItem.property(xspPath)]</value>
-		<value condition="Control.IsVisible(60112)">videodb://tvshows/titles/$INFO[Container(60112).ListItem.TvShowDBID]/$INFO[Container(60112).ListItem.Season]/?tvshowid=$INFO[Container(60112).ListItem.TvShowDBID]</value>
-		<!-- FAKE PVR-->
-		<value condition="Control.IsVisible(60113) + Container(60113).HasFocus(11) + String.IsEqual(Skin.String(LibraryPVRMode),playlist)">special://profile/playlists/video/TGB_PVR_Episodes.xsp</value>
-		<value condition="Control.IsVisible(60113) + Container(60113).HasFocus(11)">$INFO[Skin.String(LibraryPVRURL_Episodes_Date)]</value>
-		<value condition="Control.IsVisible(60113) + Container(60113).HasFocus(12) + String.IsEqual(Skin.String(LibraryPVRMode),playlist)">special://profile/playlists/video/TGB_PVR_Shows.xsp</value>
-		<value condition="Control.IsVisible(60113) + Container(60113).HasFocus(12)">$INFO[Skin.String(LibraryPVRURL_Shows)]</value>
-		<!-- ADDON -->
-		<value condition="Control.IsVisible(60113)">$INFO[Container(60113).ListItem.FolderPath]</value>
-		<value condition="Control.IsVisible(60115)">$INFO[Container(60115).ListItem.FolderPath]</value>
-		<value condition="Control.IsVisible(60116)">$INFO[Container(60116).ListItem.property(xspPath)]</value>
-		<value>$INFO[Container(60102).ListItem.property(xspPath)]</value>
-		<value>videodb://movies/titles/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22title%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%22%22%7D%5D%7D%2C%22type%22%3A%22movies%22%7D</value>
 	</variable>
 	<variable name="seasonPath">
 		<value condition="!String.IsEmpty(ListItem.Season)">videodb://tvshows/titles/$INFO[Container(504).ListItem.TvShowDBID]/$INFO[ListItem.Season]/?tvshowid=$INFO[Container(504).ListItem.TvShowDBID]</value>
@@ -1169,9 +1163,7 @@
 	</variable>
 	<variable name="PosterThumb">
 		<!-- <value condition="!String.IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value> -->
-		<value condition="Container.Content(episodes) + String.IsEqual(Skin.String(FakePVRBrowseMode),title)">$INFO[ListItem.icon]</value>
-		<value condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title)">$INFO[ListItem.Art(fanart)]</value>
-		<value condition="Container.Content(episodes)">$INFO[ListItem.Art(tvshow.poster)]</value>
+<value condition="Container.Content(episodes)">$INFO[ListItem.Art(tvshow.poster)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value>$INFO[ListItem.Icon]</value>
 	</variable>
@@ -1755,13 +1747,6 @@
 				<label>$INFO[Control.GetLabel(19).index(1)]</label>
 				<visible>0</visible>
 			</control>
-			<control type="label" id="90003">
-				<top>200</top>
-				<left>20</left>
-				<width>2000</width>
-				<label>$VAR[forcedContentPath]</label>
-				<visible>1</visible>
-			</control>
 			<!--  -->
 			<!-- <control type="label" id="90004">
 			<top>250</top>
@@ -1787,7 +1772,6 @@
 				<onleft>60101</onleft>
 				<onright>60101</onright>
 				<onup>61</onup>
-				<ondown condition="Container(60101).HasFocus(2) + Control.IsVisible(60113)">60113</ondown>
 				<ondown condition="Container(60101).HasFocus(2) + Container.Content(episodes)">60112</ondown>
 				<ondown condition="Container(60101).HasFocus(2)">60102</ondown>
 				<ondown condition="Container(60101).HasFocus(4)">19</ondown>
@@ -2023,29 +2007,6 @@
 				</content> -->
 				<content>videodb://tvshows/titles/$INFO[Container(50).ListItemPosition(4).TvShowDBID]$INFO[Container(531).ListItemPosition(4).TvShowDBID]$INFO[Container(533).ListItemPosition(4).TvShowDBID]</content>
 			</control>
-			<control type="fixedlist" id="60113">
-				<onup>SetFocus(60101,1)</onup>
-				<visible allowhiddenfocus="true">[Control.HasFocus(534) | Control.HasFocus(535) | Control.HasFocus(6034) | Control.HasFocus(6035) | Control.HasFocus(65001) | Control.HasFocus(60113) | Container(60101).HasFocus(2)] + !Control.IsVisible(60102) + !Control.IsVisible(60112)</visible>
-				<include>subHeaderLayout</include>
-				<content>
-					<item id="11">
-						<label>date recorded</label>
-						<property name="upId">$NUMBER[1]</property>
-						<property name="sortId">$NUMBER[29]</property>
-					</item>
-					<item id="12">
-						<label>title</label>
-						<property name="upId">$NUMBER[1]</property>
-						<property name="sortId">$NUMBER[29]</property>
-					</item>
-					<item id="13">
-						<label>original air date</label>
-						<property name="upId">$NUMBER[1]</property>
-						<property name="sortId">$NUMBER[29]</property>
-					</item>
-				</content>
-			</control>
-				
 			<control type="edit" id="19">
 				<top>180</top>
 				<visible>Control.HasFocus(19) | Container(60101).HasFocus(4)</visible>
@@ -2259,8 +2220,7 @@
 				<!-- <onfocus condition="Container(60113).HasFocus(11)">Container.Update(videodb://tvshows/titles/-1/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5CPlayOn%5C%5C%22%7D%2C%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5COsmosis%5C%5CDVR%28en%29%5C%5C%22%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22descending%22%2C%22method%22%3A%22dateadded%22%7D%7D,replace)</onfocus>
 				<onfocus condition="Container(60113).HasFocus(11)">Container.SetSortMethod(40)</onfocus> -->
 				<onfocus condition="Container(60113).HasFocus(12)">Skin.SetString(FakePVRBrowseMode,title)</onfocus>
-				<onfocus condition="Container(60113).HasFocus(12) + String.IsEqual(Skin.String(FakePVRViewTitle),535)">Skin.SetString(FakePVRLayout,535)</onfocus>
-				<onfocus condition="Container(60113).HasFocus(12) + !String.IsEqual(Skin.String(FakePVRViewTitle),535)">Skin.SetString(FakePVRLayout,534)</onfocus>
+				<onfocus condition="Container(60113).HasFocus(12)">Skin.SetString(FakePVRLayout,535)</onfocus>
 				<!-- <onfocus condition="Container(60113).HasFocus(12)">Container.Update(videodb://tvshows/titles/?xsp=%7B%22type%22%3A%22tvshows%22%2C%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5CPlayOn%5C%5C%22%7D%2C%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5COsmosis%5C%5CDVR%28en%29%5C%5C%22%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22method%22%3A%22sorttitle%22%7D%7D,replace)</onfocus> -->
 				<onfocus condition="Container(60113).HasFocus(13)">Skin.SetString(FakePVRBrowseMode,air_date)</onfocus>
 				<onfocus condition="Container(60113).HasFocus(13) + String.IsEqual(Skin.String(FakePVRViewAirDate),535)">Skin.SetString(FakePVRLayout,535)</onfocus>
@@ -3075,8 +3035,6 @@
 			<control type="button">
 				<label>here</label>
 				<onfocus>Container.Update($VAR[forcedContentPath],replace)</onfocus>
-				<onfocus condition="Control.HasFocus(60113) + Container(60113).HasFocus(11)">Container.SetViewMode(534)</onfocus>
-				<onfocus condition="Control.HasFocus(60113) + Container(60113).HasFocus(12)">Container.SetViewMode(535)</onfocus>
 				<visible>0</visible>
 			</control>
 		</focusedlayout>
