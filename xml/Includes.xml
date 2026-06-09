@@ -2076,7 +2076,7 @@
 
 	<include name="FakePVRHeader">
 		<control type="group">
-			<visible>Window.IsActive(1114) | Skin.HasSetting(FakePVRNavigation)</visible>
+			<visible>Window.IsActive(1114) | Window.IsActive(1115) | Skin.HasSetting(FakePVRNavigation)</visible>
 			<control type="panel" id="60101">
 				<top>80</top>
 				<left>150</left>
@@ -2159,6 +2159,7 @@
 			</control>
 			<control type="fixedlist" id="60113">
 				<onup>SetFocus(60101,1)</onup>
+	
 				<visible allowhiddenfocus="true">true</visible>
 				<include>FakePVRSubHeaderLayout</include>
 				<content>
@@ -2183,6 +2184,7 @@
 	</include>
 
 	<include name="FakePVRSubHeaderLayout">
+		<ondown condition="Window.IsActive(1115)">536</ondown>
 		<ondown condition="Skin.HasSetting(FakePVRNavigation)">50</ondown>
 		<ondown condition="String.IsEqual(Skin.String(FakePVRLayout),535)">535</ondown>
 		<ondown>534</ondown>
@@ -2221,6 +2223,8 @@
 				<onfocus condition="Container(60113).HasFocus(11)">Container.SetSortMethod(40)</onfocus> -->
 				<onfocus condition="Container(60113).HasFocus(12)">Skin.SetString(FakePVRBrowseMode,title)</onfocus>
 				<onfocus condition="Container(60113).HasFocus(12)">Skin.SetString(FakePVRLayout,535)</onfocus>
+				<onfocus condition="Container(60113).HasFocus(12) + Window.IsActive(1115) + String.IsEqual(Skin.String(FakePVR1115Loaded),1)">AlarmClock(pvr1115back,SetFocus(60113,1,absolute),0,silent)</onfocus>
+				<onfocus condition="Container(60113).HasFocus(12) + Window.IsActive(1115) + String.IsEqual(Skin.String(FakePVR1115Loaded),1)">Close</onfocus>
 				<!-- <onfocus condition="Container(60113).HasFocus(12)">Container.Update(videodb://tvshows/titles/?xsp=%7B%22type%22%3A%22tvshows%22%2C%22rules%22%3A%7B%22or%22%3A%5B%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5CPlayOn%5C%5C%22%7D%2C%7B%22field%22%3A%22path%22%2C%22operator%22%3A%22startswith%22%2C%22value%22%3A%22V%3A%5C%5COsmosis%5C%5CDVR%28en%29%5C%5C%22%7D%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22method%22%3A%22sorttitle%22%7D%7D,replace)</onfocus> -->
 				<onfocus condition="Container(60113).HasFocus(13)">Skin.SetString(FakePVRBrowseMode,air_date)</onfocus>
 				<onfocus condition="Container(60113).HasFocus(13) + String.IsEqual(Skin.String(FakePVRViewAirDate),535)">Skin.SetString(FakePVRLayout,535)</onfocus>
@@ -3458,7 +3462,7 @@
 					<textcolor>lightblue</textcolor>
 					<scroll>true</scroll>
 					<label>$INFO[ListItem.Property(TotalSeasons)] Seasons[CR]$INFO[ListItem.Property(UnWatchedEpisodes)] Unwatched Episodes</label>
-					<visible>Container.Content(tvshows) | String.IsEqual(Skin.String(FakePVRBrowseMode),title) + !Container.Content(episodes)</visible>
+					<visible>Container.Content(tvshows) + !Window.IsActive(1115) | String.IsEqual(Skin.String(FakePVRBrowseMode),title) + !Container.Content(episodes) + !Window.IsActive(1115)</visible>
 				</control>
 				<control type="label">
 					<top>-50</top>
@@ -3470,7 +3474,7 @@
 					<textcolor>lightblue</textcolor>
 					<scroll>true</scroll>
 					<label>$INFO[ListItem.Plot]</label>
-					<visible>Container.Content(tvshows) | String.IsEqual(Skin.String(FakePVRBrowseMode),title) + !Container.Content(episodes)</visible>
+					<visible>Container.Content(tvshows) + !Window.IsActive(1115) | String.IsEqual(Skin.String(FakePVRBrowseMode),title) + !Container.Content(episodes) + !Window.IsActive(1115)</visible>
 				</control>
 				<control type="label">
 					<font>font16</font>
@@ -3487,7 +3491,7 @@
 					<textcolor>lightblue</textcolor>
 					<scroll>true</scroll>
 					<label>$VAR[DurationInMinutes][CR]$INFO[ListItem.Plot]</label>
-					<visible>Container.Content(episodes) | String.IsEqual(Skin.String(FakePVRLayout),535) + !String.IsEqual(Skin.String(FakePVRBrowseMode),title)</visible>
+					<visible>Container.Content(episodes) | Window.IsActive(1115) | String.IsEqual(Skin.String(FakePVRLayout),535) + !String.IsEqual(Skin.String(FakePVRBrowseMode),title)</visible>
 				</control>
 			</control>
 			
@@ -3896,7 +3900,22 @@
 				<align>right</align>
 				<aligny>center</aligny>
 				<label>$INFO[Container.CurrentItem] [COLOR=lightblue]| $INFO[Container.NumItems][/COLOR]</label>
-				<visible>!Window.IsActive(1114)</visible>
+				<visible>!Window.IsActive(1114) + !Window.IsActive(1115)</visible>
+				<include>Window_OpenClose_Animation</include>
+			</control>
+			<control type="label">
+				<description>Page Count Label - FakePVREpisodes 536</description>
+				<right>40</right>
+				<top>130r</top>
+				<width>500</width>
+				<height>20</height>
+				<font>font36</font>
+				<textcolor>white</textcolor>
+				<scroll>false</scroll>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[Container(536).CurrentItem] [COLOR=lightblue]| $INFO[Container(536).NumItems][/COLOR]</label>
+				<visible>Window.IsActive(1115)</visible>
 				<include>Window_OpenClose_Animation</include>
 			</control>
 			<control type="label">

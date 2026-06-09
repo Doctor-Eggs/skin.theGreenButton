@@ -17,6 +17,7 @@
 		<control type="group">
 			<include>Window_OpenClose_Animation</include>
 			<include>PVRShows</include>
+			<include>PVRShowEpisodes</include>
 			<include>PVREpisodes</include>
 		</control>
 		<control type="group">

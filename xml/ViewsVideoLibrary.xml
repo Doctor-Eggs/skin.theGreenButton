@@ -270,8 +270,7 @@
 						<label>1210</label>
 						<icon>buttons/remove.png</icon>
 						<property name="hover">buttons/remove_focus.png</property>
-						<onclick>SetFocus(534)</onclick>
-						<onclick>Action(Delete)</onclick>
+						<onclick>RunScript(special://skin/resources/remove_episode.py,$INFO[Container(534).ListItem.DBID],$INFO[Container(534).ListItem.FilenameAndPath])</onclick>
 					</item>
 				</content>
 			</control>
@@ -303,8 +302,8 @@
 				<pagecontrol>6035</pagecontrol>
 				<scrolltime>200</scrolltime>
 				<orientation>horizontal</orientation>
-				<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + String.IsEqual(ListItem.DBType,tvshow)">Skin.SetBool(FakePVRNavigation)</onclick>
-				<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + String.IsEqual(ListItem.DBType,tvshow)">ActivateWindow(Videos,"videodb://tvshows/titles/$INFO[ListItem.DBID]/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22rules%22%3A%7B%22and%22%3A%5B%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22method%22%3A%22episode%22%7D%7D",return)</onclick>
+				<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + String.IsEqual(ListItem.DBType,tvshow)">Skin.SetString(FakePVRSelectedShowDBID,$INFO[ListItem.DBID])</onclick>
+				<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + String.IsEqual(ListItem.DBType,tvshow)">ActivateWindow(1115)</onclick>
 				<onclick condition="String.IsEqual(Skin.String(FakePVRBrowseMode),title) + !String.IsEqual(ListItem.DBType,tvshow)">PlayMedia($INFO[ListItem.FileNameAndPath])</onclick>
 				<onclick condition="!String.IsEqual(Skin.String(FakePVRBrowseMode),title)">PlayMedia($INFO[ListItem.FileNameAndPath])</onclick>
 				<content>$VAR[FakePVR535Content]</content>
@@ -466,6 +465,133 @@
 				<left>320</left>
 				<top>830</top>
 				<visible>Control.HasFocus(535)</visible>
+				<include>TitleYearDuration</include>
+			</control>
+		</control>
+	</include>
+	<include name="PVRShowEpisodes">
+		<control type="group">
+			<visible>Window.IsActive(1114) + String.IsEqual(Skin.String(FakePVRLayout),536) | Window.IsActive(1115)</visible>
+			<include>VisibleFadeEffect</include>
+			<control type="panel" id="536">
+				<left>60</left>
+				<top>250</top>
+				<width>1920</width>
+				<height>521</height>
+				<onup condition="Control.IsVisible(60102)">60102</onup>
+				<onup condition="Control.IsVisible(60113)">60113</onup>
+				<onup condition="Control.IsVisible(60112)">60112</onup>
+				<onup condition="Control.IsVisible(19)">19</onup>
+				<onup condition="Control.IsVisible(60104)">60104</onup>
+				<onup condition="Control.IsVisible(60115)">60115</onup>
+				<onup condition="Control.IsVisible(60116)">60116</onup>
+				<onup condition="Control.IsVisible(60106)">60106</onup>
+				<onup condition="Control.IsVisible(60107)">60107</onup>
+				<onup>60101</onup>
+				<onleft>536</onleft>
+				<onright>536</onright>
+				<ondown>6036</ondown>
+				<viewtype label="31034">bigwrap</viewtype>
+				<pagecontrol>6036</pagecontrol>
+				<scrolltime>200</scrolltime>
+				<orientation>horizontal</orientation>
+				<onclick>PlayMedia($INFO[ListItem.FileNameAndPath])</onclick>
+				<content type="videos" target="videos">videodb://tvshows/titles/$INFO[Skin.String(FakePVRSelectedShowDBID)]/-1/?xsp=%7B%22type%22%3A%22episodes%22%2C%22rules%22%3A%7B%22and%22%3A%5B%5D%7D%2C%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22method%22%3A%22episode%22%7D%7D</content>
+				<itemlayout height="100" width="750">
+					<control type="label">
+						<left>180</left>
+						<top>15</top>
+						<width>570</width>
+						<height>96</height>
+						<font>font36</font>
+						<textcolor>listOpaque</textcolor>
+						<selectedcolor>selected</selectedcolor>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label] ($INFO[ListItem.Date])</label>
+					</control>
+					<control type="image">
+						<left>10</left>
+						<top>15</top>
+						<width>150</width>
+						<height>120</height>
+						<aspectratio align="right" aligny="center">keep</aspectratio>
+						<texture background="true" colordiffuse="listOpaque">$VAR[PosterThumb]</texture>
+					</control>
+					<control type="image">
+						<depth>DepthContentPopout</depth>
+						<left>100</left>
+						<top>15</top>
+						<width>30</width>
+						<height>30</height>
+						<aspectratio>keep</aspectratio>
+						<texture colordiffuse="$VAR[posterNoFocus]">$INFO[ListItem.Overlay]</texture>
+					</control>
+				</itemlayout>
+				<focusedlayout height="100" width="750">
+					<control type="label">
+						<left>170</left>
+						<top>0</top>
+						<width>560</width>
+						<height>120</height>
+						<font>font36_bold</font>
+						<textcolor>white</textcolor>
+						<selectedcolor>selected</selectedcolor>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label] ($INFO[ListItem.Date])</label>
+					</control>
+					<control type="image">
+						<left>0</left>
+						<top>5</top>
+						<width>160</width>
+						<height>128</height>
+						<aspectratio align="right" aligny="center">keep</aspectratio>
+						<texture background="true" diffuse="diffuse/folderRounded.png">$VAR[PosterThumb]</texture>
+						<bordertexture border="3">common/folder-focus.png</bordertexture>
+						<bordersize>3</bordersize>
+					</control>
+					<control type="image">
+						<depth>DepthContentPopout</depth>
+						<left>77</left>
+						<top>3</top>
+						<width>40</width>
+						<height>40</height>
+						<aspectratio>keep</aspectratio>
+						<texture>$INFO[ListItem.Overlay]</texture>
+					</control>
+				</focusedlayout>
+			</control>
+			<control type="scrollbar" id="6036">
+				<left>140</left>
+				<top>806</top>
+				<width>1640</width>
+				<height>25</height>
+				<texturesliderbackground border="14,0,14,0">ScrollBarH.png</texturesliderbackground>
+				<texturesliderbar border="14,0,14,0">ScrollBarH_bar.png</texturesliderbar>
+				<texturesliderbarfocus border="14,0,14,0">ScrollBarH_bar_focus.png</texturesliderbarfocus>
+				<textureslidernib>ScrollBarNib.png</textureslidernib>
+				<textureslidernibfocus>ScrollBarNib.png</textureslidernibfocus>
+				<onup>536</onup>
+				<ondown condition="Control.IsVisible(61)">61</ondown>
+				<ondown>9000</ondown>
+				<showonepage>false</showonepage>
+				<orientation>horizontal</orientation>
+				<visible>Window.IsActive(1114) + String.IsEqual(Skin.String(FakePVRLayout),536) | Window.IsActive(1115)</visible>
+			</control>
+			<control type="image">
+				<left>150</left>
+				<top>840</top>
+				<width>140</width>
+				<height>196</height>
+				<visible>Control.HasFocus(536)</visible>
+				<aspectratio>stretch</aspectratio>
+				<texture background="true" diffuse="diffuse/posterRounded.png">$INFO[Container(536).ListItem.Art(tvshow.poster)]</texture>
+			</control>
+			<control type="group">
+				<left>320</left>
+				<top>830</top>
+				<visible>Control.HasFocus(536)</visible>
 				<include>TitleYearDuration</include>
 			</control>
 		</control>

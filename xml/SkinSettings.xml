@@ -1060,10 +1060,10 @@
 						<onclick condition="!String.IsEqual(Skin.String(LibraryPVRMode),playlist)">Skin.SetString(LibraryPVRMode,playlist)</onclick>
 						<visible>Skin.HasSetting(EnableLibraryPVR)</visible>
 						<onup>131</onup>
-						<ondown condition="String.IsEqual(Skin.String(LibraryPVRMode),playlist)">134</ondown>
+						<ondown condition="String.IsEqual(Skin.String(LibraryPVRMode),playlist)">135</ondown>
 						<ondown condition="!String.IsEqual(Skin.String(LibraryPVRMode),playlist)">133</ondown>
 					</control>
-					<!-- Path mode: enter or browse for folder path -->
+					<!-- Path mode controls -->
 					<control type="button" id="133">
 						<width>500</width>
 						<height>40</height>
@@ -1110,65 +1110,57 @@
 						<onclick>RunScript(special://skin/resources/set_pvr_path.py,3)</onclick>
 						<visible>Skin.HasSetting(EnableLibraryPVR) + !String.IsEqual(Skin.String(LibraryPVRMode),playlist)</visible>
 						<onup>137</onup>
+						<ondown>139</ondown>
 					</control>
-					<!-- Playlist mode: configure shows playlist -->
-					<control type="group" id="134">
-						<height>70</height>
+					<!-- Playlist mode controls -->
+					<control type="button" id="135">
+						<width>500</width>
+						<height>60</height>
+						<font>font16</font>
+						<label>Configure Shows Playlist[CR][COLOR=66FFFFFF]Set playlist type to: TV Shows[/COLOR]</label>
+						<label2>$VAR[LibraryPVRShowsStatus]</label2>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>RunScript(special://skin/resources/pvr_playlist_setup.py,TGB_PVR_Shows)</onclick>
 						<visible>Skin.HasSetting(EnableLibraryPVR) + String.IsEqual(Skin.String(LibraryPVRMode),playlist)</visible>
-						<control type="button" id="135">
-							<width>500</width>
-							<height>40</height>
-							<font>font16</font>
-							<label>Configure Shows Playlist</label>
-							<label2>$VAR[LibraryPVRShowsStatus]</label2>
-							<textcolor>99FFFFFF</textcolor>
-							<focusedcolor>white</focusedcolor>
-							<invalidcolor>invalid</invalidcolor>
-							<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
-							<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
-							<onclick>RunScript(special://skin/resources/pvr_playlist_setup.py,TGB_PVR_Shows)</onclick>
-							<onup>132</onup>
-							<ondown>136</ondown>
-						</control>
-						<control type="label">
-							<top>42</top>
-							<width>500</width>
-							<height>25</height>
-							<font>font13</font>
-							<label>Set playlist type to: TV Shows</label>
-							<textcolor>66FFFFFF</textcolor>
-							<align>left</align>
-							<aligny>center</aligny>
-						</control>
+						<onup>132</onup>
+						<ondown>136</ondown>
 					</control>
-					<!-- Playlist mode: configure episodes playlist -->
-					<control type="group">
-						<height>70</height>
+					<control type="button" id="136">
+						<width>500</width>
+						<height>60</height>
+						<font>font16</font>
+						<label>Configure Episodes Playlist[CR][COLOR=66FFFFFF]Set playlist type to: Episodes[/COLOR]</label>
+						<label2>$VAR[LibraryPVREpisodesStatus]</label2>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>RunScript(special://skin/resources/pvr_playlist_setup.py,TGB_PVR_Episodes)</onclick>
 						<visible>Skin.HasSetting(EnableLibraryPVR) + String.IsEqual(Skin.String(LibraryPVRMode),playlist)</visible>
-						<control type="button" id="136">
-							<width>500</width>
-							<height>40</height>
-							<font>font16</font>
-							<label>Configure Episodes Playlist</label>
-							<label2>$VAR[LibraryPVREpisodesStatus]</label2>
-							<textcolor>99FFFFFF</textcolor>
-							<focusedcolor>white</focusedcolor>
-							<invalidcolor>invalid</invalidcolor>
-							<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
-							<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
-							<onclick>RunScript(special://skin/resources/pvr_playlist_setup.py,TGB_PVR_Episodes)</onclick>
-							<onup>135</onup>
-						</control>
-						<control type="label">
-							<top>42</top>
-							<width>500</width>
-							<height>25</height>
-							<font>font13</font>
-							<label>Set playlist type to: Episodes</label>
-							<textcolor>66FFFFFF</textcolor>
-							<align>left</align>
-							<aligny>center</aligny>
-						</control>
+						<onup>135</onup>
+						<ondown>139</ondown>
+					</control>
+					<!-- One-Click Remove & Delete -->
+					<control type="radiobutton" id="139">
+						<width>500</width>
+						<height>40</height>
+						<font>font16</font>
+						<label>One-Click Remove &amp; Delete</label>
+						<textcolor>99FFFFFF</textcolor>
+						<focusedcolor>white</focusedcolor>
+						<invalidcolor>invalid</invalidcolor>
+						<texturefocus border="0,2,0,2" colordiffuse="33000000">common/blankWhite.png</texturefocus>
+						<texturenofocus border="0,2,0,2" colordiffuse="00FFFFFF">MenuItemNF.png</texturenofocus>
+						<onclick>Skin.ToggleSetting(LibraryPVRQuickDelete)</onclick>
+						<selected>Skin.HasSetting(LibraryPVRQuickDelete)</selected>
+						<visible>Skin.HasSetting(EnableLibraryPVR)</visible>
+						<onup condition="!String.IsEqual(Skin.String(LibraryPVRMode),playlist)">138</onup>
+						<onup condition="String.IsEqual(Skin.String(LibraryPVRMode),playlist)">136</onup>
 					</control>
 				</control>
 				<control type="scrollbar" id="62">

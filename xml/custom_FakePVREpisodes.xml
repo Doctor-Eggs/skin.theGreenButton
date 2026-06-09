@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="1115">
+	<defaultcontrol always="true">536</defaultcontrol>
+	<onload>Skin.SetString(FakePVR1115Loaded,0)</onload>
+	<onload>SetFocus(60113,1,absolute)</onload>
+	<onload>SetFocus(536)</onload>
+	<onload>Skin.SetString(FakePVR1115Loaded,1)</onload>
+	<onback>Close</onback>
+	<controls>
+		<include>CommonBackground</include>
+		<include>ContentPanelBackgrounds</include>
+		<control type="group">
+			<include>Window_OpenClose_Animation</include>
+			<include>PVRShowEpisodes</include>
+		</control>
+		<control type="group">
+			<depth>DepthFooter</depth>
+			<include>CommonPageCount</include>
+			<include>CommonNowPlaying</include>
+			<visible>true</visible>
+		</control>
+		<include>MainWindowMouseButtons</include>
+		<include>BehindDialogFadeOut</include>
+		<include>ScrollOffsetLabel</include>
+		<include content="CommonWindowHeader">
+			<param name="Icon" value="icon_video" />
+			<param name="Label" value="recorded tv" />
+			<param name="ShowLabel2" value="1" />
+		</include>
+		<include>FakePVRHeader</include>
+	</controls>
+</window>
