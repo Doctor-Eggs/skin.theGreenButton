@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts>
+	<shortcut>
+		<defaultID>recordedtv</defaultID>
+		<label>recorded tv</label>
+		<label2></label2>
+		<icon>homeIcons/recordedTV.png</icon>
+		<thumb />
+		<action>ActivateWindow(TVRecordings,pvr://recordings/tv/active/,return)</action>
+		<property name="unfocusedIcon">homeIcons/recordedTVNoFocus.png</property>
+		<visible>!Skin.HasSetting(EnableLibraryPVR)</visible>
+	</shortcut>
+	<shortcut>
+		<defaultID>fakepvrrecordedtv</defaultID>
+		<label>recorded tv</label>
+		<label2></label2>
+		<icon>homeIcons/recordedTV.png</icon>
+		<thumb />
+		<action>ActivateWindow(1114)</action>
+		<property name="unfocusedIcon">homeIcons/recordedTVNoFocus.png</property>
+		<visible>Skin.HasSetting(EnableLibraryPVR)</visible>
+	</shortcut>
+	<shortcut>
+		<defaultID>channels</defaultID>
+		<label>channels</label>
+		<label2></label2>
+		<icon>homeIcons/channels.png</icon>
+		<thumb />
+		<action>ActivateWindow(TVChannels)</action>
+		<property name="unfocusedIcon">homeIcons/channelsNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>guide</defaultID>
+		<label>guide</label>
+		<label2></label2>
+		<icon>homeIcons/guide.png</icon>
+		<thumb />
+		<action>ActivateWindow(TVGuide)</action>
+		<property name="unfocusedIcon">homeIcons/guideNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>livetv</defaultID>
+		<label>live tv</label>
+		<label2></label2>
+		<icon>homeIcons/liveTV.png</icon>
+		<thumb />
+		<action>Action(PlayPvrTV)</action>
+		<property name="unfocusedIcon">homeIcons/liveTVNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>livetvsetup</defaultID>
+		<label>live tv setup</label>
+		<label2></label2>
+		<icon>homeIcons/liveTVSettings.png</icon>
+		<thumb />
+		<action>ActivateWindow(10021)</action>
+		<property name="unfocusedIcon">homeIcons/settingsNoFocus.png</property>
+	</shortcut>
+</shortcuts>

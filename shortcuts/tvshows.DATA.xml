@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts>
+	<shortcut>
+		<defaultID>tvshowsearch</defaultID>
+		<label>search</label>
+		<label2></label2>
+		<icon>homeIcons/searchTVLibrary.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,TvShowTitles,return)</action>
+		<property name="unfocusedIcon">homeIcons/searchNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>tvserieslibrary</defaultID>
+		<label>tv series library</label>
+		<label2></label2>
+		<icon>homeIcons/TVLibrary.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,TvShowTitles,return)</action>
+		<property name="unfocusedIcon">homeIcons/TVLibraryNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>tvshowpeople</defaultID>
+		<label>person library</label>
+		<label2></label2>
+		<icon>homeIcons/people.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,TvShowActors,return)</action>
+		<property name="unfocusedIcon">homeIcons/peopleNoFocus.png</property>
+	</shortcut>
+</shortcuts>

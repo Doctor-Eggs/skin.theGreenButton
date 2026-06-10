@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts>
+	<shortcut>
+		<defaultID>moviesearch</defaultID>
+		<label>search</label>
+		<label2></label2>
+		<icon>homeIcons/searchMovies.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,videodb://movies/titles/,return)</action>
+		<property name="unfocusedIcon">homeIcons/searchNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>movielibrary</defaultID>
+		<label>movie library</label>
+		<label2></label2>
+		<icon>homeIcons/movieLibrary.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,videodb://movies/titles/,return)</action>
+		<property name="unfocusedIcon">homeIcons/movieLibraryNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>intheaters</defaultID>
+		<label>in theaters</label>
+		<label2></label2>
+		<icon>homeIcons/inTheaters.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,plugin://script.embuary.info/movie/now_playing,return)</action>
+		<property name="unfocusedIcon">homeIcons/inTheatersNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>peoplelibrary</defaultID>
+		<label>person library</label>
+		<label2></label2>
+		<icon>homeIcons/people.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,MovieActors,return)</action>
+		<property name="unfocusedIcon">homeIcons/peopleNoFocus.png</property>
+	</shortcut>
+</shortcuts>

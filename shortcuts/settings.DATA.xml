@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts>
+	<shortcut>
+		<defaultID>power</defaultID>
+		<label>power</label>
+		<label2></label2>
+		<icon>homeIcons/power.png</icon>
+		<thumb />
+		<action>ActivateWindow(ShutdownMenu)</action>
+		<property name="unfocusedIcon">homeIcons/powerNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>allsettings</defaultID>
+		<label>all settings</label>
+		<label2></label2>
+		<icon>homeIcons/allSettings.png</icon>
+		<thumb />
+		<action>ActivateWindow(10004)</action>
+		<property name="unfocusedIcon">homeIcons/allSettingsNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>skinsettings</defaultID>
+		<label>skin settings</label>
+		<label2></label2>
+		<icon>homeIcons/skinSettings.png</icon>
+		<thumb />
+		<action>ActivateWindow(10035)</action>
+		<property name="unfocusedIcon">homeIcons/skinSettingsNoFocus.png</property>
+	</shortcut>
+</shortcuts>

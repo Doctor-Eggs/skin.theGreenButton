@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts>
+	<shortcut>
+		<defaultID>addgames</defaultID>
+		<label>add games</label>
+		<label2></label2>
+		<icon>homeIcons/addGames.png</icon>
+		<thumb />
+		<action>ActivateWindow(Games)</action>
+		<property name="unfocusedIcon">homeIcons/addGamesNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>playgames</defaultID>
+		<label>play games</label>
+		<label2></label2>
+		<icon>homeIcons/playGames.png</icon>
+		<thumb />
+		<action>ActivateWindow(Games)</action>
+		<property name="unfocusedIcon">homeIcons/playGamesNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>gameaddons</defaultID>
+		<label>game add-ons</label>
+		<label2></label2>
+		<icon>homeIcons/gameAddons.png</icon>
+		<thumb />
+		<action>ActivateWindow(addonbrowser,addons://user/xbmc.addon.game/)</action>
+		<property name="unfocusedIcon">homeIcons/gameAddonsNoFocus.png</property>
+	</shortcut>
+</shortcuts>

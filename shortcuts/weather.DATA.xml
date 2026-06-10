@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts>
+	<shortcut>
+		<defaultID>weatherlocation</defaultID>
+		<label>weather location</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>Weather.LocationNext</action>
+	</shortcut>
+	<shortcut>
+		<defaultID>viewweather</defaultID>
+		<label>view weather</label>
+		<label2></label2>
+		<icon>homeIcons/weather.png</icon>
+		<thumb />
+		<action>ActivateWindow(Weather)</action>
+		<property name="unfocusedIcon">homeIcons/weatherNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>weatheraddons</defaultID>
+		<label>weather add-ons</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(addonbrowser,addons://user/weather/)</action>
+	</shortcut>
+</shortcuts>

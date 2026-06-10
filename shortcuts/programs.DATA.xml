@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts>
+	<shortcut>
+		<defaultID>downloadaddons</defaultID>
+		<label>download add-ons</label>
+		<label2></label2>
+		<icon>homeIcons/download.png</icon>
+		<thumb />
+		<action>ActivateWindow(addonbrowser,addons://install/)</action>
+		<property name="unfocusedIcon">homeIcons/downloadNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>videoaddons</defaultID>
+		<label>video add-ons</label>
+		<label2></label2>
+		<icon>homeIcons/videoAddons.png</icon>
+		<thumb />
+		<action>ActivateWindow(addonbrowser,addons://user/xbmc.addon.video/)</action>
+		<property name="unfocusedIcon">homeIcons/videoAddonsNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>programaddons</defaultID>
+		<label>program add-ons</label>
+		<label2></label2>
+		<icon>homeIcons/programAddons.png</icon>
+		<thumb />
+		<action>ActivateWindow(addonbrowser,addons://user/xbmc.addon.executable/)</action>
+		<property name="unfocusedIcon">homeIcons/programAddonsNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>musicaddons</defaultID>
+		<label>music add-ons</label>
+		<label2></label2>
+		<icon>homeIcons/musicAddons.png</icon>
+		<thumb />
+		<action>ActivateWindow(addonbrowser,addons://user/xbmc.addon.audio/)</action>
+		<property name="unfocusedIcon">homeIcons/musicAddonsNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>gameaddons</defaultID>
+		<label>game add-ons</label>
+		<label2></label2>
+		<icon>homeIcons/gameAddons.png</icon>
+		<thumb />
+		<action>ActivateWindow(addonbrowser,addons://user/xbmc.addon.game/)</action>
+		<property name="unfocusedIcon">homeIcons/gameAddonsNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>alladdons</defaultID>
+		<label>all add-ons</label>
+		<label2></label2>
+		<icon>homeIcons/addons.png</icon>
+		<thumb />
+		<action>ActivateWindow(addonbrowser,addons://user/all/)</action>
+		<property name="unfocusedIcon">homeIcons/addonsNoFocus.png</property>
+	</shortcut>
+</shortcuts>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts>
+	<shortcut>
+		<defaultID>weather</defaultID>
+		<label>Weather</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(Weather)</action>
+		<property name="id">weather</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>pictures</defaultID>
+		<label>Pictures</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(Pictures)</action>
+		<property name="id">pictures</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>games</defaultID>
+		<label>Games</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(Games)</action>
+		<property name="id">games</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>livetv</defaultID>
+		<label>TV</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(TVChannels)</action>
+		<property name="id">livetv</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>videos</defaultID>
+		<label>Videos</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(Videos,root)</action>
+		<property name="id">videos</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>movies</defaultID>
+		<label>Movies</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(Videos,MovieTitles,return)</action>
+		<property name="id">movies</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>tvshows</defaultID>
+		<label>TV Shows</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(Videos,TVShowTitles,return)</action>
+		<property name="id">tvshows</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>music</defaultID>
+		<label>Music</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(Music,root)</action>
+		<property name="id">music</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>programs</defaultID>
+		<label>Add-Ons</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(Programs,Addons,return)</action>
+		<property name="id">programs</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>favourites</defaultID>
+		<label>Favourites</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(Favourites)</action>
+		<property name="id">favourites</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>settings</defaultID>
+		<label>System</label>
+		<label2></label2>
+		<icon></icon>
+		<thumb />
+		<action>ActivateWindow(Settings)</action>
+		<property name="id">settings</property>
+	</shortcut>
+</shortcuts>

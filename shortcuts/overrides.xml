@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overrides>
+
+	<!-- focusId: all skin-shortcuts groups now share fixedlist 90000.
+	     Hardcoded special lists (add-ons=90001, favourites=90016) keep their own IDs.
+	     Fallback 0 = no submenu (e.g. play disc). -->
+	<override group="mainmenu" defaultID="livetv">
+		<property name="focusId">$NUMBER[90000]</property>
+	</override>
+	<override group="mainmenu" defaultID="videos">
+		<property name="focusId">$NUMBER[90000]</property>
+	</override>
+	<override group="mainmenu" defaultID="movies">
+		<property name="focusId">$NUMBER[90000]</property>
+	</override>
+	<override group="mainmenu" defaultID="tvshows">
+		<property name="focusId">$NUMBER[90000]</property>
+	</override>
+	<override group="mainmenu" defaultID="music">
+		<property name="focusId">$NUMBER[90000]</property>
+	</override>
+	<override group="mainmenu" defaultID="programs">
+		<property name="focusId">$NUMBER[90001]</property>
+	</override>
+	<override group="mainmenu" defaultID="favourites">
+		<property name="focusId">$NUMBER[90016]</property>
+	</override>
+	<override group="mainmenu" defaultID="settings">
+		<property name="focusId">$NUMBER[90000]</property>
+	</override>
+	<override group="mainmenu" defaultID="weather">
+		<property name="focusId">$NUMBER[90000]</property>
+	</override>
+	<override group="mainmenu" defaultID="pictures">
+		<property name="focusId">$NUMBER[90000]</property>
+	</override>
+	<override group="mainmenu" defaultID="games">
+		<property name="focusId">$NUMBER[90000]</property>
+	</override>
+
+	<propertyfallback property="focusId">$NUMBER[0]</propertyfallback>
+
+	<!-- ============================================================
+	     Submenu items: clear the category label2 that skin shortcuts
+	     injects ("Common menu item", etc.) and set proper homeIcons
+	     for items that had generic Kodi default icons.
+	     NOTE: weather items have no defaultID — clear their label2
+	     directly in the skin shortcuts editor.
+	     ============================================================ -->
+
+	<!-- Pictures group -->
+	<override group="pictures" defaultID="1039">
+		<label2 />
+		<icon>homeIcons/pictureAddons.png</icon>
+	</override>
+
+	<!-- Videos group -->
+	<override group="videos" defaultID="musicvideos">
+		<label2 />
+	</override>
+	<override group="videos" defaultID="744">
+		<label2 />
+		<icon>homeIcons/files.png</icon>
+	</override>
+	<override group="videos" defaultID="1037">
+		<label2 />
+		<icon>homeIcons/videoAddons.png</icon>
+	</override>
+
+	<!-- Movies group -->
+	<override group="movies" defaultID="20386">
+		<label2 />
+		<icon>homeIcons/movieLibrary.png</icon>
+	</override>
+	<override group="movies" defaultID="20434">
+		<label2 />
+		<icon>homeIcons/movieLibrary.png</icon>
+	</override>
+	<override group="movies" defaultID="369">
+		<label2 />
+		<icon>homeIcons/movieLibrary.png</icon>
+	</override>
+	<override group="movies" defaultID="135">
+		<label2 />
+		<icon>homeIcons/movieLibrary.png</icon>
+	</override>
+	<override group="movies" defaultID="562">
+		<label2 />
+		<icon>homeIcons/movieLibrary.png</icon>
+	</override>
+	<override group="movies" defaultID="344">
+		<label2 />
+		<icon>homeIcons/people.png</icon>
+	</override>
+
+	<!-- TV shows group -->
+	<override group="tvshows" defaultID="20387">
+		<label2 />
+		<icon>homeIcons/TVLibrary.png</icon>
+	</override>
+	<override group="tvshows" defaultID="369">
+		<label2 />
+		<icon>homeIcons/TVLibrary.png</icon>
+	</override>
+	<override group="tvshows" defaultID="135">
+		<label2 />
+		<icon>homeIcons/TVLibrary.png</icon>
+	</override>
+	<override group="tvshows" defaultID="562">
+		<label2 />
+		<icon>homeIcons/TVLibrary.png</icon>
+	</override>
+	<override group="tvshows" defaultID="344">
+		<label2 />
+		<icon>homeIcons/people.png</icon>
+	</override>
+
+	<!-- Music group -->
+	<override group="music" defaultID="744">
+		<label2 />
+		<icon>homeIcons/files.png</icon>
+	</override>
+	<override group="music" defaultID="15100">
+		<label2 />
+		<icon>homeIcons/songs.png</icon>
+	</override>
+	<override group="music" defaultID="1038">
+		<label2 />
+		<icon>homeIcons/musicAddons.png</icon>
+	</override>
+
+	<!-- System group -->
+	<override group="system" defaultID="7">
+		<label2 />
+		<icon>homeIcons/files.png</icon>
+	</override>
+	<override group="system" defaultID="13200">
+		<label2 />
+		<icon>homeIcons/allSettings.png</icon>
+	</override>
+	<override group="system" defaultID="10007">
+		<label2 />
+		<icon>homeIcons/allSettings.png</icon>
+	</override>
+	<override group="system" defaultID="14111">
+		<label2 />
+		<icon>homeIcons/allSettings.png</icon>
+	</override>
+
+	<!-- ============================================================
+	     unfocusedIcon defaults: skin shortcuts reads these via
+	     <propertydefault> and injects them into the generated
+	     script-skinshortcuts-includes.xml for every user automatically.
+	     ============================================================ -->
+
+	<!-- Weather group -->
+	<propertydefault group="weather" labelID="viewweather" property="unfocusedIcon">homeIcons/weatherNoFocus.png</propertydefault>
+
+	<!-- Pictures group -->
+	<propertydefault group="pictures" labelID="addpictures" property="unfocusedIcon">homeIcons/addPicturesNoFocus.png</propertydefault>
+	<propertydefault group="pictures" labelID="viewpictures" property="unfocusedIcon">homeIcons/viewPicturesNoFocus.png</propertydefault>
+	<propertydefault group="pictures" labelID="pictureadd-ons" property="unfocusedIcon">homeIcons/pictureAddonsNoFocus.png</propertydefault>
+
+	<!-- Games group -->
+	<propertydefault group="games" labelID="addgames" property="unfocusedIcon">homeIcons/addGamesNoFocus.png</propertydefault>
+	<propertydefault group="games" labelID="playgames" property="unfocusedIcon">homeIcons/playGamesNoFocus.png</propertydefault>
+	<propertydefault group="games" labelID="gameadd-ons" property="unfocusedIcon">homeIcons/gameAddonsNoFocus.png</propertydefault>
+
+	<!-- TV group -->
+	<propertydefault group="tv" labelID="recordedtv" property="unfocusedIcon">homeIcons/recordedTVNoFocus.png</propertydefault>
+	<propertydefault group="tv" labelID="recordedtv--0" property="unfocusedIcon">homeIcons/recordedTVNoFocus.png</propertydefault>
+	<propertydefault group="tv" labelID="channels" property="unfocusedIcon">homeIcons/channelsNoFocus.png</propertydefault>
+	<propertydefault group="tv" labelID="guide" property="unfocusedIcon">homeIcons/guideNoFocus.png</propertydefault>
+	<propertydefault group="tv" labelID="livetv" property="unfocusedIcon">homeIcons/liveTVNoFocus.png</propertydefault>
+	<propertydefault group="tv" labelID="livetvsetup" property="unfocusedIcon">homeIcons/settingsNoFocus.png</propertydefault>
+
+	<!-- Videos group -->
+	<propertydefault group="videos" labelID="files" property="unfocusedIcon">homeIcons/filesNoFocus.png</propertydefault>
+	<propertydefault group="videos" labelID="playlists" property="unfocusedIcon">homeIcons/playlistNoFocus.png</propertydefault>
+	<propertydefault group="videos" labelID="videoadd-ons" property="unfocusedIcon">homeIcons/videoAddonsNoFocus.png</propertydefault>
+	<propertydefault group="videos" labelID="movies" property="unfocusedIcon">homeIcons/movieLibraryNoFocus.png</propertydefault>
+	<propertydefault group="videos" labelID="tvshows" property="unfocusedIcon">homeIcons/TVLibraryNoFocus.png</propertydefault>
+
+	<!-- Movies group -->
+	<propertydefault group="movies" labelID="search" property="unfocusedIcon">homeIcons/searchNoFocus.png</propertydefault>
+	<propertydefault group="movies" labelID="movielibrary" property="unfocusedIcon">homeIcons/movieLibraryNoFocus.png</propertydefault>
+	<!-- labelID is derived from the plugin URL path, not the label text -->
+	<propertydefault group="movies" labelID="script.embuary.info/movie/now_playing" property="unfocusedIcon">homeIcons/inTheatersNoFocus.png</propertydefault>
+	<propertydefault group="movies" labelID="personlibrary" property="unfocusedIcon">homeIcons/peopleNoFocus.png</propertydefault>
+
+	<!-- TV Shows group -->
+	<propertydefault group="tvshows" labelID="search" property="unfocusedIcon">homeIcons/searchNoFocus.png</propertydefault>
+	<propertydefault group="tvshows" labelID="tvserieslibrary" property="unfocusedIcon">homeIcons/TVLibraryNoFocus.png</propertydefault>
+	<propertydefault group="tvshows" labelID="personlibrary" property="unfocusedIcon">homeIcons/peopleNoFocus.png</propertydefault>
+
+	<!-- Music group -->
+	<propertydefault group="music" labelID="files" property="unfocusedIcon">homeIcons/filesNoFocus.png</propertydefault>
+	<propertydefault group="music" labelID="musiclibrary" property="unfocusedIcon">homeIcons/songsNoFocus.png</propertydefault>
+	<propertydefault group="music" labelID="playlists" property="unfocusedIcon">homeIcons/playlistNoFocus.png</propertydefault>
+	<propertydefault group="music" labelID="musicadd-ons" property="unfocusedIcon">homeIcons/musicAddonsNoFocus.png</propertydefault>
+	<propertydefault group="music" labelID="radio" property="unfocusedIcon">homeIcons/radioNoFocus.png</propertydefault>
+
+	<!-- Add-Ons group -->
+	<propertydefault group="add-ons" labelID="downloadadd-ons" property="unfocusedIcon">homeIcons/downloadNoFocus.png</propertydefault>
+	<propertydefault group="add-ons" labelID="videoadd-ons" property="unfocusedIcon">homeIcons/videoAddonsNoFocus.png</propertydefault>
+	<propertydefault group="add-ons" labelID="programadd-ons" property="unfocusedIcon">homeIcons/programAddonsNoFocus.png</propertydefault>
+	<propertydefault group="add-ons" labelID="musicadd-ons" property="unfocusedIcon">homeIcons/musicAddonsNoFocus.png</propertydefault>
+	<propertydefault group="add-ons" labelID="gameadd-ons" property="unfocusedIcon">homeIcons/gameAddonsNoFocus.png</propertydefault>
+	<propertydefault group="add-ons" labelID="alladd-ons" property="unfocusedIcon">homeIcons/addonsNoFocus.png</propertydefault>
+
+	<!-- Favourites group -->
+	<propertydefault group="favourites" labelID="allfavorites" property="unfocusedIcon">homeIcons/favouritesNoFocus.png</propertydefault>
+
+	<!-- System group -->
+	<propertydefault group="system" labelID="power" property="unfocusedIcon">homeIcons/powerNoFocus.png</propertydefault>
+	<propertydefault group="system" labelID="allsettings" property="unfocusedIcon">homeIcons/allSettingsNoFocus.png</propertydefault>
+	<propertydefault group="system" labelID="skinsettings" property="unfocusedIcon">homeIcons/skinSettingsNoFocus.png</propertydefault>
+
+</overrides>

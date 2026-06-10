@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts>
+	<shortcut>
+		<defaultID>files</defaultID>
+		<label>files</label>
+		<label2></label2>
+		<icon>homeIcons/files.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,sources://video/,return)</action>
+		<property name="unfocusedIcon">homeIcons/filesNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>playlists</defaultID>
+		<label>playlists</label>
+		<label2></label2>
+		<icon>homeIcons/playlist.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,special://videoplaylists/,return)</action>
+		<property name="unfocusedIcon">homeIcons/playlistNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>videoaddons</defaultID>
+		<label>video add-ons</label>
+		<label2></label2>
+		<icon>homeIcons/videoAddons.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,addons://sources/video/)</action>
+		<property name="unfocusedIcon">homeIcons/videoAddonsNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>movies</defaultID>
+		<label>movies</label>
+		<label2></label2>
+		<icon>homeIcons/movieLibrary.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,videodb://movies/titles/,return)</action>
+		<property name="unfocusedIcon">homeIcons/movieLibraryNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>tvshows</defaultID>
+		<label>tv shows</label>
+		<label2></label2>
+		<icon>homeIcons/TVLibrary.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,TvShowTitles,return)</action>
+		<property name="unfocusedIcon">homeIcons/TVLibraryNoFocus.png</property>
+	</shortcut>
+</shortcuts>

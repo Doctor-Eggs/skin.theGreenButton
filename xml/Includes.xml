@@ -15,6 +15,7 @@
 	<include file="IncludesHomeMenuItems.xml" />
 	<include file="IncludesPVR.xml" />
 	<include file="IncludesBackgroundBuilding.xml" />
+	<include file="script-skinshortcuts-includes.xml" />
 	<!-- General -->
 	<expression name="updateContainer">[!String.IsEqual(Container.FolderPath,Control.GetLabel(90003))]</expression>
 	<!-- CONSTANTS -->
@@ -42,6 +43,16 @@
 	<constant name="DepthSideBlade">0.15</constant>
 	<expression name="PlayerSeek">[Player.Seeking | [!Player.Paused + Player.DisplayAfterSeek] | !String.IsEmpty(Player.SeekNumeric) | Player.Paused]</expression>
 	<!-- VARIABLES -->
+	<!-- Maps focused main-menu item's submenuVisibility to its sub-panel control ID.
+	     $NUMBER[] prevents Kodi from localizing the numeric string.
+	     Read back via a hidden label (id=8001) in Home.xml for SetFocus.
+	     All skin-shortcuts-managed groups share fixedlist 90000 (skinshortcuts-submenu).
+	     Only the three hardcoded special lists keep their own IDs. -->
+	<variable name="subMenuFocusId">
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),nowplaying)">$NUMBER[90017]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),playdisc)">$NUMBER[0]</value>
+		<value>$NUMBER[90000]</value>
+	</variable>
 	<variable name="contentType">
 		<value condition="Container.Content(movies)">movie</value>
 		<value condition="Container.Content(sets)">movie</value>

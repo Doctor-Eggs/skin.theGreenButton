@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
 	<defaultcontrol always="true">9000</defaultcontrol>
-	<onunload condition="Container(9000).Hasfocus(10) | Container(9000).Hasfocus(11) | ControlGroup(9010).HasFocus | ControlGroup(9016).HasFocus | ControlGroup(9017).HasFocus">SetProperty(VideosDirectLink,True)</onunload>
+	<onload>RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;group=mainmenu)</onload>
+	<onunload condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),movies) | String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows) | ControlGroup(9010).HasFocus | ControlGroup(9016).HasFocus | ControlGroup(9017).HasFocus">SetProperty(VideosDirectLink,True)</onunload>
 	<onunload condition="ControlGroup(9011).HasFocus">SetProperty(MusicDirectLink,True)</onunload>
-	<onunload condition="Control.HasFocus(9000) + Container(9000).Hasfocus(2)">ClearProperty(VideosDirectLink)</onunload>
-	<onunload condition="Control.HasFocus(9000) + Container(9000).Hasfocus(3)">ClearProperty(MusicDirectLink)</onunload>
+	<onunload condition="Control.HasFocus(9000) + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),videos)">ClearProperty(VideosDirectLink)</onunload>
+	<onunload condition="Control.HasFocus(9000) + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),music)">ClearProperty(MusicDirectLink)</onunload>
 	<controls>
 		<control type="list" id="90160">
 			<left>-10</left>
@@ -553,252 +554,25 @@
 			</animation>
 
 
-			<control type="fixedlist" id="90007">
-				<top>430</top>
+			<!-- Single fixedlist for all skin-shortcuts-managed submenus.
+			     Items in skinshortcuts-submenu each carry their own combined visible condition
+			     (group check + profile check in one expression), so only the right group's
+			     items appear when the corresponding main-menu item is focused. -->
+			<control type="fixedlist" id="90000">
 				<include>HomeSubMenuBase</include>
 				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(7)</visible>
+				<!-- First item has no items above it so its title sits higher — pull submenu up 100px -->
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<!-- Last item has no items below it so its title sits lower — push submenu down 100px -->
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
 				<content>
-					<item id="1">
-						<label>weather location</label>
-						<onclick>Weather.LocationNext</onclick>
-					</item>
-					<item id="2">
-						<label>view weather</label>
-						<onclick condition="!String.IsEmpty(Weather.Plugin)">ActivateWindow(Weather)</onclick>
-						<onclick condition="String.IsEmpty(Weather.Plugin)">ActivateWindow(servicesettings,weather)</onclick>
-						<icon>homeIcons/weather.png</icon>
-						<property name="unfocusedIcon">homeIcons/weatherNoFocus.png</property>
-					</item>
-					<item id="3">
-						<label>weather add-ons</label>
-						<onclick>ActivateWindow(addonbrowser,addons://user/weather/)</onclick>
-					</item>
-				</content>
-			</control>
-			<control type="fixedlist" id="90004">
-				<include>HomeSubMenuBase</include>
-				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(4)</visible>
-				<content>
-					<item id="1">
-						<label>add pictures</label>
-						<icon>homeIcons/addPictures.png</icon>
-						<property name="unfocusedIcon">homeIcons/addPicturesNoFocus.png</property>
-					</item>
-					<item id="2">
-						<label>view pictures</label>
-						<icon>homeIcons/viewPictures.png</icon>
-						<property name="unfocusedIcon">homeIcons/viewPicturesNoFocus.png</property>
-					</item>
-					<item id="3">
-						<label>picture add-ons</label>
-						<icon>homeIcons/pictureAddons.png</icon>
-						<property name="unfocusedIcon">homeIcons/pictureAddonsNoFocus.png</property>
-						<onclick>ActivateWindow(addonbrowser,addons://user/xbmc.addon.image/)</onclick>
-					</item>
-				</content>
-			</control>
-			<control type="fixedlist" id="90014">
-				<include>HomeSubMenuBase</include>
-				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(14)</visible>
-				<content>
-					<item id="1">
-						<label>add games</label>
-						<icon>homeIcons/addGames.png</icon>
-						<property name="unfocusedIcon">homeIcons/addGamesNoFocus.png</property>
-					</item>
-					<item id="2">
-						<label>play games</label>
-						<icon>homeIcons/playGames.png</icon>
-						<property name="unfocusedIcon">homeIcons/playGamesNoFocus.png</property>
-					</item>
-					<item id="3">
-						<label>game add-ons</label>
-						<icon>homeIcons/gameAddons.png</icon>
-						<property name="unfocusedIcon">homeIcons/gameAddonsNoFocus.png</property>
-					</item>
-				</content>
-			</control>
-			<control type="fixedlist" id="90012">
-				<include>HomeSubMenuBase</include>
-				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(12)</visible>
-				<content>
-					<item id="1">
-						<label>recorded tv</label>
-						<onclick condition="Skin.HasSetting(EnableLibraryPVR)">Skin.SetString(FakePVRBrowseMode,date_recorded)</onclick>
-						<onclick condition="Skin.HasSetting(EnableLibraryPVR)">Skin.SetString(FakePVRLayout,$INFO[Skin.String(FakePVRViewDateRecorded)])</onclick>
-						<onclick condition="Skin.HasSetting(EnableLibraryPVR)">ActivateWindow(1114)</onclick>
-						<onclick condition="!Skin.HasSetting(EnableLibraryPVR)">ActivateWindow(TVRecordings,pvr://recordings/tv/active/,return)</onclick>
-						<icon>homeIcons/recordedTV.png</icon>
-						<property name="unfocusedIcon">homeIcons/recordedTVNoFocus.png</property>
-					</item>
-					<item id="2">
-						<label>channels</label>
-						<onclick>ActivateWindow(TVChannels)</onclick>
-						<icon>homeIcons/channels.png</icon>
-						<property name="unfocusedIcon">homeIcons/channelsNoFocus.png</property>
-					</item>
-					<item id="3">
-						<label>guide</label>
-						<onclick>ActivateWindow(TVGuide)</onclick>
-						<icon>homeIcons/guide.png</icon>
-						<property name="unfocusedIcon">homeIcons/guideNoFocus.png</property>
-					</item>
-					<item id="4">
-						<label>live tv</label>
-						<onclick>Action(PlayPvrTV)</onclick>
-						<icon>homeIcons/liveTV.png</icon>
-						<property name="unfocusedIcon">homeIcons/liveTVNoFocus.png</property>
-					</item>
-					<item id="5">
-						<label>live tv setup</label>
-						<icon>homeIcons/liveTVSettings.png</icon>
-						<property name="unfocusedIcon">homeIcons/settingsNoFocus.png</property>
-						<onclick>ActivateWindow(10021)</onclick>
-					</item>
-				</content>
-			</control>
-			<control type="fixedlist" id="90002">
-				<include>HomeSubMenuBase</include>
-				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(2)</visible>
-				<content>
-					<item id="1">
-						<label>files</label>
-						<onclick>ActivateWindow(Videos,sources://video/,return)</onclick>
-						<icon>homeIcons/files.png</icon>
-						<property name="unfocusedIcon">homeIcons/filesNoFocus.png</property>
-					</item>
-					<item id="2">
-						<label>playlists</label>
-						<onclick>ActivateWindow(Videos,special://videoplaylists/,return)</onclick>
-						<icon>homeIcons/playlist.png</icon>
-						<property name="unfocusedIcon">homeIcons/playlistNoFocus.png</property>
-					</item>
-					<item id="3">
-						<label>video add-ons</label>
-						<onclick>ActivateWindow(Videos,addons://sources/video/)</onclick>
-						<icon>homeIcons/videoAddons.png</icon>
-						<property name="unfocusedIcon">homeIcons/videoAddonsNoFocus.png</property>
-					</item>
-					<item id="4">
-						<label>movies</label>
-						<onclick>ActivateWindow(Videos,videodb://movies/titles/,return)</onclick>
-						<icon>homeIcons/movieLibrary.png</icon>
-						<property name="unfocusedIcon">homeIcons/movieLibraryNoFocus.png</property>
-					</item>
-					<item id="5">
-						<label>tv shows</label>
-						<onclick>ActivateWindow(Videos,TvShowTitles,return)</onclick>
-						<icon>homeIcons/TVLibrary.png</icon>
-						<property name="unfocusedIcon">homeIcons/TVLibraryNoFocus.png</property>
-					</item>
-				</content>
-			</control>
-			<control type="fixedlist" id="90010">
-				<include>HomeSubMenuBase</include>
-				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(10)</visible>
-				<content>
-					<item id="1">
-						<label>search</label>
-						<icon>homeIcons/searchMovies.png</icon>
-						<property name="unfocusedIcon">homeIcons/searchNoFocus.png</property>
-					</item>
-					<item id="2">
-						<label>movie library</label>
-						<onclick>ActivateWindow(Videos,videodb://movies/titles/,return)</onclick>
-						<icon>homeIcons/movieLibrary.png</icon>
-						<property name="unfocusedIcon">homeIcons/movieLibraryNoFocus.png</property>
-					</item>
-					<item id="3">
-						<label>in theaters</label>
-						<onclick>ActivateWindow(Videos,plugin://script.embuary.info/movie/now_playing,return)</onclick>
-						<icon>homeIcons/inTheaters.png</icon>
-						<property name="unfocusedIcon">homeIcons/inTheatersNoFocus.png</property>
-					</item>
-					<item id="4">
-						<label>person library</label>
-						<onclick>ActivateWindow(Videos,MovieActors,return)</onclick>
-						<icon>homeIcons/people.png</icon>
-						<property name="unfocusedIcon">homeIcons/peopleNoFocus.png</property>
-					</item>
-				</content>
-			</control>
-			<control type="fixedlist" id="90011">
-				<include>HomeSubMenuBase</include>
-				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(11)</visible>
-				<content>
-					<item id="1">
-						<label>search</label>
-						<icon>homeIcons/searchTVLibrary.png</icon>
-						<property name="unfocusedIcon">homeIcons/searchNoFocus.png</property>
-					</item>
-					<item id="2">
-						<label>tv series library</label>
-						<onclick>ActivateWindow(Videos,TvShowTitles,return)</onclick>
-						<icon>homeIcons/TVLibrary.png</icon>
-						<property name="unfocusedIcon">homeIcons/TVLibraryNoFocus.png</property>
-					</item>
-					<item id="3">
-						<label>person library</label>
-						<onclick>ActivateWindow(Videos,TvShowActors,return)</onclick>
-						<icon>homeIcons/people.png</icon>
-						<property name="unfocusedIcon">homeIcons/peopleNoFocus.png</property>
-					</item>
-				</content>
-			</control>
-			<!-- <control type="fixedlist" id="90015">
-				<include>HomeSubMenuBase</include>
-				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(15)</visible>
-				<content>plugin://script.embuary.helper/?info=getnextup</content>
-			</control> -->
-			<control type="fixedlist" id="90003">
-				<include>HomeSubMenuBase</include>
-				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(3)</visible>
-				<content>
-					<item id="1">
-						<label>files</label>
-						<onclick>ActivateWindow(music,sources://music/)</onclick>
-						<icon>homeIcons/files.png</icon>
-						<property name="unfocusedIcon">homeIcons/filesNoFocus.png</property>
-					</item>
-					<item id="1">
-						<label>music library</label>
-						<onclick>ActivateWindow(music,musicdb://albums/,return)</onclick>
-						<icon>homeIcons/songs.png</icon>
-						<property name="unfocusedIcon">homeIcons/songsNoFocus.png</property>
-					</item>
-					<item id="3">
-						<label>playlists</label>
-						<onclick>ActivateWindow(music,special://musicplaylists/,return)</onclick>
-						<icon>homeIcons/playlist.png</icon>
-						<property name="unfocusedIcon">homeIcons/playlistNoFocus.png</property>
-					</item>
-					<item id="4">
-						<label>music add-ons</label>
-						<onclick>ActivateWindow(addonbrowser,addons://sources/audio/,return)</onclick>
-						<icon>homeIcons/musicAddons.png</icon>
-						<property name="unfocusedIcon">homeIcons/musicAddonsNoFocus.png</property>
-					</item>
-					<item id="5">
-						<label>radio</label>
-						<onclick>ActivateWindow(RadioChannels)</onclick>
-						<icon>homeIcons/radio.png</icon>
-						<property name="unfocusedIcon">homeIcons/radioNoFocus.png</property>
-					</item>
+					<include>skinshortcuts-submenu</include>
 				</content>
 			</control>
 			<control type="fixedlist" id="90017">
 				<include>HomeSubMenuBase</include>
 				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(17)</visible>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),nowplaying)</visible>
 				<content>
 					<item id="1">
 						<label>$INFO[MusicPlayer.Title]</label>
@@ -813,7 +587,7 @@
 			<control type="fixedlist" id="90001">
 				<include>HomeSubMenuBase</include>
 				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(1)</visible>
+				<visible>False</visible>
 				<content>
 					<item id="1">
 						<label>download add-ons</label>
@@ -862,7 +636,7 @@
 			<control type="fixedlist" id="90016">
 				<include>HomeSubMenuBase</include>
 				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(16)</visible>
+				<visible>False</visible>
 				<content>
 					<item id="1">
 						<label>all $LOCALIZE[1036]</label>
@@ -873,53 +647,20 @@
 				</content>
 				<content>favourites://</content>
 			</control>
-			<control type="fixedlist" id="90009">
-				<top>630</top>
-				<include>HomeSubMenuBase</include>
-				<include>VisibleFadeEffect</include>
-				<visible>Container(9000).HasFocus(5)</visible>
-				<content>
-					<item id="1">
-						<label>power</label>
-						<onclick>ActivateWindow(ShutdownMenu)</onclick>
-						<icon>homeIcons/power.png</icon>
-						<property name="unfocusedIcon">homeIcons/powerNoFocus.png</property>
-					</item>
-					<item id="2">
-						<label>all settings</label>
-						<onclick>ActivateWindow(10004)</onclick>
-						<icon>homeIcons/allSettings.png</icon>
-						<property name="unfocusedIcon">homeIcons/allSettingsNoFocus.png</property>
-					</item>
-					<!-- <item id="3">
-						<label>system information</label>
-						<onclick>ActivateWindow(10016)</onclick>
-						<icon>homeIcons/systemInformation.png</icon>
-						<property name="unfocusedIcon">homeIcons/systemInformationNoFocus.png</property>
-					</item> -->
-					<item id="4">
-						<label>skin settings</label>
-						<onclick>ActivateWindow(10035)</onclick>
-						<icon>homeIcons/skinSettings.png</icon>
-						<property name="unfocusedIcon">homeIcons/skinSettingsNoFocus.png</property>
-					</item>
-					<!-- <item id="4">
-						<label>interface</label>
-						<onclick>ActivateWindow(10032)</onclick>
-						<icon>homeIcons/interface.png</icon>
-						<property name="unfocusedIcon">homeIcons/interfaceNoFocus.png</property>
-					</item>
-					<item id="5">
-						<label>player</label>
-						<onclick>ActivateWindow(10030)</onclick>
-						<icon>homeIcons/allSettings.png</icon>
-						<property name="unfocusedIcon">homeIcons/allSettingsNoFocus.png</property>
-					</item> -->
-				</content>
+
+
+
+
+			<!-- Hidden label: always holds the sub-panel control ID for the currently focused
+			     main-menu item. $VAR[subMenuFocusId] returns e.g. "90010"; the label renders
+			     $NUMBER[90010] → "90010" (no localization). SetFocus reads it via Control.GetLabel. -->
+			<control type="label" id="8001">
+				<left>-1000</left>
+				<top>0</top>
+				<width>10</width>
+				<height>10</height>
+				<label>$VAR[subMenuFocusId]</label>
 			</control>
-
-
-
 
 			<control type="fixedlist" id="9000">
 				<left>325</left>
@@ -927,7 +668,7 @@
 				<width>1500</width>
 				<height>1000</height>
 				<onleft>601</onleft>
-				<onright>9001</onright>
+				<onright>SetFocus($INFO[Control.GetLabel(8001)])</onright>
 				<onup>9000</onup>
 				<ondown>9000</ondown>
 				<pagecontrol/>
@@ -935,7 +676,7 @@
 				<focusposition>4</focusposition>
 				<movement>1</movement>
 				<orientation>Vertical</orientation>
-				<onfocus>SetFocus($INFO[ListItem.Property(focusId)])</onfocus>
+				<onfocus>SetFocus($INFO[Control.GetLabel(8001)])</onfocus>
 				<itemlayout height="100" width="800">
 					<control type="label">
 						<left>25</left>
@@ -963,128 +704,19 @@
 					</control>
 				</focusedlayout>
 				<content>
-					<item id="7">
-						<label>31950</label>
-						<onclick condition="!String.IsEmpty(Weather.Plugin)">ActivateWindow(Weather)</onclick>
-						<onclick condition="String.IsEmpty(Weather.Plugin)">ActivateWindow(servicesettings,weather)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>Skin.HasSetting(weatherVisible)</visible>
-						<property name="focusId">$NUMBER[90007]</property>
-					</item>
-					<item id="4">
-						<label>31951</label>
-						<onclick>ActivateWindow(Pictures)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>Skin.HasSetting(picturesVisible)</visible>
-						<property name="focusId">$NUMBER[90004]</property>
-					</item>
-					<item id="14">
-						<label>31001</label>
-						<onclick>ActivateWindow(Games)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>Skin.HasSetting(gamesVisible)</visible>
-						<property name="focusId">$NUMBER[90014]</property>
-					</item>
-					<!-- <item id="13">
-						<label>31960</label>
-						<onclick>ActivateWindow(RadioChannels)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>PVR.HasRadioChannels</visible>
-						<property name="focusId">$NUMBER[90013]</property>
-					</item> -->
-					<item id="12">
-						<label>31952</label>
-						<onclick>ActivateWindow(TVChannels)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>Skin.HasSetting(tvVisible)</visible>
-						<property name="focusId">$NUMBER[90012]</property>
-					</item>
-					<item id="2">
-						<label>31953</label>
-						<onclick condition="String.IsEqual(Window.Property(VideosDirectLink),True)">ActivateWindow(Videos)</onclick>
-						<onclick condition="!String.IsEqual(Window.Property(VideosDirectLink),True)">ActivateWindow(Videos,root)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>Skin.HasSetting(videosVisible)</visible>
-						<property name="focusId">$NUMBER[90002]</property>
-					</item>
-					<!-- <item id="15">
-						<label>YouTube Search</label>
-						<onclick>plugin://plugin.video.youtube/kodion/search/list/</onclick>
-						<icon/>
-						<thumb/>
-						<visible>true | PVR.HasTVChannels</visible>
-						<property name="focusId">$NUMBER[90015]</property>
-					</item> -->
-					<item id="10">
-						<label>31954</label>
-						<onclick condition="System.IsMaster | !Skin.HasSetting(HomeMenuMovieUsePlaylist)">ActivateWindow(Videos,MovieTitles,return)</onclick>
-						<onclick condition="!System.IsMaster + Skin.HasSetting(HomeMenuMovieUsePlaylist)">ActivateWindow(Videos,$INFO[Skin.String(HomeMenuMoviePlaylist)],return)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>Skin.HasSetting(moviesVisible)</visible>
-						<property name="focusId">$NUMBER[90010]</property>
-					</item>
-					<item id="11">
-						<label>31955</label>
-						<onclick condition="System.IsMaster | !Skin.HasSetting(HomeMenuTVShowUsePlaylist)">ActivateWindow(Videos,TVShowTitles,return)</onclick>
-						<onclick condition="!System.IsMaster + Skin.HasSetting(HomeMenuTVShowUsePlaylist)">ActivateWindow(Videos,$INFO[Skin.String(HomeMenuTVShowPlaylist)],return)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>Skin.HasSetting(tvshowsVisible)</visible>
-						<property name="focusId">$NUMBER[90011]</property>
-					</item>
-					<item id="3">
-						<label>31956</label>
-						<onclick condition="[System.IsMaster | !Skin.HasSetting(HomeMenuMusicUsePlaylist)] + String.IsEqual(Window.Property(MusicDirectLink),True)">ActivateWindow(Music)</onclick>
-						<onclick condition="[System.IsMaster | !Skin.HasSetting(HomeMenuMusicUsePlaylist)] + !String.IsEqual(Window.Property(MusicDirectLink),True)">ActivateWindow(Music,root)</onclick>
-						<onclick condition="!System.IsMaster + Skin.HasSetting(HomeMenuMusicUsePlaylist)">ActivateWindow(Music,$INFO[Skin.String(HomeMenuMusicPlaylist)],return)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>Skin.HasSetting(musicVisible)</visible>
-						<property name="focusId">$NUMBER[90003]</property>
-					</item>
+					<include>skinshortcuts-mainmenu</include>
 					<item id="17">
 						<label>31040</label>
 						<visible>Player.HasAudio + !Skin.HasSetting(homepageMusicinfo) + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))</visible>
+						<property name="submenuVisibility">nowplaying</property>
 						<property name="focusId">$NUMBER[90017]</property>
-					</item>
-					<item id="1">
-						<label>31957</label>
-						<onclick condition="!System.Platform.Android">ActivateWindow(Programs,Addons,return)</onclick>
-						<onclick condition="System.Platform.Android">ActivateWindow(Programs)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>Skin.HasSetting(addonsVisible)</visible>
-						<property name="focusId">$NUMBER[90001]</property>
-					</item>
-					<item id="16">
-						<label>$LOCALIZE[1036]</label>
-						<icon/>
-						<thumb/>
-						<visible>Skin.HasSetting(favoritesVisible)</visible>
-						<property name="focusId">$NUMBER[90016]</property>
 					</item>
 					<item id="6">
 						<label>31958</label>
 						<onclick>PlayDVD()</onclick>
-						<icon/>
-						<thumb/>
 						<visible>System.HasMediaDVD | System.HasMediaAudioCD</visible>
+						<property name="submenuVisibility">playdisc</property>
 						<property name="focusId">$NUMBER[90006]</property>
-					</item>
-					<item id="5">
-						<label>31959</label>
-						<onclick>ActivateWindow(Settings)</onclick>
-						<icon/>
-						<thumb/>
-						<visible>[!Skin.HasSetting(HomeMenuNoSystemButton) + !System.IsMaster] | System.IsMaster</visible>
-						<property name="focusId">$NUMBER[90009]</property>
 					</item>
 				</content>
 			</control>
@@ -1093,7 +725,7 @@
 			<depth>DepthMenu</depth>
 			<control type="fixedlist" id="700">
 				<animation effect="slide" start="0,0" end="-91,0" time="0" condition="String.IsEqual(Container(700).NumItems,2) | String.IsEqual(Container(700).NumItems,4)">conditional</animation>
-				<visible>Container(9000).HasFocus(2) | Container(9000).HasFocus(10) | Container(9000).HasFocus(11)</visible>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),videos) | String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),movies) | String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows)</visible>
 				<onleft>700</onleft>
 				<onright>700</onright>
 				<onup>9001</onup>
@@ -1105,7 +737,7 @@
 			</control>
 			<control type="fixedlist" id="703">
 				<animation effect="slide" start="0,0" end="-91,0" time="0" condition="String.IsEqual(Container(703).NumItems,2) | String.IsEqual(Container(703).NumItems,4)">conditional</animation>
-				<visible>Container(9000).HasFocus(3)</visible>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),music)</visible>
 				<onleft>703</onleft>
 				<onright>703</onright>
 				<onup>9001</onup>
@@ -1117,7 +749,7 @@
 			</control>
 			<control type="fixedlist" id="704">
 				<animation effect="slide" start="0,0" end="-91,0" time="0" condition="String.IsEqual(Container(704).NumItems,2) | String.IsEqual(Container(704).NumItems,4)">conditional</animation>
-				<visible>Container(9000).HasFocus(4)</visible>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),pictures)</visible>
 				<onleft>704</onleft>
 				<onright>704</onright>
 				<onup>9001</onup>
@@ -1129,7 +761,7 @@
 			</control>
 			<control type="fixedlist" id="705">
 				<animation effect="slide" start="0,0" end="-91,0" time="0" condition="String.IsEqual(Container(705).NumItems,2) | String.IsEqual(Container(705).NumItems,4)">conditional</animation>
-				<visible>Container(9000).HasFocus(1)</visible>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),add-ons)</visible>
 				<onleft>705</onleft>
 				<onright>705</onright>
 				<onup>9001</onup>
@@ -1141,7 +773,7 @@
 			</control>
 			<control type="fixedlist" id="706">
 				<animation effect="slide" start="0,0" end="-91,0" time="0" condition="String.IsEqual(Container(706).NumItems,2) | String.IsEqual(Container(706).NumItems,4)">conditional</animation>
-				<visible>Container(9000).HasFocus(14)</visible>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),games)</visible>
 				<onleft>706</onleft>
 				<onright>706</onright>
 				<onup>9001</onup>
@@ -1369,7 +1001,7 @@
 			<control type="group">
 				<left>1000</left>
 				<top>100</top>
-				<visible>Container(9000).HasFocus(7) + Weather.IsFetched</visible>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),weather) + Weather.IsFetched</visible>
 				<include>Window_OpenClose_Animation</include>
 				<include>VisibleFadeEffect</include>
 				<control type="image">

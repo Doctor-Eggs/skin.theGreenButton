@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts>
+	<shortcut>
+		<defaultID>musicfiles</defaultID>
+		<label>files</label>
+		<label2></label2>
+		<icon>homeIcons/files.png</icon>
+		<thumb />
+		<action>ActivateWindow(music,sources://music/)</action>
+		<property name="unfocusedIcon">homeIcons/filesNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>musiclibrary</defaultID>
+		<label>music library</label>
+		<label2></label2>
+		<icon>homeIcons/songs.png</icon>
+		<thumb />
+		<action>ActivateWindow(music,musicdb://albums/,return)</action>
+		<property name="unfocusedIcon">homeIcons/songsNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>musicplaylists</defaultID>
+		<label>playlists</label>
+		<label2></label2>
+		<icon>homeIcons/playlist.png</icon>
+		<thumb />
+		<action>ActivateWindow(music,special://musicplaylists/,return)</action>
+		<property name="unfocusedIcon">homeIcons/playlistNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>musicaddons</defaultID>
+		<label>music add-ons</label>
+		<label2></label2>
+		<icon>homeIcons/musicAddons.png</icon>
+		<thumb />
+		<action>ActivateWindow(addonbrowser,addons://sources/audio/,return)</action>
+		<property name="unfocusedIcon">homeIcons/musicAddonsNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>radio</defaultID>
+		<label>radio</label>
+		<label2></label2>
+		<icon>homeIcons/radio.png</icon>
+		<thumb />
+		<action>ActivateWindow(RadioChannels)</action>
+		<property name="unfocusedIcon">homeIcons/radioNoFocus.png</property>
+	</shortcut>
+</shortcuts>

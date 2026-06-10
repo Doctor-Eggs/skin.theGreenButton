@@ -5,8 +5,8 @@
 		<top>530</top>
 		<width>1500</width>
 		<height>280</height>
-		<onleft>90002</onleft>
-		<onright>90002</onright>
+		<onleft>9000</onleft>
+		<onright>9000</onright>
 		<pagecontrol/>
 		<scrolltime>300</scrolltime>
 		<focusposition>1</focusposition>

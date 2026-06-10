@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts>
+	<shortcut>
+		<defaultID>addpictures</defaultID>
+		<label>add pictures</label>
+		<label2></label2>
+		<icon>homeIcons/addPictures.png</icon>
+		<thumb />
+		<action>ActivateWindow(mediasource,pictures)</action>
+		<property name="unfocusedIcon">homeIcons/addPicturesNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>viewpictures</defaultID>
+		<label>view pictures</label>
+		<label2></label2>
+		<icon>homeIcons/viewPictures.png</icon>
+		<thumb />
+		<action>ActivateWindow(Pictures)</action>
+		<property name="unfocusedIcon">homeIcons/viewPicturesNoFocus.png</property>
+	</shortcut>
+	<shortcut>
+		<defaultID>pictureaddons</defaultID>
+		<label>picture add-ons</label>
+		<label2></label2>
+		<icon>homeIcons/pictureAddons.png</icon>
+		<thumb />
+		<action>ActivateWindow(addonbrowser,addons://user/xbmc.addon.image/)</action>
+		<property name="unfocusedIcon">homeIcons/pictureAddonsNoFocus.png</property>
+	</shortcut>
+</shortcuts>
