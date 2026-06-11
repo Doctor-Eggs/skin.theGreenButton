@@ -46,11 +46,22 @@
 	<!-- Maps focused main-menu item's submenuVisibility to its sub-panel control ID.
 	     $NUMBER[] prevents Kodi from localizing the numeric string.
 	     Read back via a hidden label (id=8001) in Home.xml for SetFocus.
-	     All skin-shortcuts-managed groups share fixedlist 90000 (skinshortcuts-submenu).
-	     Only the three hardcoded special lists keep their own IDs. -->
+	     Each known group has its own fixedlist (9101-9111) for independent cursor memory.
+	     Unknown/custom skinshortcuts groups fall back to shared fixedlist 90000. -->
 	<variable name="subMenuFocusId">
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),nowplaying)">$NUMBER[90017]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),playdisc)">$NUMBER[0]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),weather)">$NUMBER[9101]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),pictures)">$NUMBER[9102]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),games)">$NUMBER[9103]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tv)">$NUMBER[9104]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),videos)">$NUMBER[9105]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),movies)">$NUMBER[9106]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows)">$NUMBER[9107]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),music)">$NUMBER[9108]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),add-ons)">$NUMBER[9109]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),favourites)">$NUMBER[9110]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),system)">$NUMBER[9111]</value>
 		<value>$NUMBER[90000]</value>
 	</variable>
 	<variable name="contentType">

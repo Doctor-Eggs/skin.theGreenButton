@@ -554,20 +554,129 @@
 			</animation>
 
 
-			<!-- Single fixedlist for all skin-shortcuts-managed submenus.
-			     Items in skinshortcuts-submenu each carry their own combined visible condition
-			     (group check + profile check in one expression), so only the right group's
-			     items appear when the corresponding main-menu item is focused. -->
+			<!-- Per-group fixedlists — each maintains independent cursor position per section.
+			     When Control.Move(9000) changes the active section, the focused list's <visible>
+			     condition fails, Kodi moves focus to defaultcontrol 9000, and 9000's onfocus
+			     routes to the new list via subMenuFocusId. Unknown/custom groups fall back to 90000. -->
+
+			<!-- weather -->
+			<control type="fixedlist" id="9101">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),weather)</visible>
+				<content><include>skinshortcuts-group-weather</include></content>
+			</control>
+
+			<!-- pictures -->
+			<control type="fixedlist" id="9102">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),pictures)</visible>
+				<content><include>skinshortcuts-group-pictures</include></content>
+			</control>
+
+			<!-- games -->
+			<control type="fixedlist" id="9103">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),games)</visible>
+				<content><include>skinshortcuts-group-games</include></content>
+			</control>
+
+			<!-- tv -->
+			<control type="fixedlist" id="9104">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tv)</visible>
+				<content><include>skinshortcuts-group-tv</include></content>
+			</control>
+
+			<!-- videos -->
+			<control type="fixedlist" id="9105">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),videos)</visible>
+				<content><include>skinshortcuts-group-videos</include></content>
+			</control>
+
+			<!-- movies -->
+			<control type="fixedlist" id="9106">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),movies)</visible>
+				<content><include>skinshortcuts-group-movies</include></content>
+			</control>
+
+			<!-- tvshows -->
+			<control type="fixedlist" id="9107">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows)</visible>
+				<content><include>skinshortcuts-group-tvshows</include></content>
+			</control>
+
+			<!-- music -->
+			<control type="fixedlist" id="9108">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),music)</visible>
+				<content><include>skinshortcuts-group-music</include></content>
+			</control>
+
+			<!-- add-ons -->
+			<control type="fixedlist" id="9109">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),add-ons)</visible>
+				<content><include>skinshortcuts-group-add-ons</include></content>
+			</control>
+
+			<!-- favourites -->
+			<control type="fixedlist" id="9110">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),favourites)</visible>
+				<content><include>skinshortcuts-group-favourites</include></content>
+			</control>
+
+			<!-- system -->
+			<control type="fixedlist" id="9111">
+				<include>HomeSubMenuBase</include>
+				<include>VisibleFadeEffect</include>
+				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),system)</visible>
+				<content><include>skinshortcuts-group-system</include></content>
+			</control>
+
+			<!-- Fallback for any custom/unknown groups added via skinshortcuts GUI. -->
 			<control type="fixedlist" id="90000">
 				<include>HomeSubMenuBase</include>
 				<include>VisibleFadeEffect</include>
-				<!-- First item has no items above it so its title sits higher — pull submenu up 100px -->
 				<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
-				<!-- Last item has no items below it so its title sits lower — push submenu down 100px -->
 				<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
-				<content>
-					<include>skinshortcuts-submenu</include>
-				</content>
+				<visible>!String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),weather) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),pictures) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),games) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tv) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),videos) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),movies) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),music) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),add-ons) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),favourites) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),system) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),nowplaying) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),playdisc)</visible>
+				<content><include>skinshortcuts-submenu</include></content>
 			</control>
 			<control type="fixedlist" id="90017">
 				<include>HomeSubMenuBase</include>
@@ -661,7 +770,6 @@
 				<height>10</height>
 				<label>$VAR[subMenuFocusId]</label>
 			</control>
-
 			<control type="fixedlist" id="9000">
 				<left>325</left>
 				<top>0</top>
