@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overrides>
 
+	<group name="mainmenu" type="mainmenu" />
+
 	<!-- focusId: all skin-shortcuts groups now share fixedlist 90000.
 	     Hardcoded special lists (add-ons=90001, favourites=90016) keep their own IDs.
 	     Fallback 0 = no submenu (e.g. play disc). -->
@@ -129,6 +131,26 @@
 		<icon>homeIcons/musicAddons.png</icon>
 	</override>
 
+	<!-- TV group -->
+	<override group="tv" defaultID="recordedtv">
+		<icon>homeIcons/recordedTV.png</icon>
+	</override>
+	<override group="tv" defaultID="fakepvrrecordedtv">
+		<icon>homeIcons/recordedTV.png</icon>
+	</override>
+	<override group="tv" defaultID="channels">
+		<icon>homeIcons/channels.png</icon>
+	</override>
+	<override group="tv" defaultID="guide">
+		<icon>homeIcons/guide.png</icon>
+	</override>
+	<override group="tv" defaultID="livetv">
+		<icon>homeIcons/liveTV.png</icon>
+	</override>
+	<override group="tv" defaultID="livetvsetup">
+		<icon>homeIcons/liveTVSettings.png</icon>
+	</override>
+
 	<!-- System group -->
 	<override group="system" defaultID="7">
 		<label2 />
@@ -167,12 +189,13 @@
 	<propertydefault group="games" labelID="gameadd-ons" property="unfocusedIcon">homeIcons/gameAddonsNoFocus.png</propertydefault>
 
 	<!-- TV group -->
+	<visibleoverride condition="System.HasPVRAddon" group="tv">noop</visibleoverride>
 	<propertydefault group="tv" labelID="recordedtv" property="unfocusedIcon">homeIcons/recordedTVNoFocus.png</propertydefault>
 	<propertydefault group="tv" labelID="recordedtv--0" property="unfocusedIcon">homeIcons/recordedTVNoFocus.png</propertydefault>
 	<propertydefault group="tv" labelID="channels" property="unfocusedIcon">homeIcons/channelsNoFocus.png</propertydefault>
 	<propertydefault group="tv" labelID="guide" property="unfocusedIcon">homeIcons/guideNoFocus.png</propertydefault>
 	<propertydefault group="tv" labelID="livetv" property="unfocusedIcon">homeIcons/liveTVNoFocus.png</propertydefault>
-	<propertydefault group="tv" labelID="livetvsetup" property="unfocusedIcon">homeIcons/settingsNoFocus.png</propertydefault>
+	<propertydefault group="tv" labelID="livetvsetup" property="unfocusedIcon">homeIcons/liveTVSettingsNoFocus.png</propertydefault>
 
 	<!-- Videos group -->
 	<propertydefault group="videos" labelID="files" property="unfocusedIcon">homeIcons/filesNoFocus.png</propertydefault>

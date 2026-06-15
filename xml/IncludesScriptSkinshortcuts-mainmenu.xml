@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+	<!-- Mainmenu-specific editor content: submenu thumbnail preview panels.
+	     These are the only controls that differ between the mainmenu layout and
+	     any other group. List 211, scrollbar 260, and grouplist 90000 are defined
+	     once in script-skinshortcuts.xml and shared by all layouts.
+	     Each fixedlist's labelID condition makes it self-suppress when not editing
+	     the mainmenu (submenu item labelIDs never match these mainmenu section names). -->
+	<include name="MainMenuEditorLayout">
+
+		<control type="fixedlist" id="90003">
+			<include>SubmenuFixedListBase</include>
+			<visible>String.IsEqual(Container(211).ListItem.Property(labelID),weather)</visible>
+			<content><include>skinshortcuts-group-weather</include></content>
+		</control>
+		<control type="fixedlist" id="90004">
+			<include>SubmenuFixedListBase</include>
+			<visible>String.IsEqual(Container(211).ListItem.Property(labelID),pictures)</visible>
+			<content><include>skinshortcuts-group-pictures</include></content>
+		</control>
+		<control type="fixedlist" id="90005">
+			<include>SubmenuFixedListBase</include>
+			<visible>String.IsEqual(Container(211).ListItem.Property(labelID),games)</visible>
+			<content><include>skinshortcuts-group-games</include></content>
+		</control>
+		<control type="fixedlist" id="90006">
+			<include>SubmenuFixedListBase</include>
+			<visible>String.IsEqual(Container(211).ListItem.Property(labelID),tv)</visible>
+			<content><include>skinshortcuts-group-tv</include></content>
+		</control>
+		<control type="fixedlist" id="90007">
+			<include>SubmenuFixedListBase</include>
+			<visible>String.IsEqual(Container(211).ListItem.Property(labelID),videos)</visible>
+			<content><include>skinshortcuts-group-videos</include></content>
+		</control>
+		<control type="fixedlist" id="90008">
+			<include>SubmenuFixedListBase</include>
+			<visible>String.IsEqual(Container(211).ListItem.Property(labelID),movies)</visible>
+			<content><include>skinshortcuts-group-movies</include></content>
+		</control>
+		<control type="fixedlist" id="90009">
+			<include>SubmenuFixedListBase</include>
+			<visible>String.IsEqual(Container(211).ListItem.Property(labelID),tvshows)</visible>
+			<content><include>skinshortcuts-group-tvshows</include></content>
+		</control>
+		<control type="fixedlist" id="90010">
+			<include>SubmenuFixedListBase</include>
+			<visible>String.IsEqual(Container(211).ListItem.Property(labelID),music)</visible>
+			<content><include>skinshortcuts-group-music</include></content>
+		</control>
+		<control type="fixedlist" id="90011">
+			<include>SubmenuFixedListBase</include>
+			<visible>String.IsEqual(Container(211).ListItem.Property(labelID),add-ons)</visible>
+			<content><include>skinshortcuts-group-add-ons</include></content>
+		</control>
+		<control type="fixedlist" id="90012">
+			<include>SubmenuFixedListBase</include>
+			<visible>String.IsEqual(Container(211).ListItem.Property(labelID),favourites)</visible>
+			<content><include>skinshortcuts-group-favourites</include></content>
+		</control>
+		<control type="fixedlist" id="90013">
+			<include>SubmenuFixedListBase</include>
+			<visible>String.IsEqual(Container(211).ListItem.Property(labelID),system)</visible>
+			<content><include>skinshortcuts-group-system</include></content>
+		</control>
+
+	</include>
+
+</includes>

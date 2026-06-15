@@ -16,6 +16,8 @@
 	<include file="IncludesPVR.xml" />
 	<include file="IncludesBackgroundBuilding.xml" />
 	<include file="script-skinshortcuts-includes.xml" />
+	<include file="IncludesScriptSkinshortcuts.xml" />
+	<include file="IncludesScriptSkinshortcuts-mainmenu.xml" />
 	<!-- General -->
 	<expression name="updateContainer">[!String.IsEqual(Container.FolderPath,Control.GetLabel(90003))]</expression>
 	<!-- CONSTANTS -->

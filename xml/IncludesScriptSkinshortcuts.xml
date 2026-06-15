@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+	<include name="SlideWithList211">
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,0)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,1)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,2)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,3)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,4)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,5)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,6)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,7)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,8)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,9)">Conditional</animation>
+	</include>
+
+	<!-- Returns checked-box when item is active, empty-box when disabled -->
+	<variable name="SkinShortcutsDisabledIcon">
+		<value condition="String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)">&#xE835;</value>
+		<value>&#xE834;</value>
+	</variable>
+
+	<!-- Shared chrome for all editor windows (mainmenu, submenu, base).
+	     Mirrors DialogBackgroundFull but uses kodi-button.png on the upper left
+	     instead of the dynamic addon icon, and hard-codes "Media Center Studio"
+	     as the title. -->
+	<include name="EditorChrome">
+		<control type="image">
+			<left>0</left>
+			<top>0</top>
+			<width>1920</width>
+			<height>1080</height>
+			<texture fallback="special://skin/backgrounds/SKINDEFAULT.png">$INFO[Skin.String(MasterCustomBackgroundPath)]</texture>
+		</control>
+		<control type="image">
+			<left>0</left>
+			<top>0</top>
+			<width>1920</width>
+			<height>150</height>
+			<texture colordiffuse="66000000">common/blankWhite.png</texture>
+		</control>
+		<control type="image">
+			<left>0</left>
+			<top>150r</top>
+			<width>1920</width>
+			<height>150</height>
+			<texture colordiffuse="66000000">common/blankWhite.png</texture>
+		</control>
+		<control type="image">
+			<left>30</left>
+			<top>5</top>
+			<width>140</width>
+			<height>140</height>
+			<aspectratio>keep</aspectratio>
+			<texture>kodi-button.png</texture>
+		</control>
+		<control type="image">
+			<left>285r</left>
+			<top>85</top>
+			<width>50</width>
+			<height>50</height>
+			<aspectratio aligny="top" align="left">keep</aspectratio>
+			<texture>kodi-button.png</texture>
+		</control>
+		<control type="label">
+			<right>295</right>
+			<top>100</top>
+			<width>300</width>
+			<height>15</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<font>font30_light</font>
+			<textcolor>white</textcolor>
+			<label>[B]Kodi[/B] Media Center</label>
+		</control>
+		<control type="label">
+			<left>200</left>
+			<top>90</top>
+			<width>1300</width>
+			<height>30</height>
+			<font>font36</font>
+			<label>Media Center Studio</label>
+			<align>left</align>
+			<aligny>center</aligny>
+			<textcolor>lightblue</textcolor>
+		</control>
+	</include>
+
+	<!-- Dynamically shows a description for whichever action button has focus.
+	     Button 405 (Edit Submenu) only exists in the mainmenu editor so its
+	     condition simply never fires in the submenu/base editors. -->
+	<variable name="EditorButtonDescription">
+		<value condition="Control.HasFocus(308)">Restore — Returns this item to its default label and icon</value>
+		<value condition="Control.HasFocus(303)">Move Up — Moves this item higher in the list</value>
+		<value condition="Control.HasFocus(313)">Disable / Enable — Hides or shows this item without removing it</value>
+		<value condition="Control.HasFocus(305)">Rename — Edit the display name for this item</value>
+		<value condition="Control.HasFocus(304)">Move Down — Moves this item lower in the list</value>
+		<value condition="Control.HasFocus(405)">Edit Submenu — Opens the submenu editor for this item</value>
+		<value condition="Control.HasFocus(211)">Select an item from the list to edit it</value>
+	</variable>
+
+	<!-- Submenu thumbnail strip — display only.
+	     All four nav directions redirect to list 211 so mouse clicks can never
+	     strand focus here. itemlayout and focusedlayout are identical so there
+	     is no visual "focused" state even if focus arrives via mouse.
+	     aspectratio=keep preserves correct image proportions. -->
+	<include name="SubmenuFixedListBase">
+		<left>700</left>
+		<top>220</top>
+		<width>1160</width>
+		<height>185</height>
+		<orientation>horizontal</orientation>
+		<onup>211</onup>
+		<ondown>211</ondown>
+		<onleft>211</onleft>
+		<onright>211</onright>
+		<hitrect x="0" y="0" w="0" h="0" />
+		<include>SlideWithList211</include>
+		<itemlayout width="150" height="185">
+			<control type="image">
+				<left>5</left>
+				<top>2</top>
+				<width>140</width>
+				<height>140</height>
+				<texture fallback="DefaultShortcut.png">$INFO[ListItem.Icon]</texture>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="label">
+				<left>2</left>
+				<top>145</top>
+				<width>146</width>
+				<height>40</height>
+				<label>$INFO[ListItem.Label]</label>
+				<font>font13</font>
+				<textcolor>AAFFFFFF</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+				<scroll>false</scroll>
+			</control>
+		</itemlayout>
+		<focusedlayout width="150" height="185">
+			<control type="image">
+				<left>5</left>
+				<top>2</top>
+				<width>140</width>
+				<height>140</height>
+				<texture fallback="DefaultShortcut.png">$INFO[ListItem.Icon]</texture>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="label">
+				<left>2</left>
+				<top>145</top>
+				<width>146</width>
+				<height>40</height>
+				<label>$INFO[ListItem.Label]</label>
+				<font>font13</font>
+				<textcolor>AAFFFFFF</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+				<scroll>false</scroll>
+			</control>
+		</focusedlayout>
+	</include>
+
+</includes>

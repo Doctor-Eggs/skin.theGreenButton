@@ -25,7 +25,7 @@
 				<aligny>bottom</aligny>
 				<label>$INFO[ListItem.Label]</label>
 			</control>
-			<control type="image">
+<control type="image">
 				<top>50</top>
 				<left>75</left>
 				<width>150</width>
