@@ -8,6 +8,7 @@
 		<thumb />
 		<action>ActivateWindow(Videos,videodb://movies/titles/,return)</action>
 		<property name="unfocusedIcon">homeIcons/searchNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/searchMovies.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>movielibrary</defaultID>
@@ -17,6 +18,7 @@
 		<thumb />
 		<action>ActivateWindow(Videos,videodb://movies/titles/,return)</action>
 		<property name="unfocusedIcon">homeIcons/movieLibraryNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/movieLibrary.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>intheaters</defaultID>
@@ -26,6 +28,7 @@
 		<thumb />
 		<action>ActivateWindow(Videos,plugin://script.embuary.info/movie/now_playing,return)</action>
 		<property name="unfocusedIcon">homeIcons/inTheatersNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/inTheaters.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>peoplelibrary</defaultID>
@@ -35,5 +38,6 @@
 		<thumb />
 		<action>ActivateWindow(Videos,MovieActors,return)</action>
 		<property name="unfocusedIcon">homeIcons/peopleNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/people.png</property>
 	</shortcut>
 </shortcuts>

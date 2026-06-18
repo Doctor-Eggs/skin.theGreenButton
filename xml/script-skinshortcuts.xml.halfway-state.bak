@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<allowoverlay>no</allowoverlay>
+	<defaultcontrol always="true">99999</defaultcontrol>
+	<animation type="WindowOpen" reversible="false">
+		<effect type="zoom" start="80" end="100" center="960,540" easing="out" tween="back" time="225" />
+		<effect type="fade" start="0" end="100" time="225" />
+	</animation>
+	<animation type="WindowClose" reversible="false">
+		<effect type="zoom" start="100" end="80" center="960,540" easing="in" tween="back" time="225" />
+		<effect type="fade" start="100" end="0" time="225" />
+	</animation>
+	<controls>
+
+		<include>EditorChrome</include>
+
+		<!-- Hidden bootstrap control — sole defaultcontrol target, always
+		     visible/unconditioned (so it's never skipped or contested), with
+		     a single onfocus action. The actual branching is resolved by the
+		     BootstrapFocusTarget variable beforehand, so this is one action,
+		     not multiple conditioned tags (which weren't being honored). -->
+		<control type="button" id="99999">
+			<left>-2000</left>
+			<top>0</top>
+			<width>1</width>
+			<height>1</height>
+			<onfocus>SetFocus($VAR[BootstrapFocusTarget])</onfocus>
+		</control>
+
+		<!-- Mirrors Window.Property(groupname) into a ListItem property so the
+		     auto-generated skinshortcuts-submenu include (whose items each carry
+		     their own <visible> keyed to Container(9000).ListItem.Property(submenuVisibility))
+		     can be reused as the SubmenuEditorStrip catch-all for custom/unknown
+		     groups. A single-item fixedlist always has that item selected, even
+		     unfocused, so this resolves correctly without ever needing focus. -->
+		<control type="fixedlist" id="9000">
+			<left>-2000</left>
+			<top>0</top>
+			<width>1</width>
+			<height>1</height>
+			<itemlayout height="1" width="1">
+			</itemlayout>
+			<focusedlayout height="1" width="1">
+			</focusedlayout>
+			<content>
+				<item id="1">
+					<property name="submenuVisibility">$INFO[Window.Property(groupname)]</property>
+				</item>
+			</content>
+		</control>
+
+		<!-- Single shared list, id=211 — lives outside both groups so the
+		     skinshortcuts script's one getControl(211) call always finds the
+		     control it's actually populating. Always vertical for now since
+		     the orientation can't be conditionally swapped per-group; the
+		     "Edit Submenu" button only shows up for mainmenu rows. -->
+		<control type="list" id="211">
+			<left>700</left>
+			<top>155</top>
+			<width>1160</width>
+			<height>755</height>
+			<orientation>vertical</orientation>
+			<viewtype label="535">list</viewtype>
+			<itemlayout width="1150" height="65">
+				<control type="label">
+					<left>0</left>
+					<top>0</top>
+					<width>1150</width>
+					<height>65</height>
+					<label>$INFO[ListItem.Label]</label>
+					<font>font30</font>
+					<textcolor>66FFFFFF</textcolor>
+					<align>center</align>
+					<aligny>center</aligny>
+					<visible>String.IsEqual(Window.Property(groupname),mainmenu)</visible>
+				</control>
+			</itemlayout>
+			<focusedlayout width="1150" height="65">
+				<control type="label">
+					<left>0</left>
+					<top>0</top>
+					<width>1150</width>
+					<height>65</height>
+					<label>$INFO[ListItem.Label]</label>
+					<font>font30</font>
+					<textcolor>white</textcolor>
+					<align>center</align>
+					<aligny>center</aligny>
+					<visible>false</visible>
+				</control>
+			</focusedlayout>
+		</control>
+
+		<!-- GROUP: Main menu -->
+		<control type="group">
+			<visible>String.IsEqual(Window.Property(groupname),mainmenu)</visible>
+			<control type="grouplist" id="90000">
+				<left>700</left>
+				<top>160</top>
+				<width>1160</width>
+				<height>65</height>
+				<onleft>90000</onleft>
+				<onright>90000</onright>
+				<onup>Control.Move(211,-1)</onup>
+				<ondown>Control.Move(211,1)</ondown>
+				<orientation>horizontal</orientation>
+				<include>SlideWithList211</include>
+				<control type="button" id="308">
+					<texturefocus />
+					<texturenofocus />
+					<width>110</width>
+					<height>65</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>IconMediumMD</font>
+					<textcolor>66FFFFFF</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<label>&#xE8BA;</label>
+					<onleft>90000</onleft>
+				</control>
+				<control type="button" id="303">
+					<texturefocus />
+					<texturenofocus />
+					<width>110</width>
+					<height>65</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>IconMediumMD</font>
+					<textcolor>66FFFFFF</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<label>&#xF182;</label>
+				</control>
+				<control type="button" id="313">
+					<texturefocus />
+					<texturenofocus />
+					<width>150</width>
+					<height>65</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>IconMediumMD</font>
+					<textcolor>66FFFFFF</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<label>$VAR[SkinShortcutsDisabledIcon]</label>
+				</control>
+				<control type="button" id="305">
+					<texturenofocus colordiffuse="CCFFFFFF">common/blankWhite.png</texturenofocus>
+					<texturefocus colordiffuse="FFFFFFFF">common/blankWhite.png</texturefocus>
+					<width>400</width>
+					<height>65</height>
+					<font>font30</font>
+					<textcolor>FF1A237E</textcolor>
+					<focusedcolor>FF0D0D5A</focusedcolor>
+					<label>$INFO[Container(211).ListItem.Label]</label>
+					<align>center</align>
+					<aligny>center</aligny>
+				</control>
+				<control type="button" id="301">
+					<texturefocus />
+					<texturenofocus />
+					<width>110</width>
+					<height>65</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>IconMediumMD</font>
+					<textcolor>66FFFFFF</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<label>&#xF181;</label>
+				</control>
+				<control type="button" id="304">
+					<texturefocus />
+					<texturenofocus />
+					<width>110</width>
+					<height>65</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>IconMediumMD</font>
+					<textcolor>66FFFFFF</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<label>&#xF181;</label>
+				</control>
+				<control type="button" id="405">
+					<texturefocus />
+					<texturenofocus />
+					<width>110</width>
+					<height>65</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>IconMediumMD</font>
+					<textcolor>66FFFFFF</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<label>&#xE31C;</label>
+					<onright>90000</onright>
+				</control>
+			</control>
+		</control>
+
+		<!-- GROUP: Everything else -->
+		<control type="group">
+			<visible>false</visible>
+
+			<!-- Horizontal mirror strip — list 211 holds the real data (the
+			     script's only getControl(211) target), so this strip can't be
+			     its own list/fixedlist without duplicating that ownership.
+			     Instead it's a single focusable button whose onleft/onright
+			     drive 211 via Control.Move, with a row of labels reading
+			     Container(211).ListItem(offset) to mirror nearby items
+			     around whatever's currently focused in 211. -->
+			<control type="button" id="90001">
+				<left>160</left>
+				<top>900</top>
+				<width>1600</width>
+				<height>65</height>
+				<texturefocus />
+				<texturenofocus />
+				<onleft>Control.Move(211,-1)</onleft>
+				<onright>Control.Move(211,1)</onright>
+			</control>
+			<control type="label">
+				<left>160</left>
+				<top>900</top>
+				<width>320</width>
+				<height>65</height>
+				<label>$INFO[Container(211).ListItem(-2).Label]</label>
+				<font>font24</font>
+				<textcolor>66FFFFFF</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+			</control>
+			<control type="label">
+				<left>480</left>
+				<top>900</top>
+				<width>320</width>
+				<height>65</height>
+				<label>$INFO[Container(211).ListItem(-1).Label]</label>
+				<font>font24</font>
+				<textcolor>66FFFFFF</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+			</control>
+			<control type="label">
+				<left>800</left>
+				<top>900</top>
+				<width>320</width>
+				<height>65</height>
+				<label>$INFO[Container(211).ListItem(0).Label]</label>
+				<font>font30</font>
+				<textcolor>white</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+			</control>
+			<control type="label">
+				<left>1120</left>
+				<top>900</top>
+				<width>320</width>
+				<height>65</height>
+				<label>$INFO[Container(211).ListItem(1).Label]</label>
+				<font>font24</font>
+				<textcolor>66FFFFFF</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+			</control>
+			<control type="label">
+				<left>1440</left>
+				<top>900</top>
+				<width>320</width>
+				<height>65</height>
+				<label>$INFO[Container(211).ListItem(2).Label]</label>
+				<font>font24</font>
+				<textcolor>66FFFFFF</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+			</control>
+		</control>
+
+		<!-- GROUP: Everything else (bak comparison) — same visible condition
+		     as the 90001 group above, recreating the .bak file's fixedlist
+		     9050 + selection-overlay approach for side-by-side comparison. -->
+		<control type="group">
+			<visible>!String.IsEqual(Window.Property(groupname),mainmenu)</visible>
+			<include>SubmenuEditorStrip</include>
+			<include>SubmenuEditorSelectionOverlay</include>
+		</control>
+
+		<!-- TROUBLESHOOTING: dumps key skinshortcuts info so we can see what's
+		     actually available/set at any given point. Remove once done testing. -->
+		<control type="group">
+			<left>20</left>
+			<top>160</top>
+			<control type="image">
+				<width>650</width>
+				<height>730</height>
+				<texture colordiffuse="AA000000">common/blankWhite.png</texture>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>10</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>red</textcolor>
+				<label>Focused Control ID: $INFO[System.CurrentControlID]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>40</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>yellow</textcolor>
+				<label>Window.Property(groupname): $INFO[Window.Property(groupname)]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>70</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>yellow</textcolor>
+				<label>Window(Home).Property(SkinShortcuts-Group): $INFO[Window(Home).Property(SkinShortcuts-Group)]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>100</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>Container(211).NumItems: $INFO[Container(211).NumItems]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>130</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>Container(211).Position: $INFO[Container(211).Position]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>160</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>Container(211).ListItem.Label: $INFO[Container(211).ListItem.Label]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>190</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>Container(211).ListItem.Label2: $INFO[Container(211).ListItem.Label2]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>220</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>Container(211).ListItem.Icon: $INFO[Container(211).ListItem.Icon]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>250</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>Container(211).ListItem.Path: $INFO[Container(211).ListItem.Path]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>280</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>ListItem.Property(Path): $INFO[Container(211).ListItem.Property(Path)]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>310</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>ListItem.Property(displayPath): $INFO[Container(211).ListItem.Property(displayPath)]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>340</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>ListItem.Property(submenuVisibility): $INFO[Container(211).ListItem.Property(submenuVisibility)]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>370</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>ListItem.Property(skinshortcuts-disabled): $INFO[Container(211).ListItem.Property(skinshortcuts-disabled)]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>400</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>ListItem.Property(defaultID): $INFO[Container(211).ListItem.Property(defaultID)]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>430</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>ListItem.Property(additionalListItem): $INFO[Container(211).ListItem.Property(additionalListItem)]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>460</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>ListItem.Property(icon): $INFO[Container(211).ListItem.Property(icon)]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>490</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>ListItem.Property(thumb): $INFO[Container(211).ListItem.Property(thumb)]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>520</top>
+				<width>630</width>
+				<height>25</height>
+				<font>font12</font>
+				<textcolor>white</textcolor>
+				<label>ListItem.Property(action): $INFO[Container(211).ListItem.Property(action)]</label>
+			</control>
+		</control>
+
+	</controls>
+</window>

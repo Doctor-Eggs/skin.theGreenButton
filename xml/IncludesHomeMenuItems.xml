@@ -25,7 +25,7 @@
 				<aligny>bottom</aligny>
 				<label>$INFO[ListItem.Label]</label>
 			</control>
-<control type="image">
+			<control type="image">
 				<top>50</top>
 				<left>75</left>
 				<width>150</width>
@@ -41,7 +41,7 @@
 				<width>150</width>
 				<height>100</height>
 				<colordiffuse>66FFFFFF</colordiffuse>
-				<texture colordiffuse="lightblueTransparent">$INFO[ListItem.icon]</texture>
+				<texture colordiffuse="lightblueTransparent" fallback="$INFO[ListItem.icon]">$INFO[ListItem.Property(focusedIcon)]</texture>
 				<aspectratio>keep</aspectratio>
 				<visible>String.IsEmpty(ListItem.Property(unfocusedIcon))</visible>
 			</control>
@@ -56,7 +56,7 @@
 				<align>right</align>
 				<aligny>bottom</aligny>
 				<label>$INFO[ListItem.Label]</label>
-				<visible>String.IsEmpty(ListItem.Label2)</visible>
+				<!-- <visible>String.IsEmpty(ListItem.Label2)</visible>
 			</control>
 			<control type="label">
 				<left>0</left>
@@ -80,14 +80,14 @@
 				<aligny>bottom</aligny>
 				<scroll>false</scroll>
 				<label>$INFO[ListItem.Label2]</label>
-				<visible>!String.IsEmpty(ListItem.Label2)</visible>
+				<visible>!String.IsEmpty(ListItem.Label2)</visible> -->
 			</control>
 			<control type="image">
 				<centerleft>50%</centerleft>
 				<width>300</width>
 				<height>200</height>
 				<colordiffuse>FFFFFFFF</colordiffuse>
-				<texture>$INFO[ListItem.icon]</texture>
+				<texture fallback="$INFO[ListItem.icon]">$INFO[ListItem.Property(focusedIcon)]</texture>
 				<aspectratio>keep</aspectratio>
 			</control>
 			<control type="image">
@@ -97,6 +97,29 @@
 				<texture>homeFrame.png</texture>
 			</control>
 		</focusedlayout>
+	</include>
+
+	<!-- Single-item fallback shown in place of a group's submenu fixedlist
+	     whenever that list has no shortcuts (e.g. a freshly created main-menu
+	     item that hasn't had its submenu populated yet via skinshortcuts).
+	     $PARAM[id] must be unique per call; $PARAM[listid] is the real
+	     submenu fixedlist whose item count is checked; $PARAM[groupcondition]
+	     is the boolean expression that's true while that group's main-menu
+	     item is focused. -->
+	<include name="EmptySubmenuPlaceholder">
+		<control type="fixedlist" id="$PARAM[id]">
+			<include>HomeSubMenuBase</include>
+			<include>VisibleFadeEffect</include>
+			<animation effect="slide" start="0,0" end="0,-100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,1)">conditional</animation>
+			<animation effect="slide" start="0,0" end="0,100" time="0" condition="String.IsEqual(Container(9000).CurrentItem,Container(9000).NumItems)">conditional</animation>
+			<visible>$PARAM[groupcondition] + Integer.IsEqual(Container($PARAM[listid]).NumItems,0)</visible>
+			<content>
+				<item id="1">
+					<label>No shortcuts added yet</label>
+					<icon>homeIcons/filesNoFocus.png</icon>
+				</item>
+			</content>
+		</control>
 	</include>
 	<include name="HomeSubMenuVideos">
 		<control type="image" id="90101">

@@ -14,13 +14,25 @@
 		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,9)">Conditional</animation>
 	</include>
 
-	<!-- Returns checked-box when item is active, empty-box when disabled -->
+	<!-- Checked-box icon when item is enabled; empty-box when disabled -->
 	<variable name="SkinShortcutsDisabledIcon">
 		<value condition="String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)">&#xE835;</value>
 		<value>&#xE834;</value>
 	</variable>
 
-	<!-- Shared chrome for all editor windows (mainmenu, submenu, base).
+	<!-- Checkbox icon for itemlayout/focusedlayout (uses ListItem scope) -->
+	<variable name="SkinShortcutsDisabledPrefix">
+		<value condition="String.IsEqual(ListItem.Property(skinshortcuts-disabled),True)">&#xE835;</value>
+		<value>&#xE834;</value>
+	</variable>
+
+	<!-- Action label for button 313 — flips with item state -->
+	<variable name="SkinShortcutsItemStateLabel">
+		<value condition="String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)">Enable item</value>
+		<value>Disable item</value>
+	</variable>
+
+	<!-- Shared chrome for the editor window.
 	     Mirrors DialogBackgroundFull but uses kodi-button.png on the upper left
 	     instead of the dynamic addon icon, and hard-codes "Media Center Studio"
 	     as the title. -->
@@ -86,80 +98,21 @@
 		</control>
 	</include>
 
-	<!-- Dynamically shows a description for whichever action button has focus.
-	     Button 405 (Edit Submenu) only exists in the mainmenu editor so its
-	     condition simply never fires in the submenu/base editors. -->
+	<!-- Help text for whichever button or list currently has focus. -->
 	<variable name="EditorButtonDescription">
+		<value condition="Control.HasFocus(211)">Select an item from the list, then press right to edit it</value>
 		<value condition="Control.HasFocus(308)">Restore — Returns this item to its default label and icon</value>
+		<value condition="Control.HasFocus(302)">Delete — Permanently removes this item</value>
+		<value condition="Control.HasFocus(301)">Add — Adds a new item to this menu</value>
 		<value condition="Control.HasFocus(303)">Move Up — Moves this item higher in the list</value>
-		<value condition="Control.HasFocus(313)">Disable / Enable — Hides or shows this item without removing it</value>
-		<value condition="Control.HasFocus(305)">Rename — Edit the display name for this item</value>
 		<value condition="Control.HasFocus(304)">Move Down — Moves this item lower in the list</value>
-		<value condition="Control.HasFocus(405)">Edit Submenu — Opens the submenu editor for this item</value>
-		<value condition="Control.HasFocus(211)">Select an item from the list to edit it</value>
+		<value condition="Control.HasFocus(313)">Enable / Disable — Hides or shows this item without deleting it</value>
+		<value condition="Control.HasFocus(401)">Choose Shortcut — Select a new destination for this item</value>
+		<value condition="Control.HasFocus(305)">Rename — Edit the display name for this item</value>
+		<value condition="Control.HasFocus(307)">Change Action — Set the path or action this item triggers</value>
+		<value condition="Control.HasFocus(306)">Set Icon — Choose the icon for this item</value>
+		<value condition="Control.HasFocus(406)">Set Unfocused Icon — Choose the icon shown when this submenu item is not selected</value>
+		<value condition="Control.HasFocus(405)">Edit Submenu — Open the submenu editor for this item</value>
 	</variable>
-
-	<!-- Submenu thumbnail strip — display only.
-	     All four nav directions redirect to list 211 so mouse clicks can never
-	     strand focus here. itemlayout and focusedlayout are identical so there
-	     is no visual "focused" state even if focus arrives via mouse.
-	     aspectratio=keep preserves correct image proportions. -->
-	<include name="SubmenuFixedListBase">
-		<left>700</left>
-		<top>220</top>
-		<width>1160</width>
-		<height>185</height>
-		<orientation>horizontal</orientation>
-		<onup>211</onup>
-		<ondown>211</ondown>
-		<onleft>211</onleft>
-		<onright>211</onright>
-		<hitrect x="0" y="0" w="0" h="0" />
-		<include>SlideWithList211</include>
-		<itemlayout width="150" height="185">
-			<control type="image">
-				<left>5</left>
-				<top>2</top>
-				<width>140</width>
-				<height>140</height>
-				<texture fallback="DefaultShortcut.png">$INFO[ListItem.Icon]</texture>
-				<aspectratio>keep</aspectratio>
-			</control>
-			<control type="label">
-				<left>2</left>
-				<top>145</top>
-				<width>146</width>
-				<height>40</height>
-				<label>$INFO[ListItem.Label]</label>
-				<font>font13</font>
-				<textcolor>AAFFFFFF</textcolor>
-				<align>center</align>
-				<aligny>center</aligny>
-				<scroll>false</scroll>
-			</control>
-		</itemlayout>
-		<focusedlayout width="150" height="185">
-			<control type="image">
-				<left>5</left>
-				<top>2</top>
-				<width>140</width>
-				<height>140</height>
-				<texture fallback="DefaultShortcut.png">$INFO[ListItem.Icon]</texture>
-				<aspectratio>keep</aspectratio>
-			</control>
-			<control type="label">
-				<left>2</left>
-				<top>145</top>
-				<width>146</width>
-				<height>40</height>
-				<label>$INFO[ListItem.Label]</label>
-				<font>font13</font>
-				<textcolor>AAFFFFFF</textcolor>
-				<align>center</align>
-				<aligny>center</aligny>
-				<scroll>false</scroll>
-			</control>
-		</focusedlayout>
-	</include>
 
 </includes>

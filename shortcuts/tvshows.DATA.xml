@@ -8,6 +8,7 @@
 		<thumb />
 		<action>ActivateWindow(Videos,TvShowTitles,return)</action>
 		<property name="unfocusedIcon">homeIcons/searchNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/searchTVLibrary.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>tvserieslibrary</defaultID>
@@ -17,6 +18,7 @@
 		<thumb />
 		<action>ActivateWindow(Videos,TvShowTitles,return)</action>
 		<property name="unfocusedIcon">homeIcons/TVLibraryNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/TVLibrary.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>tvshowpeople</defaultID>
@@ -26,5 +28,6 @@
 		<thumb />
 		<action>ActivateWindow(Videos,TvShowActors,return)</action>
 		<property name="unfocusedIcon">homeIcons/peopleNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/people.png</property>
 	</shortcut>
 </shortcuts>

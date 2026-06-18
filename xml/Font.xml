@@ -221,7 +221,12 @@
 		</font>
 		<font>
 			<name>IconMediumMD</name>
-			<filename>MaterialIcons-Regular.ttf</filename>
+			<filename>MaterialSymbolsOutlined_48pt-Regular.ttf</filename>
+			<size>50</size>
+		</font>
+		<font>
+			<name>IconLightMD</name>
+			<filename>MaterialSymbolsOutlined_48pt-ExtraLight.ttf</filename>
 			<size>50</size>
 		</font>
 	</fontset>
@@ -310,7 +315,12 @@
 		</font>
 		<font>
 			<name>IconMediumMD</name>
-			<filename>MaterialIcons-Regular.ttf</filename>
+			<filename>MaterialSymbolsOutlined_48pt-Regular.ttf</filename>
+			<size>50</size>
+		</font>
+		<font>
+			<name>IconLightMD</name>
+			<filename>MaterialSymbolsOutlined_48pt-ExtraLight.ttf</filename>
 			<size>50</size>
 		</font>
 	</fontset>
@@ -399,7 +409,12 @@
 		</font>
 		<font>
 			<name>IconMediumMD</name>
-			<filename>MaterialIcons-Regular.ttf</filename>
+			<filename>MaterialSymbolsOutlined_48pt-Regular.ttf</filename>
+			<size>50</size>
+		</font>
+		<font>
+			<name>IconLightMD</name>
+			<filename>MaterialSymbolsOutlined_48pt-ExtraLight.ttf</filename>
 			<size>50</size>
 		</font>
 	</fontset>
@@ -497,7 +512,12 @@
 		</font>
 		<font>
 			<name>IconMediumMD</name>
-			<filename>MaterialIcons-Regular.ttf</filename>
+			<filename>MaterialSymbolsOutlined_48pt-Regular.ttf</filename>
+			<size>50</size>
+		</font>
+		<font>
+			<name>IconLightMD</name>
+			<filename>MaterialSymbolsOutlined_48pt-ExtraLight.ttf</filename>
 			<size>50</size>
 		</font>
 	</fontset>

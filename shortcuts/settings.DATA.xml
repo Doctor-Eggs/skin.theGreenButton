@@ -8,6 +8,7 @@
 		<thumb />
 		<action>ActivateWindow(ShutdownMenu)</action>
 		<property name="unfocusedIcon">homeIcons/powerNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/power.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>allsettings</defaultID>
@@ -17,6 +18,7 @@
 		<thumb />
 		<action>ActivateWindow(10004)</action>
 		<property name="unfocusedIcon">homeIcons/allSettingsNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/allSettings.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>skinsettings</defaultID>
@@ -26,5 +28,6 @@
 		<thumb />
 		<action>ActivateWindow(10035)</action>
 		<property name="unfocusedIcon">homeIcons/skinSettingsNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/skinSettings.png</property>
 	</shortcut>
 </shortcuts>

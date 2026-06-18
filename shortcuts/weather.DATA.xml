@@ -16,6 +16,7 @@
 		<thumb />
 		<action>ActivateWindow(Weather)</action>
 		<property name="unfocusedIcon">homeIcons/weatherNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/weather.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>weatheraddons</defaultID>

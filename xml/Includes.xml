@@ -49,22 +49,37 @@
 	     $NUMBER[] prevents Kodi from localizing the numeric string.
 	     Read back via a hidden label (id=8001) in Home.xml for SetFocus.
 	     Each known group has its own fixedlist (9101-9111) for independent cursor memory.
-	     Unknown/custom skinshortcuts groups fall back to shared fixedlist 90000. -->
+	     Unknown/custom skinshortcuts groups fall back to shared fixedlist 90000.
+	     Before routing to a group's real list, its NumItems is checked — if the group's
+	     submenu has no shortcuts yet, focus goes to its EmptySubmenuPlaceholder (920x)
+	     instead so there's always something focusable. -->
 	<variable name="subMenuFocusId">
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),nowplaying)">$NUMBER[90017]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),playdisc)">$NUMBER[0]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),weather) + Integer.IsEqual(Container(9101).NumItems,0)">$NUMBER[9201]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),weather)">$NUMBER[9101]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),pictures) + Integer.IsEqual(Container(9102).NumItems,0)">$NUMBER[9202]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),pictures)">$NUMBER[9102]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),games) + Integer.IsEqual(Container(9103).NumItems,0)">$NUMBER[9203]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),games)">$NUMBER[9103]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tv) + Integer.IsEqual(Container(9104).NumItems,0)">$NUMBER[9204]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tv)">$NUMBER[9104]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),videos) + Integer.IsEqual(Container(9105).NumItems,0)">$NUMBER[9205]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),videos)">$NUMBER[9105]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),movies) + Integer.IsEqual(Container(9106).NumItems,0)">$NUMBER[9206]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),movies)">$NUMBER[9106]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows) + Integer.IsEqual(Container(9107).NumItems,0)">$NUMBER[9207]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows)">$NUMBER[9107]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),music) + Integer.IsEqual(Container(9108).NumItems,0)">$NUMBER[9208]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),music)">$NUMBER[9108]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),add-ons) + Integer.IsEqual(Container(9109).NumItems,0)">$NUMBER[9209]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),add-ons)">$NUMBER[9109]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),favourites) + Integer.IsEqual(Container(9110).NumItems,0)">$NUMBER[9210]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),favourites)">$NUMBER[9110]</value>
+		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),system) + Integer.IsEqual(Container(9111).NumItems,0)">$NUMBER[9211]</value>
 		<value condition="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),system)">$NUMBER[9111]</value>
-		<value>$NUMBER[90000]</value>
+		<value condition="Integer.IsGreater(Container(90000).NumItems,0)">$NUMBER[90000]</value>
+		<value>$NUMBER[9212]</value>
 	</variable>
 	<variable name="contentType">
 		<value condition="Container.Content(movies)">movie</value>

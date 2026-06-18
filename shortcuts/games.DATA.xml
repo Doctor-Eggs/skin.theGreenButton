@@ -8,6 +8,7 @@
 		<thumb />
 		<action>ActivateWindow(Games)</action>
 		<property name="unfocusedIcon">homeIcons/addGamesNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/addGames.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>playgames</defaultID>
@@ -17,6 +18,7 @@
 		<thumb />
 		<action>ActivateWindow(Games)</action>
 		<property name="unfocusedIcon">homeIcons/playGamesNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/playGames.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>gameaddons</defaultID>
@@ -26,5 +28,6 @@
 		<thumb />
 		<action>ActivateWindow(addonbrowser,addons://user/xbmc.addon.game/)</action>
 		<property name="unfocusedIcon">homeIcons/gameAddonsNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/gameAddons.png</property>
 	</shortcut>
 </shortcuts>

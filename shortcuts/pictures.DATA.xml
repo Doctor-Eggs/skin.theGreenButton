@@ -8,6 +8,7 @@
 		<thumb />
 		<action>ActivateWindow(mediasource,pictures)</action>
 		<property name="unfocusedIcon">homeIcons/addPicturesNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/addPictures.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>viewpictures</defaultID>
@@ -17,6 +18,7 @@
 		<thumb />
 		<action>ActivateWindow(Pictures)</action>
 		<property name="unfocusedIcon">homeIcons/viewPicturesNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/viewPictures.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>pictureaddons</defaultID>
@@ -26,5 +28,6 @@
 		<thumb />
 		<action>ActivateWindow(addonbrowser,addons://user/xbmc.addon.image/)</action>
 		<property name="unfocusedIcon">homeIcons/pictureAddonsNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/pictureAddons.png</property>
 	</shortcut>
 </shortcuts>

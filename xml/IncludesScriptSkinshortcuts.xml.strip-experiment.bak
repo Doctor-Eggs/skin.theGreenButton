@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+	<include name="SlideWithList211">
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,0)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,1)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,2)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,3)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,4)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,5)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,6)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,7)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,8)">Conditional</animation>
+		<animation effect="slide" end="0,65" condition="Integer.IsGreater(Container(211).Position,9)">Conditional</animation>
+	</include>
+
+	<!-- Returns checked-box when item is active, empty-box when disabled -->
+	<variable name="SkinShortcutsDisabledIcon">
+		<value condition="String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)">&#xE835;</value>
+		<value>&#xE834;</value>
+	</variable>
+
+	<!-- Shared chrome for all editor windows (mainmenu, submenu, base).
+	     Mirrors DialogBackgroundFull but uses kodi-button.png on the upper left
+	     instead of the dynamic addon icon, and hard-codes "Media Center Studio"
+	     as the title. -->
+	<include name="EditorChrome">
+		<control type="image">
+			<left>0</left>
+			<top>0</top>
+			<width>1920</width>
+			<height>1080</height>
+			<texture fallback="special://skin/backgrounds/SKINDEFAULT.png">$INFO[Skin.String(MasterCustomBackgroundPath)]</texture>
+		</control>
+		<control type="image">
+			<left>0</left>
+			<top>0</top>
+			<width>1920</width>
+			<height>150</height>
+			<texture colordiffuse="66000000">common/blankWhite.png</texture>
+		</control>
+		<control type="image">
+			<left>0</left>
+			<top>150r</top>
+			<width>1920</width>
+			<height>150</height>
+			<texture colordiffuse="66000000">common/blankWhite.png</texture>
+		</control>
+		<control type="image">
+			<left>30</left>
+			<top>5</top>
+			<width>140</width>
+			<height>140</height>
+			<aspectratio>keep</aspectratio>
+			<texture>kodi-button.png</texture>
+		</control>
+		<control type="image">
+			<left>285r</left>
+			<top>85</top>
+			<width>50</width>
+			<height>50</height>
+			<aspectratio aligny="top" align="left">keep</aspectratio>
+			<texture>kodi-button.png</texture>
+		</control>
+		<control type="label">
+			<right>295</right>
+			<top>100</top>
+			<width>300</width>
+			<height>15</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<font>font30_light</font>
+			<textcolor>white</textcolor>
+			<label>[B]Kodi[/B] Media Center</label>
+		</control>
+		<control type="label">
+			<left>200</left>
+			<top>90</top>
+			<width>1300</width>
+			<height>30</height>
+			<font>font36</font>
+			<label>Media Center Studio</label>
+			<align>left</align>
+			<aligny>center</aligny>
+			<textcolor>lightblue</textcolor>
+		</control>
+	</include>
+
+	<!-- Dynamically shows a description for whichever action button has focus.
+	     Submenu-specific conditions are checked first (they share IDs 303/304/211 with mainmenu).
+	     Button 405 (Edit Submenu) only exists in the mainmenu editor. -->
+	<variable name="EditorButtonDescription">
+		<!-- Submenu-only descriptions -->
+		<value condition="Control.HasFocus(9050)">Select an item — press OK to rename it</value>
+		<value condition="Control.HasFocus(303) + !String.IsEqual(Window.Property(groupname),mainmenu)">Move Left — Moves this item one position to the left</value>
+		<value condition="Control.HasFocus(304) + !String.IsEqual(Window.Property(groupname),mainmenu)">Move Right — Moves this item one position to the right</value>
+		<value condition="Control.HasFocus(301)">Add — Adds a new item to this submenu</value>
+		<value condition="Control.HasFocus(302)">Delete — Permanently removes this item from the submenu</value>
+		<value condition="Control.HasFocus(306)">Set Icon — Choose the main (focused) icon for this item</value>
+		<value condition="Control.HasFocus(320)">Set Unfocused Icon — Choose the icon shown when this item is not selected</value>
+		<!-- Mainmenu and shared descriptions -->
+		<value condition="Control.HasFocus(308)">Restore — Returns this item to its default label and icon</value>
+		<value condition="Control.HasFocus(303)">Move Up — Moves this item higher in the list</value>
+		<value condition="Control.HasFocus(313)">Disable / Enable — Hides or shows this item without removing it</value>
+		<value condition="Control.HasFocus(305)">Rename — Edit the display name for this item</value>
+		<value condition="Control.HasFocus(304)">Move Down — Moves this item lower in the list</value>
+		<value condition="Control.HasFocus(405)">Edit Submenu — Opens the submenu editor for this item</value>
+		<value condition="Control.HasFocus(211)">Select an item from the list to edit it</value>
+	</variable>
+
+	<!-- Submenu editor strip — the INTERACTIVE replacement for list 211's vertical
+	     view. This is a fixedlist (id=9050), not list 211: list 211 stays the real
+	     data source script.skinshortcuts drives, but it's never duplicated and never
+	     visible here. A fixedlist has no internal cursor, so onleft/onright fire on
+	     every press (not just at the ends) — that's what keeps Control.Move(211,...)
+	     in lockstep with every keypress. onclick forwards to button 305 so pressing
+	     OK on the strip renames the item exactly like the mainmenu's 305 textbox.
+	     itemlayout == focusedlayout on purpose: the "bigger on focus" look comes from
+	     SubmenuEditorSelectionOverlay instead, so items never reflow on screen. -->
+	<include name="SubmenuEditorItemBase">
+		<left>700</left>
+		<top>155</top>
+		<width>1160</width>
+		<height>220</height>
+		<orientation>horizontal</orientation>
+		<onup>9050</onup>
+		<ondown>303</ondown>
+		<onleft>Control.Move(211,-1)</onleft>
+		<onright>Control.Move(211,1)</onright>
+		<onclick>SendClick(305)</onclick>
+		<itemlayout width="190" height="220">
+			<control type="image">
+				<left>35</left>
+				<top>50</top>
+				<width>120</width>
+				<height>120</height>
+				<texture fallback="DefaultShortcut.png">$INFO[ListItem.Icon]</texture>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="label">
+				<left>0</left>
+				<top>175</top>
+				<width>190</width>
+				<height>40</height>
+				<label>$INFO[ListItem.Label]</label>
+				<font>font13</font>
+				<textcolor>AAFFFFFF</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+				<scroll>false</scroll>
+			</control>
+		</itemlayout>
+		<focusedlayout width="190" height="220">
+			<control type="image">
+				<left>35</left>
+				<top>50</top>
+				<width>120</width>
+				<height>120</height>
+				<texture fallback="DefaultShortcut.png">$INFO[ListItem.Icon]</texture>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="label">
+				<left>0</left>
+				<top>175</top>
+				<width>190</width>
+				<height>40</height>
+				<label>$INFO[ListItem.Label]</label>
+				<font>font13</font>
+				<textcolor>AAFFFFFF</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+				<scroll>false</scroll>
+			</control>
+		</focusedlayout>
+	</include>
+
+	<!-- One fixedlist instance per submenu group, each self-suppressing via
+	     Window.Property(groupname) — same pattern as MainMenuEditorLayout's
+	     90003-90013 preview panels, just driven by groupname instead of labelID
+	     since there's no outer list-211 item to read a labelID property from here. -->
+	<include name="SubmenuEditorStrip">
+		<control type="fixedlist" id="9050">
+			<include>SubmenuEditorItemBase</include>
+			<visible>String.IsEqual(Window.Property(groupname),weather)</visible>
+			<content><include>skinshortcuts-group-weather</include></content>
+		</control>
+		<control type="fixedlist" id="9050">
+			<include>SubmenuEditorItemBase</include>
+			<visible>String.IsEqual(Window.Property(groupname),pictures)</visible>
+			<content><include>skinshortcuts-group-pictures</include></content>
+		</control>
+		<control type="fixedlist" id="9050">
+			<include>SubmenuEditorItemBase</include>
+			<visible>String.IsEqual(Window.Property(groupname),games)</visible>
+			<content><include>skinshortcuts-group-games</include></content>
+		</control>
+		<control type="fixedlist" id="9050">
+			<include>SubmenuEditorItemBase</include>
+			<visible>String.IsEqual(Window.Property(groupname),tv)</visible>
+			<content><include>skinshortcuts-group-tv</include></content>
+		</control>
+		<control type="fixedlist" id="9050">
+			<include>SubmenuEditorItemBase</include>
+			<visible>String.IsEqual(Window.Property(groupname),videos)</visible>
+			<content><include>skinshortcuts-group-videos</include></content>
+		</control>
+		<control type="fixedlist" id="9050">
+			<include>SubmenuEditorItemBase</include>
+			<visible>String.IsEqual(Window.Property(groupname),movies)</visible>
+			<content><include>skinshortcuts-group-movies</include></content>
+		</control>
+		<control type="fixedlist" id="9050">
+			<include>SubmenuEditorItemBase</include>
+			<visible>String.IsEqual(Window.Property(groupname),tvshows)</visible>
+			<content><include>skinshortcuts-group-tvshows</include></content>
+		</control>
+		<control type="fixedlist" id="9050">
+			<include>SubmenuEditorItemBase</include>
+			<visible>String.IsEqual(Window.Property(groupname),music)</visible>
+			<content><include>skinshortcuts-group-music</include></content>
+		</control>
+		<control type="fixedlist" id="9050">
+			<include>SubmenuEditorItemBase</include>
+			<visible>String.IsEqual(Window.Property(groupname),add-ons)</visible>
+			<content><include>skinshortcuts-group-add-ons</include></content>
+		</control>
+		<control type="fixedlist" id="9050">
+			<include>SubmenuEditorItemBase</include>
+			<visible>String.IsEqual(Window.Property(groupname),favourites)</visible>
+			<content><include>skinshortcuts-group-favourites</include></content>
+		</control>
+		<control type="fixedlist" id="9050">
+			<include>SubmenuEditorItemBase</include>
+			<visible>String.IsEqual(Window.Property(groupname),system)</visible>
+			<content><include>skinshortcuts-group-system</include></content>
+		</control>
+	</include>
+
+	<!-- "Bigger image on focus" indicator for the submenu strip. Items in the strip
+	     itself never move — instead, 8 absolute-positioned overlay sets (one per
+	     possible slot) sit on top of the strip, and only the set matching
+	     Container(211).Position (0-based) is shown. All four controls in each set
+	     read Container(211).ListItem.* directly, so they always reflect whichever
+	     item list 211 (the real, hidden data source) currently has selected. -->
+	<include name="SubmenuEditorSelectionOverlay">
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,0)</visible>
+			<left>700</left><top>155</top><width>190</width><height>220</height>
+			<texture border="5" colordiffuse="33FFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,0)</visible>
+			<left>710</left><top>160</top><width>170</width><height>163</height>
+			<texture fallback="DefaultShortcut.png">$INFO[Container(211).ListItem.Icon]</texture>
+			<aspectratio>keep</aspectratio>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,0)</visible>
+			<left>700</left><top>323</top><width>190</width><height>52</height>
+			<texture colordiffuse="CCFFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="label">
+			<visible>Integer.IsEqual(Container(211).Position,0)</visible>
+			<left>700</left><top>323</top><width>190</width><height>52</height>
+			<label>$INFO[Container(211).ListItem.Label]</label>
+			<font>font13</font><textcolor>FF1A237E</textcolor>
+			<align>center</align><aligny>center</aligny><scroll>false</scroll>
+		</control>
+
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,1)</visible>
+			<left>890</left><top>155</top><width>190</width><height>220</height>
+			<texture border="5" colordiffuse="33FFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,1)</visible>
+			<left>900</left><top>160</top><width>170</width><height>163</height>
+			<texture fallback="DefaultShortcut.png">$INFO[Container(211).ListItem.Icon]</texture>
+			<aspectratio>keep</aspectratio>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,1)</visible>
+			<left>890</left><top>323</top><width>190</width><height>52</height>
+			<texture colordiffuse="CCFFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="label">
+			<visible>Integer.IsEqual(Container(211).Position,1)</visible>
+			<left>890</left><top>323</top><width>190</width><height>52</height>
+			<label>$INFO[Container(211).ListItem.Label]</label>
+			<font>font13</font><textcolor>FF1A237E</textcolor>
+			<align>center</align><aligny>center</aligny><scroll>false</scroll>
+		</control>
+
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,2)</visible>
+			<left>1080</left><top>155</top><width>190</width><height>220</height>
+			<texture border="5" colordiffuse="33FFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,2)</visible>
+			<left>1090</left><top>160</top><width>170</width><height>163</height>
+			<texture fallback="DefaultShortcut.png">$INFO[Container(211).ListItem.Icon]</texture>
+			<aspectratio>keep</aspectratio>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,2)</visible>
+			<left>1080</left><top>323</top><width>190</width><height>52</height>
+			<texture colordiffuse="CCFFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="label">
+			<visible>Integer.IsEqual(Container(211).Position,2)</visible>
+			<left>1080</left><top>323</top><width>190</width><height>52</height>
+			<label>$INFO[Container(211).ListItem.Label]</label>
+			<font>font13</font><textcolor>FF1A237E</textcolor>
+			<align>center</align><aligny>center</aligny><scroll>false</scroll>
+		</control>
+
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,3)</visible>
+			<left>1270</left><top>155</top><width>190</width><height>220</height>
+			<texture border="5" colordiffuse="33FFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,3)</visible>
+			<left>1280</left><top>160</top><width>170</width><height>163</height>
+			<texture fallback="DefaultShortcut.png">$INFO[Container(211).ListItem.Icon]</texture>
+			<aspectratio>keep</aspectratio>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,3)</visible>
+			<left>1270</left><top>323</top><width>190</width><height>52</height>
+			<texture colordiffuse="CCFFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="label">
+			<visible>Integer.IsEqual(Container(211).Position,3)</visible>
+			<left>1270</left><top>323</top><width>190</width><height>52</height>
+			<label>$INFO[Container(211).ListItem.Label]</label>
+			<font>font13</font><textcolor>FF1A237E</textcolor>
+			<align>center</align><aligny>center</aligny><scroll>false</scroll>
+		</control>
+
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,4)</visible>
+			<left>1460</left><top>155</top><width>190</width><height>220</height>
+			<texture border="5" colordiffuse="33FFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,4)</visible>
+			<left>1470</left><top>160</top><width>170</width><height>163</height>
+			<texture fallback="DefaultShortcut.png">$INFO[Container(211).ListItem.Icon]</texture>
+			<aspectratio>keep</aspectratio>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,4)</visible>
+			<left>1460</left><top>323</top><width>190</width><height>52</height>
+			<texture colordiffuse="CCFFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="label">
+			<visible>Integer.IsEqual(Container(211).Position,4)</visible>
+			<left>1460</left><top>323</top><width>190</width><height>52</height>
+			<label>$INFO[Container(211).ListItem.Label]</label>
+			<font>font13</font><textcolor>FF1A237E</textcolor>
+			<align>center</align><aligny>center</aligny><scroll>false</scroll>
+		</control>
+
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,5)</visible>
+			<left>1650</left><top>155</top><width>190</width><height>220</height>
+			<texture border="5" colordiffuse="33FFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,5)</visible>
+			<left>1660</left><top>160</top><width>170</width><height>163</height>
+			<texture fallback="DefaultShortcut.png">$INFO[Container(211).ListItem.Icon]</texture>
+			<aspectratio>keep</aspectratio>
+		</control>
+		<control type="image">
+			<visible>Integer.IsEqual(Container(211).Position,5)</visible>
+			<left>1650</left><top>323</top><width>190</width><height>52</height>
+			<texture colordiffuse="CCFFFFFF">common/blankWhite.png</texture>
+		</control>
+		<control type="label">
+			<visible>Integer.IsEqual(Container(211).Position,5)</visible>
+			<left>1650</left><top>323</top><width>190</width><height>52</height>
+			<label>$INFO[Container(211).ListItem.Label]</label>
+			<font>font13</font><textcolor>FF1A237E</textcolor>
+			<align>center</align><aligny>center</aligny><scroll>false</scroll>
+		</control>
+	</include>
+
+	<!-- Submenu thumbnail strip — display only.
+	     All four nav directions redirect to list 211 so mouse clicks can never
+	     strand focus here. itemlayout and focusedlayout are identical so there
+	     is no visual "focused" state even if focus arrives via mouse.
+	     aspectratio=keep preserves correct image proportions. -->
+	<include name="SubmenuFixedListBase">
+		<left>700</left>
+		<top>220</top>
+		<width>1160</width>
+		<height>185</height>
+		<orientation>horizontal</orientation>
+		<onup>211</onup>
+		<ondown>211</ondown>
+		<onleft>211</onleft>
+		<onright>211</onright>
+		<hitrect x="0" y="0" w="0" h="0" />
+		<include>SlideWithList211</include>
+		<itemlayout width="150" height="185">
+			<control type="image">
+				<left>5</left>
+				<top>2</top>
+				<width>140</width>
+				<height>140</height>
+				<texture fallback="DefaultShortcut.png">$INFO[ListItem.Icon]</texture>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="label">
+				<left>2</left>
+				<top>145</top>
+				<width>146</width>
+				<height>40</height>
+				<label>$INFO[ListItem.Label]</label>
+				<font>font13</font>
+				<textcolor>AAFFFFFF</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+				<scroll>false</scroll>
+			</control>
+		</itemlayout>
+		<focusedlayout width="150" height="185">
+			<control type="image">
+				<left>5</left>
+				<top>2</top>
+				<width>140</width>
+				<height>140</height>
+				<texture fallback="DefaultShortcut.png">$INFO[ListItem.Icon]</texture>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="label">
+				<left>2</left>
+				<top>145</top>
+				<width>146</width>
+				<height>40</height>
+				<label>$INFO[ListItem.Label]</label>
+				<font>font13</font>
+				<textcolor>AAFFFFFF</textcolor>
+				<align>center</align>
+				<aligny>center</aligny>
+				<scroll>false</scroll>
+			</control>
+		</focusedlayout>
+	</include>
+
+</includes>

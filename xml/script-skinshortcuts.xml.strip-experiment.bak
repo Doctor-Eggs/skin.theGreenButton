@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<allowoverlay>no</allowoverlay>
+	<!-- Conditional on groupname, with always="true". Window.Property(groupname) can
+	     still be stale/unset at the very first defaultcontrol resolution (it's a new
+	     modal GUI() instance each time, e.g. via button 405, and the property is only
+	     set once onInit runs) — always="true" makes Kodi re-apply this once the
+	     property is current instead of leaving focus stranded on the first guess.
+	     211 is only visible for mainmenu; 9050 (the strip) is only visible otherwise. -->
+	<defaultcontrol condition="String.IsEqual(Window.Property(groupname),mainmenu)" always="true">211</defaultcontrol>
+	<defaultcontrol condition="!String.IsEqual(Window.Property(groupname),mainmenu)" always="true">9050</defaultcontrol>
+	<animation type="WindowOpen" reversible="false">
+		<effect type="zoom" start="80" end="100" center="960,540" easing="out" tween="back" time="225" />
+		<effect type="fade" start="0" end="100" time="225" />
+	</animation>
+	<animation type="WindowClose" reversible="false">
+		<effect type="zoom" start="100" end="80" center="960,540" easing="in" tween="back" time="225" />
+		<effect type="fade" start="100" end="0" time="225" />
+	</animation>
+	<controls>
+
+		<include>EditorChrome</include>
+
+		<!-- Current shortcuts list (id=211) — SINGLE global instance, shared by both
+		     editors. The Python script caches whatever getControl(211) returns once,
+		     so this control must never be duplicated across groups — duplicating it
+		     left the submenu strip permanently empty because the script kept driving
+		     the mainmenu copy. Visibility is gated directly on the control instead.
+		     Only rendered for the mainmenu editor; the submenu editor hides it and
+		     drives it in the background via Control.Move() from fixedlist 9050. -->
+		<control type="list" id="211">
+			<visible>String.IsEqual(Window.Property(groupname),mainmenu)</visible>
+			<left>700</left>
+			<top>155</top>
+			<width>1160</width>
+			<height>755</height>
+			<onright>308</onright>
+			<onup>211</onup>
+			<ondown>211</ondown>
+			<pagecontrol>260</pagecontrol>
+			<scrolltime>200</scrolltime>
+			<orientation>vertical</orientation>
+			<viewtype label="535">list</viewtype>
+			<preloaditems>2</preloaditems>
+			<itemlayout width="1150" height="65">
+				<control type="label">
+					<left>0</left>
+					<top>0</top>
+					<width>1150</width>
+					<height>65</height>
+					<label>$INFO[ListItem.Label]</label>
+					<font>font30</font>
+					<textcolor>66FFFFFF</textcolor>
+					<align>center</align>
+					<aligny>center</aligny>
+				</control>
+			</itemlayout>
+			<focusedlayout width="1150" height="255">
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<width>1150</width>
+					<height>255</height>
+					<texture border="5" colordiffuse="33FFFFFF">common/blankWhite.png</texture>
+				</control>
+			</focusedlayout>
+		</control>
+
+		<!-- Scrollbar for mainmenu list 211 -->
+		<control type="scrollbar" id="260">
+			<visible>String.IsEqual(Window.Property(groupname),mainmenu)</visible>
+			<left>1880</left>
+			<top>155</top>
+			<width>20</width>
+			<height>755</height>
+			<texturesliderbackground border="0,14,0,14">ScrollBarV.png</texturesliderbackground>
+			<texturesliderbar border="0,14,0,14">ScrollBarV_bar.png</texturesliderbar>
+			<texturesliderbarfocus border="0,14,0,14">ScrollBarV_bar_focus.png</texturesliderbarfocus>
+			<textureslidernib>ScrollBarNib.png</textureslidernib>
+			<textureslidernibfocus>ScrollBarNib.png</textureslidernibfocus>
+			<onleft>211</onleft>
+			<onright>308</onright>
+			<showonepage>false</showonepage>
+			<orientation>vertical</orientation>
+		</control>
+
+		<!-- ═══════════════════════════════════════════════
+		     GROUP: Main menu editor
+		     ═══════════════════════════════════════════════ -->
+		<control type="group">
+			<visible>String.IsEqual(Window.Property(groupname),mainmenu)</visible>
+
+			<!-- Hidden utility buttons — script requires these to exist -->
+			<control type="button" id="301">
+				<left>-2000</left>
+				<top>0</top>
+				<width>100</width>
+				<height>60</height>
+				<label>$ADDON[script.skinshortcuts 32024]</label>
+			</control>
+			<control type="button" id="302">
+				<left>-2000</left>
+				<top>0</top>
+				<width>100</width>
+				<height>60</height>
+				<label>&#xE5CD;</label>
+			</control>
+			<control type="button" id="306">
+				<left>-2000</left>
+				<top>0</top>
+				<width>200</width>
+				<height>30</height>
+				<label>$ADDON[script.skinshortcuts 32026]</label>
+			</control>
+			<control type="button" id="307">
+				<left>-2000</left>
+				<top>0</top>
+				<width>200</width>
+				<height>30</height>
+				<label>$ADDON[script.skinshortcuts 32027]</label>
+			</control>
+
+			<include>MainMenuEditorLayout</include>
+
+			<control type="grouplist" id="90000">
+				<left>700</left>
+				<top>160</top>
+				<width>1160</width>
+				<height>65</height>
+				<onleft>90000</onleft>
+				<onright>90000</onright>
+				<onup>Control.Move(211,-1)</onup>
+				<ondown>Control.Move(211,1)</ondown>
+				<orientation>horizontal</orientation>
+				<include>SlideWithList211</include>
+				<control type="button" id="308">
+					<texturefocus />
+					<texturenofocus />
+					<width>110</width>
+					<height>65</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>IconMediumMD</font>
+					<textcolor>66FFFFFF</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<label>&#xE8BA;</label>
+					<onleft>90000</onleft>
+				</control>
+				<control type="button" id="303">
+					<texturefocus />
+					<texturenofocus />
+					<width>110</width>
+					<height>65</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>IconMediumMD</font>
+					<textcolor>66FFFFFF</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<label>&#xF182;</label>
+				</control>
+				<control type="button" id="313">
+					<texturefocus />
+					<texturenofocus />
+					<width>150</width>
+					<height>65</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>IconMediumMD</font>
+					<textcolor>66FFFFFF</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<label>$VAR[SkinShortcutsDisabledIcon]</label>
+				</control>
+				<control type="button" id="305">
+					<texturenofocus colordiffuse="CCFFFFFF">common/blankWhite.png</texturenofocus>
+					<texturefocus colordiffuse="FFFFFFFF">common/blankWhite.png</texturefocus>
+					<width>400</width>
+					<height>65</height>
+					<font>font30</font>
+					<textcolor>FF1A237E</textcolor>
+					<focusedcolor>FF0D0D5A</focusedcolor>
+					<label>$INFO[Container(211).ListItem.Label]</label>
+					<align>center</align>
+					<aligny>center</aligny>
+				</control>
+				<control type="button" id="304">
+					<texturefocus />
+					<texturenofocus />
+					<width>110</width>
+					<height>65</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>IconMediumMD</font>
+					<textcolor>66FFFFFF</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<label>&#xF181;</label>
+				</control>
+				<control type="button" id="405">
+					<texturefocus />
+					<texturenofocus />
+					<width>110</width>
+					<height>65</height>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>IconMediumMD</font>
+					<textcolor>66FFFFFF</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<label>&#xE31C;</label>
+					<onright>90000</onright>
+				</control>
+			</control>
+
+		</control>
+
+		<!-- ═══════════════════════════════════════════════
+		     GROUP: Submenu editor
+		     Any groupname that is not "mainmenu" uses this layout.
+		     ═══════════════════════════════════════════════ -->
+		<control type="group">
+			<visible>!String.IsEqual(Window.Property(groupname),mainmenu)</visible>
+
+			<!-- Horizontal image strip — a fixedlist (id=9050), NOT list 211.
+			     List 211 stays the real data source (hidden, off-screen visually);
+			     this strip drives it via Control.Move() on every left/right press
+			     (fixedlist has no internal cursor of its own, so onleft/onright fire
+			     every time, unlike a real list). Pressing OK forwards to button 305
+			     to trigger rename. Items never reflow — the "bigger on focus" look
+			     comes from the separate absolute-position overlay below, keyed off
+			     Container(211).Position, not from this control's own focusedlayout. -->
+			<include>SubmenuEditorStrip</include>
+
+			<!-- Bigger-image focus indicator for whichever item is selected in 211.
+			     One set of overlay controls per strip slot; only the slot matching
+			     Container(211).Position is shown, so items never move position. -->
+			<include>SubmenuEditorSelectionOverlay</include>
+
+			<!-- Button 305 (rename) — hidden; triggered by strip onclick above -->
+			<control type="button" id="305">
+				<left>-2000</left>
+				<top>0</top>
+				<width>400</width>
+				<height>65</height>
+				<label>$INFO[Container(211).ListItem.Label]</label>
+			</control>
+
+			<!-- Button 307 (change action) — hidden; required by script -->
+			<control type="button" id="307">
+				<left>-2000</left>
+				<top>0</top>
+				<width>200</width>
+				<height>30</height>
+				<label>$ADDON[script.skinshortcuts 32027]</label>
+			</control>
+
+			<!-- ═══════════════════════════════════════════════
+			     ACTION BUTTON GRID — 2 columns × 4 rows
+			     Col 1 left=1030  Col 2 left=1300  width=230 each
+			     Rows start at top=410, spaced 85px apart
+			     ═══════════════════════════════════════════════ -->
+
+			<!-- Row 1: Move Left (303) | Move Right (304) -->
+			<control type="button" id="303">
+				<left>1030</left>
+				<top>410</top>
+				<width>230</width>
+				<height>75</height>
+				<texturefocus />
+				<texturenofocus />
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>IconMediumMD</font>
+				<textcolor>66FFFFFF</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<label>&#xE314;</label>
+				<onup>9050</onup>
+				<ondown>301</ondown>
+				<onleft>303</onleft>
+				<onright>304</onright>
+			</control>
+			<control type="button" id="304">
+				<left>1300</left>
+				<top>410</top>
+				<width>230</width>
+				<height>75</height>
+				<texturefocus />
+				<texturenofocus />
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>IconMediumMD</font>
+				<textcolor>66FFFFFF</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<label>&#xE315;</label>
+				<onup>9050</onup>
+				<ondown>308</ondown>
+				<onleft>303</onleft>
+				<onright>304</onright>
+			</control>
+
+			<!-- Row 2: Add Item (301) | Restore Default (308) -->
+			<control type="button" id="301">
+				<left>1030</left>
+				<top>495</top>
+				<width>230</width>
+				<height>75</height>
+				<texturefocus />
+				<texturenofocus />
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>IconMediumMD</font>
+				<textcolor>66FFFFFF</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<label>&#xE145;</label>
+				<onup>303</onup>
+				<ondown>306</ondown>
+				<onleft>301</onleft>
+				<onright>308</onright>
+			</control>
+			<control type="button" id="308">
+				<left>1300</left>
+				<top>495</top>
+				<width>230</width>
+				<height>75</height>
+				<texturefocus />
+				<texturenofocus />
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>IconMediumMD</font>
+				<textcolor>66FFFFFF</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<label>&#xE8BA;</label>
+				<onup>304</onup>
+				<ondown>320</ondown>
+				<onleft>301</onleft>
+				<onright>308</onright>
+			</control>
+
+			<!-- Row 3: Set Main Icon (306) | Set Unfocused Icon (320) -->
+			<control type="button" id="306">
+				<left>1030</left>
+				<top>580</top>
+				<width>230</width>
+				<height>75</height>
+				<texturefocus />
+				<texturenofocus />
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>IconMediumMD</font>
+				<textcolor>66FFFFFF</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<label>&#xE3F4;</label>
+				<onup>301</onup>
+				<ondown>313</ondown>
+				<onleft>306</onleft>
+				<onright>320</onright>
+			</control>
+			<control type="button" id="320">
+				<left>1300</left>
+				<top>580</top>
+				<width>230</width>
+				<height>75</height>
+				<texturefocus />
+				<texturenofocus />
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>IconMediumMD</font>
+				<textcolor>66FFFFFF</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<label>&#xE40A;</label>
+				<onup>308</onup>
+				<ondown>302</ondown>
+				<onleft>306</onleft>
+				<onright>320</onright>
+			</control>
+
+			<!-- Row 4: Enable / Disable (313) | Delete (302) -->
+			<control type="button" id="313">
+				<left>1030</left>
+				<top>665</top>
+				<width>230</width>
+				<height>75</height>
+				<texturefocus />
+				<texturenofocus />
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>IconMediumMD</font>
+				<textcolor>66FFFFFF</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<label>$VAR[SkinShortcutsDisabledIcon]</label>
+				<onup>306</onup>
+				<ondown>9050</ondown>
+				<onleft>313</onleft>
+				<onright>302</onright>
+			</control>
+			<control type="button" id="302">
+				<left>1300</left>
+				<top>665</top>
+				<width>230</width>
+				<height>75</height>
+				<texturefocus />
+				<texturenofocus />
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>IconMediumMD</font>
+				<textcolor>66FFFFFF</textcolor>
+				<focusedcolor>white</focusedcolor>
+				<label>&#xE872;</label>
+				<onup>320</onup>
+				<ondown>9050</ondown>
+				<onleft>313</onleft>
+				<onright>302</onright>
+			</control>
+
+		</control>
+
+		<!-- ═══════════════════════════════════════════════
+		     Bottom description bar — inside the bottom shadow zone.
+		     ═══════════════════════════════════════════════ -->
+		<control type="label">
+			<left>700</left>
+			<top>1010</top>
+			<width>1160</width>
+			<height>50</height>
+			<font>font14</font>
+			<textcolor>AAFFFFFF</textcolor>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$VAR[EditorButtonDescription]</label>
+		</control>
+
+		<!-- ═══════════════════════════════════════════════
+		     Hidden controls required by the skinshortcuts Python script.
+		     Shared by both editors — IDs 101, 102, 103, 111, 160.
+		     ═══════════════════════════════════════════════ -->
+		<control type="label" id="101">
+			<left>-2000</left>
+			<top>0</top>
+			<width>400</width>
+			<height>30</height>
+		</control>
+		<control type="button" id="102">
+			<left>-2000</left>
+			<top>0</top>
+			<width>30</width>
+			<height>30</height>
+			<onclick>-</onclick>
+			<texturefocus>scroll-down-focus-2.png</texturefocus>
+			<texturenofocus>scroll-down-2.png</texturenofocus>
+		</control>
+		<control type="button" id="103">
+			<left>-2000</left>
+			<top>0</top>
+			<width>30</width>
+			<height>30</height>
+			<onclick>-</onclick>
+			<texturefocus>scroll-up-focus-2.png</texturefocus>
+			<texturenofocus>scroll-up-2.png</texturenofocus>
+		</control>
+		<control type="list" id="111">
+			<left>-2000</left>
+			<top>0</top>
+			<width>450</width>
+			<height>650</height>
+			<onleft>211</onleft>
+			<pagecontrol>160</pagecontrol>
+			<orientation>vertical</orientation>
+			<viewtype label="535">list</viewtype>
+			<preloaditems>2</preloaditems>
+			<itemlayout width="450" height="50">
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<width>50</width>
+					<height>50</height>
+					<texture background="true" fallback="DefaultShortcut.png">$INFO[ListItem.Icon]</texture>
+				</control>
+				<control type="label">
+					<left>55</left>
+					<top>0</top>
+					<width>395</width>
+					<height>50</height>
+					<label>$INFO[ListItem.Label]</label>
+					<font>font16</font>
+					<textcolor>FFCCCCCC</textcolor>
+					<aligny>center</aligny>
+				</control>
+			</itemlayout>
+			<focusedlayout width="450" height="50">
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<width>50</width>
+					<height>50</height>
+					<texture background="true" fallback="DefaultShortcut.png">$INFO[ListItem.Icon]</texture>
+				</control>
+				<control type="label">
+					<left>55</left>
+					<top>0</top>
+					<width>395</width>
+					<height>50</height>
+					<label>$INFO[ListItem.Label]</label>
+					<font>font16</font>
+					<textcolor>FF4DBAFF</textcolor>
+					<aligny>center</aligny>
+				</control>
+			</focusedlayout>
+		</control>
+		<control type="scrollbar" id="160">
+			<left>-2000</left>
+			<top>0</top>
+			<width>20</width>
+			<height>650</height>
+			<texturesliderbackground border="0,14,0,14">ScrollBarV.png</texturesliderbackground>
+			<texturesliderbar border="0,14,0,14">ScrollBarV_bar.png</texturesliderbar>
+			<texturesliderbarfocus border="0,14,0,14">ScrollBarV_bar_focus.png</texturesliderbarfocus>
+			<textureslidernib>ScrollBarNib.png</textureslidernib>
+			<textureslidernibfocus>ScrollBarNib.png</textureslidernibfocus>
+			<onleft>111</onleft>
+			<showonepage>false</showonepage>
+			<orientation>vertical</orientation>
+		</control>
+
+	</controls>
+</window>

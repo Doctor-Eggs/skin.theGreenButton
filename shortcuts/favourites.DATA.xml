@@ -8,5 +8,6 @@
 		<thumb />
 		<action>ActivateWindow(Favourites)</action>
 		<property name="unfocusedIcon">homeIcons/favouritesNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/addons.png</property>
 	</shortcut>
 </shortcuts>

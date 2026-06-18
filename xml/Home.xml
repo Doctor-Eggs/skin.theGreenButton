@@ -557,7 +557,11 @@
 			<!-- Per-group fixedlists — each maintains independent cursor position per section.
 			     When Control.Move(9000) changes the active section, the focused list's <visible>
 			     condition fails, Kodi moves focus to defaultcontrol 9000, and 9000's onfocus
-			     routes to the new list via subMenuFocusId. Unknown/custom groups fall back to 90000. -->
+			     routes to the new list via subMenuFocusId. Unknown/custom groups fall back to 90000.
+			     Each group also has an EmptySubmenuPlaceholder include (920x) that takes over,
+			     both visually and for focus routing, whenever that group's real list has zero
+			     items — e.g. a main-menu item was added via skinshortcuts but never had any
+			     submenu shortcuts assigned to it. -->
 
 			<!-- weather -->
 			<control type="fixedlist" id="9101">
@@ -569,6 +573,12 @@
 				<content><include>skinshortcuts-group-weather</include></content>
 			</control>
 
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9201"/>
+				<param name="listid" value="9101"/>
+				<param name="groupcondition" value="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),weather)"/>
+			</include>
+
 			<!-- pictures -->
 			<control type="fixedlist" id="9102">
 				<include>HomeSubMenuBase</include>
@@ -578,6 +588,11 @@
 				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),pictures)</visible>
 				<content><include>skinshortcuts-group-pictures</include></content>
 			</control>
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9202"/>
+				<param name="listid" value="9102"/>
+				<param name="groupcondition" value="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),pictures)"/>
+			</include>
 
 			<!-- games -->
 			<control type="fixedlist" id="9103">
@@ -588,6 +603,11 @@
 				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),games)</visible>
 				<content><include>skinshortcuts-group-games</include></content>
 			</control>
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9203"/>
+				<param name="listid" value="9103"/>
+				<param name="groupcondition" value="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),games)"/>
+			</include>
 
 			<!-- tv -->
 			<control type="fixedlist" id="9104">
@@ -598,6 +618,11 @@
 				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tv)</visible>
 				<content><include>skinshortcuts-group-tv</include></content>
 			</control>
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9204"/>
+				<param name="listid" value="9104"/>
+				<param name="groupcondition" value="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tv)"/>
+			</include>
 
 			<!-- videos -->
 			<control type="fixedlist" id="9105">
@@ -608,6 +633,11 @@
 				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),videos)</visible>
 				<content><include>skinshortcuts-group-videos</include></content>
 			</control>
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9205"/>
+				<param name="listid" value="9105"/>
+				<param name="groupcondition" value="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),videos)"/>
+			</include>
 
 			<!-- movies -->
 			<control type="fixedlist" id="9106">
@@ -618,6 +648,11 @@
 				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),movies)</visible>
 				<content><include>skinshortcuts-group-movies</include></content>
 			</control>
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9206"/>
+				<param name="listid" value="9106"/>
+				<param name="groupcondition" value="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),movies)"/>
+			</include>
 
 			<!-- tvshows -->
 			<control type="fixedlist" id="9107">
@@ -628,6 +663,11 @@
 				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows)</visible>
 				<content><include>skinshortcuts-group-tvshows</include></content>
 			</control>
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9207"/>
+				<param name="listid" value="9107"/>
+				<param name="groupcondition" value="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows)"/>
+			</include>
 
 			<!-- music -->
 			<control type="fixedlist" id="9108">
@@ -638,6 +678,11 @@
 				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),music)</visible>
 				<content><include>skinshortcuts-group-music</include></content>
 			</control>
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9208"/>
+				<param name="listid" value="9108"/>
+				<param name="groupcondition" value="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),music)"/>
+			</include>
 
 			<!-- add-ons -->
 			<control type="fixedlist" id="9109">
@@ -648,6 +693,11 @@
 				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),add-ons)</visible>
 				<content><include>skinshortcuts-group-add-ons</include></content>
 			</control>
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9209"/>
+				<param name="listid" value="9109"/>
+				<param name="groupcondition" value="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),add-ons)"/>
+			</include>
 
 			<!-- favourites -->
 			<control type="fixedlist" id="9110">
@@ -658,6 +708,11 @@
 				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),favourites)</visible>
 				<content><include>skinshortcuts-group-favourites</include></content>
 			</control>
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9210"/>
+				<param name="listid" value="9110"/>
+				<param name="groupcondition" value="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),favourites)"/>
+			</include>
 
 			<!-- system -->
 			<control type="fixedlist" id="9111">
@@ -668,6 +723,11 @@
 				<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),system)</visible>
 				<content><include>skinshortcuts-group-system</include></content>
 			</control>
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9211"/>
+				<param name="listid" value="9111"/>
+				<param name="groupcondition" value="String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),system)"/>
+			</include>
 
 			<!-- Fallback for any custom/unknown groups added via skinshortcuts GUI. -->
 			<control type="fixedlist" id="90000">
@@ -678,6 +738,11 @@
 				<visible>!String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),weather) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),pictures) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),games) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tv) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),videos) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),movies) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),music) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),add-ons) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),favourites) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),system) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),nowplaying) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),playdisc)</visible>
 				<content><include>skinshortcuts-submenu</include></content>
 			</control>
+			<include content="EmptySubmenuPlaceholder">
+				<param name="id" value="9212"/>
+				<param name="listid" value="90000"/>
+				<param name="groupcondition" value="!String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),weather) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),pictures) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),games) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tv) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),videos) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),movies) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),music) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),add-ons) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),favourites) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),system) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),nowplaying) + !String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),playdisc)"/>
+			</include>
 			<control type="fixedlist" id="90017">
 				<include>HomeSubMenuBase</include>
 				<include>VisibleFadeEffect</include>
@@ -1230,5 +1295,23 @@
 			</control>
 		</control>
 		<include>CommonNowPlaying</include>
+
+		<!-- Loading overlay while script.skinshortcuts builds the menu -->
+		<control type="group">
+			<visible>String.IsEqual(Window(Home).Property(skinshortcuts-isrunning),True)</visible>
+			<control type="image">
+				<left>0</left><top>0</top>
+				<width>1920</width><height>1080</height>
+				<texture colordiffuse="CC000000">common/blankWhite.png</texture>
+			</control>
+			<control type="label">
+				<left>0</left><top>0</top>
+				<width>1920</width><height>1080</height>
+				<font>font36</font>
+				<textcolor>white</textcolor>
+				<align>center</align><aligny>center</aligny>
+				<label>Building menu, please wait…</label>
+			</control>
+		</control>
 	</controls>
 </window>

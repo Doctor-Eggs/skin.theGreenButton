@@ -8,6 +8,7 @@
 		<thumb />
 		<action>ActivateWindow(Videos,sources://video/,return)</action>
 		<property name="unfocusedIcon">homeIcons/filesNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/files.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>playlists</defaultID>
@@ -17,6 +18,7 @@
 		<thumb />
 		<action>ActivateWindow(Videos,special://videoplaylists/,return)</action>
 		<property name="unfocusedIcon">homeIcons/playlistNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/playlist.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>videoaddons</defaultID>
@@ -26,6 +28,7 @@
 		<thumb />
 		<action>ActivateWindow(Videos,addons://sources/video/)</action>
 		<property name="unfocusedIcon">homeIcons/videoAddonsNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/videoAddons.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>movies</defaultID>
@@ -35,6 +38,7 @@
 		<thumb />
 		<action>ActivateWindow(Videos,videodb://movies/titles/,return)</action>
 		<property name="unfocusedIcon">homeIcons/movieLibraryNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/movieLibrary.png</property>
 	</shortcut>
 	<shortcut>
 		<defaultID>tvshows</defaultID>
@@ -44,5 +48,6 @@
 		<thumb />
 		<action>ActivateWindow(Videos,TvShowTitles,return)</action>
 		<property name="unfocusedIcon">homeIcons/TVLibraryNoFocus.png</property>
+		<property name="focusedIcon">homeIcons/TVLibrary.png</property>
 	</shortcut>
 </shortcuts>
