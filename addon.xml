@@ -13,6 +13,9 @@
 		<summary lang="en_GB">The Green Button skin by Doctor Eggs</summary>
 		<description lang="en_GB">The Green Button was developed to give Kodi a similar interface to WMC.</description>
 		<disclaimer lang="en_GB">This is an Alpha release. Mouse interaction works, but things get funky when using the mouse.</disclaimer>
+		<summary lang="it_IT">Skin The Green Button di Doctor Eggs</summary>
+		<description lang="it_IT">The Green Button é stata sviluppata con l'obiettivo di dare a Kodi un'interfaccia simile a quella di Windows Media Player.</description>
+		<disclaimer lang="it_IT">Questa é una release alpha instable. L'interazione con mouse funziona, ma il suo uso puó portare alla comparsa di bug grafici.</disclaimer>
 		<platform>all</platform>
 		<license>CC-BY-NC-ND-4.0</license>
 		<forum>https://forum.kodi.tv/showthread.php?tid=370312</forum>
